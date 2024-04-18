@@ -1,0 +1,438 @@
+@charset "UTF-8";
+@import url("reset.css");
+
+:root {
+  // fonst-szie
+  --fs-12: 1.2rem;
+  --fs-14: 1.4rem;
+  --fs-16: 1.6rem;
+  --fs-18: 1.8rem;
+  --fs-20: 2rem;
+  --fs-22: 2.2rem;
+  --fs-24: 2.4rem;
+  --fs-26: 2.6rem;
+  --fs-28: 2.8rem;
+  --fs-30: 3rem;
+  --fs-32: 3.2rem;
+  --fs-34: 3.4rem;
+  --fs-36: 3.6rem;
+  --fs-38: 3.8rem;
+  --fs-40: 4rem;
+  --fs-42: 4.2rem;
+  --fs-44: 4.4rem;
+  --fs-46: 4.6rem;
+  --fs-48: 4.8rem;
+  --fs-50: 5rem;
+  --fs-52: 5.2rem;
+  --fs-54: 5.4rem;
+  --fs-56: 5.6rem;
+  --fs-58: 5.8rem;
+  --fs-60: 6rem;
+  --fs-80: 8rem;
+
+  // border-radius
+  --br-2: 2px;
+  --br-3: 3px;
+  --br-5: 5px;
+  --br-10: 13px;
+  --br-30: 30px;
+  --br-50: 50px;
+  --br-50pro: 50%;
+
+  // gray scale
+  --gray-100: #fff;
+  --gray-200: #f4f5f6;
+  --gray-300: #e8e8e8;
+  --gray-400: #e2e2e2;
+  --gray-500: #d3d3d3;
+  --gray-600: #999;
+  --gray-700: #888;
+  --gray-800: #666;
+  --gray-900: #333;
+  --gray-1000: #111;
+
+  // main blue color
+  --mblue01: #819bc9;
+  --mblue02: #0e419c;
+  --mblue03: #114493;
+  --mblue04: #002d5e;
+
+  // sub blue color
+  --sblue01: #7f96ae;
+  --sblue02: #3377ff;
+  --sblue03: #003b56;
+  --sblue04: #3b6ce9;
+  --sblue05: #59c3c4;
+  --sblue06: #479fa0;
+  --sblue07: #f6f8fa;
+
+  // Error
+  --error01: #fdeaea;
+  --error02: #fab2a9;
+  --error03: #f40000;
+  --error04: #da0000;
+
+  // Warning
+  --warning01: #fff5e9;
+  --warning02: #ffd66d;
+  --warning03: #fea620;
+  --warning04: #ff8a00;
+
+  // Info
+  --info01: #eaf2ff;
+  --info02: #819bc9;
+  --info03: #114493;
+  --info04: #002d5e;
+
+  // Success
+  --success01: #e8f5e8;
+  --success02: #8adaa0;
+  --success03: #00a02d;
+  --success04: #006434;
+
+  // cms color
+  --cmsblue02: #005cff;
+  --cmsblue03: #072977;
+  --cmsblue04: #091d58;
+  --cmsblue05: #000924;
+  --cmsblue06: #00071c;
+
+  // gradation
+  --cms-gradation: linear-gradient(
+    179deg,
+    #0c4fab -6.11%,
+    #07469c -6.09%,
+    #3d0ca5 276.67%
+  );
+}
+
+html,
+body {
+  font-weight: 400;
+  word-break: keep-all;
+}
+
+html {
+  font-size: 62.5%;
+  color: var(--gray-1000);
+  line-height: 1em;
+}
+
+body {
+  // min-width: 1680px;
+  font-size: var(--fs-16);
+  font-family: var(--font-pretendard) !important;
+  position: relative;
+  overflow-x: hidden;
+
+  // &.main {
+  //   overflow-y: hidden;
+
+  //   &::-webkit-scrollbar {
+  //     display: none;
+  //   }
+  // }
+}
+a {
+  display: block;
+}
+button {
+  cursor: pointer !important;
+  // &:focus {
+  //   outline: 1px solid var(--gray-1000);
+  // }
+}
+img {
+  display: block;
+  width: 100%;
+}
+
+// 메인 레이아웃
+.container {
+  width: 1680px;
+  margin: 0 auto;
+}
+// 서브 레이아웃 전체
+.sub_layout_container {
+  width: 100%;
+  min-height: calc(100vh - 312px);
+  padding: 13rem 0 0;
+  box-sizing: border-box;
+  position: relative;
+}
+.pp_top,
+.pp_top_table {
+  position: absolute;
+  top: 279px;
+  right: 50px;
+  width: 140px;
+  height: 60px;
+  display: inline-block;
+  border-right: solid 1px #d3d3d3;
+}
+.pp_top button,
+.pp_top_table button {
+  width: 70px !important;
+  height: 60px !important;
+  float: left;
+  border-left: solid 1px #d3d3d3;
+  border-radius: 0 !important;
+  font-size: 22px !important;
+}
+.pp_top button:hover,
+.pp_top button:focus,
+.pp_top button:active,
+.pp_top_table button:hover,
+.pp_top_table button:focus,
+.pp_top_table button:active {
+  background-color: #fff !important;
+}
+.pp_top button:nth-of-type(2) svg,
+.pp_top_table button:nth-of-type(2) svg {
+  width: 25px !important;
+}
+.pp_top button:nth-of-type(1) svg,
+.pp_top_table:nth-of-type(1) button svg {
+  width: 20px !important;
+}
+
+// pc / mobile display 여부 분리
+.pc {
+  display: block;
+}
+.mobile {
+  display: none;
+}
+
+@media only screen and (min-width: 816px) and (max-width: 1532px) {
+  .pp_top,
+  .pp_top_table {
+    top: 269px;
+  }
+}
+@media only screen and (min-width: 769px) and (max-width: 815px) {
+  .pp_top,
+  .pp_top_table {
+    top: 345px;
+  }
+  .pp_top.dp3,
+  .pp_top_table.dp3 {
+    top: 450px;
+  }
+  .pp_top.icc,
+  .pp_top_table.icc {
+    top: 360px;
+  }
+}
+@media only screen and (min-width: 641px) and (max-width: 768px) {
+  .pp_top,
+  .pp_top_table {
+    top: 290px;
+  }
+  .pp_top.dp3,
+  .pp_top_table.dp3 {
+    top: 390px;
+  }
+  .pp_top.icc,
+  .pp_top_table.icc {
+    top: 305px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .pp_top {
+    display: none;
+  }
+  .pc {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+}
+@media only screen and (max-width: 815px) {
+  .pp_top {
+    border-right: none;
+    width: 85px;
+  }
+
+  .pp_top_table {
+    position: unset;
+    transform: unset;
+    border-right: none;
+    width: auto;
+    height: auto !important;
+  }
+  .pp_top_table button {
+    // background-color: var(--gray-200) !important;
+    border-radius: unset !important;
+    width: auto !important;
+    height: auto !important;
+    border-left: none;
+  }
+
+  .pp_top button {
+    // background-color: var(--gray-200) !important;
+    border-radius: 30px !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-left: none;
+  }
+  .pp_top button:nth-of-type(1),
+  .pp_top_table button:nth-of-type(1) {
+    margin-right: 5px;
+  }
+}
+// 서브 레이아웃의 children을 감싸는 레이아웃
+
+@media only screen and (min-width: 1920px) {
+  .sub_container {
+    width: 100%;
+    padding: 30px 250px 60px 250px;
+    box-sizing: border-box;
+  }
+}
+@media only screen and (min-width: 1520px) and (max-width: 1919px) {
+  .sub_container {
+    width: 1420px;
+    margin: 0 auto;
+    padding: 30px 0 60px 0;
+  }
+}
+@media only screen and (min-width: 641px) and (max-width: 1519px) {
+  .sub_container {
+    width: 100%;
+    padding: 30px 50px 60px 50px;
+    box-sizing: border-box;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .sub_container {
+    width: 100%;
+    padding: 0 12px 12px 12px;
+    box-sizing: border-box;
+  }
+}
+
+//페이지 상단 아이콘 버튼
+// .top_btn_box {
+//   width: 100%;
+//   display: flex;
+//   justify-content: flex-end;
+//   gap: 15px;
+// }
+// .top_btn_box button {
+//   width: 24px !important;
+//   position: relative;
+// }
+// .top_btn_box button:nth-of-type(2)::before {
+//   content: "";
+//   position: absolute;
+//   top: 25%;
+//   left: -8px;
+//   width: 1px;
+//   height: 50%;
+//   background-color: var(--gray-300);
+// }
+// .top_btn_box button:nth-of-type(2) svg {
+//   width: 24px;
+//   height: auto;
+// }
+
+// 웹 표준
+.screen_out {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0); /* 구형 브라우저를 위해 사용 */
+  clip-path: polygon(0 0, 0 0, 0 0); /* inset(50%) 와 동일한 표현 */
+  border: 0;
+}
+// 접근성 필수입력
+.essential {
+  color: var(--error03);
+  margin-left: 6px;
+}
+
+// 커스텀 스크롤바
+*::-webkit-scrollbar {
+  width: 8px; /* 스크롤바 너비 */
+  height: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--gray-500);
+  border-radius: 4px; /* 슬라이더 모서리 둥글기 */
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--gray-500);
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent;
+} /*# sourceMappingURL=globals.css.map */
+
+// 테이블 새 글 아이콘 <span>
+.ico_new_list {
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  font-size: var(--fs-14);
+  font-weight: 700;
+  background-color: var(--mblue03);
+  color: var(--gray-100);
+  border-radius: var(--br-50pro);
+  box-sizing: border-box;
+  margin-left: 0.5rem;
+  position: relative;
+
+  &::before {
+    content: "N";
+    text-align: center;
+    line-height: 1;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+// 에디터
+.ck-editor__editable {
+  min-height: 460px;
+}
+
+.cms_sub_title {
+  color: var(--gray-1000);
+  font-size: var(--fs-22);
+  font-weight: 700;
+}
+.rt-TextFieldSlot {
+  position: static !important;
+}
+
+@media screen and (max-width: 1532px) {
+  // 서브 레이아웃 전체
+  .sub_layout_container {
+    padding: 12rem 0 0;
+  }
+}
+
+// 768부터 전부 다 모바일 시작
+@media screen and (max-width: 768px) {
+  // 서브 레이아웃 전체
+  .sub_layout_container {
+    padding: 6.5rem 0 0;
+  }
+
+  // 에디터
+  .ck.ck-reset.ck-editor.ck-rounded-corners {
+    width: 99%;
+  }
+  .ck-editor__editable {
+    min-height: 200px;
+  }
+}

@@ -1,0 +1,108 @@
+button.btn {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  box-sizing: border-box;
+
+  // 기본 컬러
+  background-color: var(--gray-100);
+  color: var(--gray-1000);
+  border: 1px solid var(--gray-300);
+  box-sizing: border-box;
+
+  // 기본 컬러 호버
+  &:hover {
+    background-color: var(--gray-1000);
+    color: var(--gray-100);
+    border: 1px solid var(--gray-1000);
+    box-sizing: border-box;
+  }
+
+  // 기본 사이즈
+  height: 4.4rem;
+  padding: 11px 0;
+  font-size: var(--fs-18);
+
+  // btnSize
+  &.sm {
+    height: 2.8rem;
+    padding: 3px 0;
+
+    font-size: var(--fs-14);
+  }
+  &.md {
+    height: 3.2rem;
+    padding: 5px 0;
+    font-size: var(--fs-16);
+  }
+  &.cm {
+    height: 4.4rem;
+    padding: 11px 0;
+    font-size: var(--fs-16);
+  }
+
+  /* btnColor */
+  &.black {
+    background-color: var(--gray-1000);
+    border: 1px solid var(--gray-1000);
+    color: var(--gray-100);
+  }
+
+  //hover
+  &.black_hover {
+    background-color: var(--gray-100);
+    color: var(--gray-1000);
+    border: 1px solid var(--gray-1000);
+    box-sizing: border-box;
+  }
+
+  // disabled
+  &.white:disabled,
+  &.blue:disabled,
+  &.blueBorder:disabled {
+    background-color: var(--gray-200) !important;
+    color: var(--gray-600);
+    border-color: var(--gray-200) !important;
+    cursor: default;
+  }
+
+  /* btnStyle */
+  &.br_0 {
+    border-radius: 0;
+  }
+  &.br_2 {
+    border-radius: var(--br-2);
+  }
+  &.br_5 {
+    border-radius: var(--br-5);
+  }
+  &.br_round {
+    border-radius: var(--br-50);
+  }
+}
+
+.gray {
+  background-color: var(--gray-300) !important;
+  color: var(--gray-800);
+  border: solid 1px var(--gray-500) !important;
+}
+
+.disabled {
+  background-color: var(--gray-200) !important;
+  color: var(--gray-600);
+  border: solid 1px var(--gray-200) !important;
+  cursor: default !important;
+}
+
+// 반응형
+// 모s바일
+@media screen and (max-width: 768px) {
+  button.btn {
+    font-size: var(--fs-14);
+  }
+}
