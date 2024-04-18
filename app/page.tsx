@@ -8,6 +8,13 @@ export default function Home() {
     <main className={style.main}>
       <Button text={"기본 버튼"} id={"btnBasic"} onClickEvent={() => {}} />
       <Button
+        text={"disabled 버튼 md"}
+        color="disabled"
+        size="md"
+        id={"btnBlack"}
+        onClickEvent={() => {}}
+      />
+      <Button
         text={"검정 버튼 sm"}
         color="black"
         size="sm"
