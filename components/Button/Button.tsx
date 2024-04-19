@@ -5,8 +5,10 @@ import style from "./Button.module.scss";
 
 interface ButtonProps {
   size?: "sm" | "md";
-  // TODO: 색상에 맞게 컬러 추가
+  // TODO: 디자인에 맞게 추가
   color?: "black" | "disabled";
+  // TODO: 디자인에 맞게 추가
+  border?: "br_3" | "br_50";
   title?: string;
   text: string;
   id: string;
@@ -18,6 +20,9 @@ interface ButtonProps {
 /**
  * @param size?: 버튼 크기 (기본 lg)
  * @return "sm" | "md";
+ *
+ * @param border?: 보더 사이즈 (기본 0)
+ * @return "br_3" | "br_50";
  *
  * @param color?: 버튼 색상 (기본 white)
  * @returns "black" | "disabled"
@@ -41,7 +46,17 @@ interface ButtonProps {
  * @returns string
  */
 const TextButton = (
-  { size, color, onClickEvent, text, tabIndex, onBlur, title, id }: ButtonProps,
+  {
+    size,
+    color,
+    border,
+    onClickEvent,
+    text,
+    tabIndex,
+    onBlur,
+    title,
+    id,
+  }: ButtonProps,
   ref: Ref<HTMLButtonElement>
 ) => {
   // hover
@@ -72,6 +87,8 @@ const TextButton = (
           : color === "disabled"
           ? style.disabled
           : style.white
+      } ${
+        border === "br_3" ? style.br_3 : border === "br_50" ? style.br_50 : ""
       } ${isHover === true ? `${style[color + "_hover"]}` : ""}`}
       disabled={color === "disabled" ? true : false}
     >
