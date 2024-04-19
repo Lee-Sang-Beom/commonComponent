@@ -2,6 +2,7 @@
 
 import Button from "@/components/Button/Button";
 import style from "./page.module.scss";
+import Input from "@/components/Input/Input";
 
 export default function Home() {
   return (
@@ -24,6 +25,15 @@ export default function Home() {
 
       <br />
       <br />
+      <br />
+
+      <Input
+        color="blue"
+        value={"인풋 블루 sm br_50"}
+        inpSize={"sm"}
+        border="br_50"
+      />
+      <Input borderColor="gray" value={"인풋 보더 그레이"} />
     </main>
   );
 }
