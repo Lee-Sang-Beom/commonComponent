@@ -37,6 +37,8 @@ export default function TablePage() {
                     ExcelExport(data, header, "test");
                 }}
             ></Button>
+            <br />
+            <br />
             <Table<any>
                 data={data}
                 headers={header}
