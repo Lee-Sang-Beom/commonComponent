@@ -41,7 +41,7 @@ export interface TableHeader {
      */
     excelValue?: Function;
     /**
-     * 엑셀에 출력할지 여부
+     * 엑셀에 출력할지 여부, 기본 값은 true, false 로 설정시 엑셀 다운로드에 해당 컬럼 미포함
      */
     excelYn?: boolean;
 }
