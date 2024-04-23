@@ -5,8 +5,7 @@ import style from "./Button.module.scss";
 
 interface ButtonProps {
   size?: "sm" | "md";
-  // TODO: 디자인에 맞게 추가
-  color?: "black" | "disabled";
+  color?: string;
   // TODO: 디자인에 맞게 추가
   border?: "br_3" | "br_50";
   title?: string;
@@ -25,7 +24,7 @@ interface ButtonProps {
  * @return "br_3" | "br_50";
  *
  * @param color?: 버튼 색상 (기본 white)
- * @returns "black" | "disabled"
+ * @returns string
  *
  * @param text: 버튼 text
  * @returns string
@@ -81,13 +80,7 @@ const TextButton = (
       }}
       className={`${style.btn} ${
         size === "sm" ? style.sm : size === "md" ? style.md : style.lg
-      } ${
-        color === "black"
-          ? style.black
-          : color === "disabled"
-          ? style.disabled
-          : style.white
-      } ${
+      } ${color && color !== "" ? style[color] : style.white} ${
         border === "br_3" ? style.br_3 : border === "br_50" ? style.br_50 : ""
       } ${isHover === true ? `${style[color + "_hover"]}` : ""}`}
       disabled={color === "disabled" ? true : false}

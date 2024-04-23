@@ -1,1 +1,18 @@
+// menu ------------------------------------------------------------
+.menu {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem;
 
+  a {
+    width: fit-content;
+    padding: 1rem 3rem;
+    background-color: cornflowerblue;
+    border-radius: var(--br-5);
+    font-size: 2rem;
+    font-family: bold;
+  }
+}

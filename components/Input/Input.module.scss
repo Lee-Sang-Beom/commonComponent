@@ -6,8 +6,8 @@ input.inp {
 
   // 기본 컬러
   background-color: var(--gray-100);
+  border: 1px solid var(--gray-500);
   color: var(--gray-1000);
-  border: 0;
 
   // disabled
   &.disabled {
@@ -40,16 +40,8 @@ input.inp {
     background-color: var(--mblue02);
     color: var(--gray-100);
   }
-
-  /* border color */
-  &.border_color_white {
-    border: 1px solid var(--gray-100);
-  }
-  &.border_color_black {
-    border: 1px solid var(--gray-1000);
-  }
-  &.border_color_gray {
-    border: 1px solid var(--gray-300);
+  &.redBorder {
+    border-color: red;
   }
 
   /* border */
