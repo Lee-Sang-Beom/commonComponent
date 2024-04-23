@@ -25,6 +25,9 @@ export default function RootLayout({
           <a href="/table" title="table">
             table
           </a>
+          <a href="/validationCheck" title="table">
+            React-Hook-Form
+          </a>
         </div>
         {children}
       </body>

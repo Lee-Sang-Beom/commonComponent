@@ -147,7 +147,10 @@ export default function ReactFormClient({ data }: IProps) {
           onChange={(e) => {
             setValue(
               "phoneNumber",
-              removeHyphenToString(e.currentTarget.value)
+              removeHyphenToString(e.currentTarget.value),
+              {
+                shouldValidate: true,
+              }
             );
           }}
         />
@@ -171,7 +174,10 @@ export default function ReactFormClient({ data }: IProps) {
           onChange={(e) => {
             setValue(
               "regionNumber",
-              removeHyphenToString(e.currentTarget.value)
+              removeHyphenToString(e.currentTarget.value),
+              {
+                shouldValidate: true,
+              }
             );
           }}
         />
@@ -195,7 +201,10 @@ export default function ReactFormClient({ data }: IProps) {
           onChange={(e) => {
             setValue(
               "commonNumber",
-              removeHyphenToString(e.currentTarget.value)
+              removeHyphenToString(e.currentTarget.value),
+              {
+                shouldValidate: true,
+              }
             );
           }}
         />
@@ -254,7 +263,9 @@ export default function ReactFormClient({ data }: IProps) {
           }
           value={insertHyphenToString("BRNO", watch("brno") || "")}
           onChange={(e) => {
-            setValue("brno", removeHyphenToString(e.currentTarget.value));
+            setValue("brno", removeHyphenToString(e.currentTarget.value), {
+              shouldValidate: true,
+            });
           }}
         />
         {errors.brno && <small role="alert">{errors.brno.message}</small>}
