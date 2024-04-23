@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.scss";
+import style from "./page.module.scss";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div className={style.menu}>
+          <a href="/form" title="form요소">
+            form요소
+          </a>
+          <a href="/table" title="table">
+            table
+          </a>
+        </div>
+        {children}
+      </body>
     </html>
   );
 }
