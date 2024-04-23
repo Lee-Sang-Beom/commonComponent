@@ -5,7 +5,7 @@
  */
 export const phoneNumberRegex = /^(01[016789]{1})[0-9]{3,4}[0-9]{4}$/;
 export const regionNumberRegex =
-  /^(070|02|0[3-9]{1}[0-9]{1})[0-9]{3,4}[0-9]{4}$/;
+  /^(0(2|3[1-3]|4[1-4]|5[1-5]|6[1-4]))(\d{3,4})(\d{4})$/;
 export const phoneAndRegionCommonNumberRegex = /^[0-9]{2,3}[0-9]{3,4}[0-9]{4}$/;
 
 /**

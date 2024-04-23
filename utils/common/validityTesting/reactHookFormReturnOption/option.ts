@@ -8,7 +8,7 @@ import {
 
 interface ReactHookFormOption {
   required?: string;
-  pattern: {
+  pattern?: {
     value: RegExp;
     message: string;
   };
@@ -22,42 +22,35 @@ interface ReactHookFormOption {
     value: number;
     message: string;
   };
+
+  validate?: any;
 }
+
 /**
  * @phoneNumberReactHookFormOption : 휴대폰 번호에 대한 register() 함수의 두 번째 인자 Option값
  *
  * @required : 필수 입력사항인지 true, false를 보내면 됨
- * @minLength : 입력값의 최소 허용 길이
- * @maxLength : 입력값의 최대 허용 길이
  */
-export function phoneNumberReactHookFormOption(
-  required?: boolean,
-  minLength?: number,
-  maxLength?: number
-) {
+export function phoneNumberReactHookFormOption(required?: boolean) {
   const returnBaseObj: ReactHookFormOption = {
-    pattern: {
-      value: phoneNumberRegex,
-      message: "휴대폰번호 형식이 올바르지 않습니다.",
+    validate: {
+      /**
+       * @patternCheck : "-"를 제외한 휴대폰 번호 정규식 체크
+       */
+      patternCheck: (v: string) => {
+        if (!required && v.length <= 0) return true;
+
+        let result = false;
+        if (phoneNumberRegex.test(v.replaceAll("-", ""))) {
+          result = true;
+        }
+        return result || "휴대폰 번호 형식이 올바르지 않습니다.";
+      },
     },
   };
 
   if (required) {
-    returnBaseObj.required = "휴대폰번호는 필수 입력사항입니다.";
-  }
-
-  if (minLength) {
-    returnBaseObj.minLength = {
-      value: minLength,
-      message: `휴대폰 번호는 최소 ${minLength}글자 이상이어야 합니다.`,
-    };
-  }
-
-  if (maxLength) {
-    returnBaseObj.maxLength = {
-      value: maxLength,
-      message: `휴대폰 번호는 최대 ${maxLength}글자를 초과할 수 없습니다.`,
-    };
+    returnBaseObj.required = "휴대폰 번호는 필수 입력사항입니다.";
   }
 
   return returnBaseObj;
@@ -67,37 +60,27 @@ export function phoneNumberReactHookFormOption(
  * @regionNumberReactHookFormOption : 지역 번호에 대한 register() 함수의 두 번째 인자 Option값
  *
  * @required : 필수 입력사항인지 true, false를 보내면 됨
- * @minLength : 입력값의 최소 허용 길이
- * @maxLength : 입력값의 최대 허용 길이
  */
-export function regionNumberReactHookFormOption(
-  required?: boolean,
-  minLength?: number,
-  maxLength?: number
-) {
+export function regionNumberReactHookFormOption(required?: boolean) {
   const returnBaseObj: ReactHookFormOption = {
-    pattern: {
-      value: regionNumberRegex,
-      message: "지역 전화번호 형식이 올바르지 않습니다.",
+    validate: {
+      /**
+       * @patternCheck : "-"를 제외한 지역 전화번호 정규식 체크
+       */
+      patternCheck: (v: string) => {
+        if (!required && v.length <= 0) return true;
+
+        let result = false;
+        if (regionNumberRegex.test(v.replaceAll("-", ""))) {
+          result = true;
+        }
+        return result || "지역 전화번호 형식이 올바르지 않습니다.";
+      },
     },
   };
 
   if (required) {
     returnBaseObj.required = "지역 전화번호는 필수 입력사항입니다.";
-  }
-
-  if (minLength) {
-    returnBaseObj.minLength = {
-      value: minLength,
-      message: `지역 전화번호는 최소 ${minLength}글자 이상이어야 합니다.`,
-    };
-  }
-
-  if (maxLength) {
-    returnBaseObj.maxLength = {
-      value: maxLength,
-      message: `지역 전화번호는 최대 ${maxLength}글자를 초과할 수 없습니다.`,
-    };
   }
 
   return returnBaseObj;
@@ -107,37 +90,26 @@ export function regionNumberReactHookFormOption(
  * @commonNumberReactHookFormOption : 휴대폰 + 지역 공통 번호에 대한 register() 함수의 두 번째 인자 Option값
  *
  * @required : 필수 입력사항인지 true, false를 보내면 됨
- * @minLength : 입력값의 최소 허용 길이
- * @maxLength : 입력값의 최대 허용 길이
  */
-export function commonNumberReactHookFormOption(
-  required?: boolean,
-  minLength?: number,
-  maxLength?: number
-) {
+export function commonNumberReactHookFormOption(required?: boolean) {
   const returnBaseObj: ReactHookFormOption = {
-    pattern: {
-      value: phoneAndRegionCommonNumberRegex,
-      message: "전화번호 형식이 올바르지 않습니다.",
+    validate: {
+      /**
+       * @patternCheck : "-"를 제외한 전화번호 정규식 체크
+       */
+      patternCheck: (v: string) => {
+        if (!required && v.length <= 0) return true;
+
+        let result = false;
+        if (phoneAndRegionCommonNumberRegex.test(v.replaceAll("-", ""))) {
+          result = true;
+        }
+        return result || "전화번호 형식이 올바르지 않습니다.";
+      },
     },
   };
-
   if (required) {
     returnBaseObj.required = "전화번호는 필수 입력사항입니다.";
-  }
-
-  if (minLength) {
-    returnBaseObj.minLength = {
-      value: minLength,
-      message: `전화번호는 최소 ${minLength}글자 이상이어야 합니다.`,
-    };
-  }
-
-  if (maxLength) {
-    returnBaseObj.maxLength = {
-      value: maxLength,
-      message: `전화번호는 최대 ${maxLength}글자를 초과할 수 없습니다.`,
-    };
   }
 
   return returnBaseObj;
@@ -219,6 +191,55 @@ export function passwordReactHookFormOption(
       value: maxLength,
       message: `비밀번호는 최대 ${maxLength}글자를 초과할 수 없습니다.`,
     };
+  }
+
+  return returnBaseObj;
+}
+
+/**
+ * @brnoReactHookFormOption : 사업자 등록번호에 대한 register() 함수의 두 번째 인자 Option값
+ *
+ * @required : 필수 입력사항인지 true, false를 보내면 됨
+ */
+export function brnoReactHookFormOption(required?: boolean) {
+  const returnBaseObj: ReactHookFormOption = {
+    // validate 함수를 직접 만들어서 validation을 할 수 있다.
+    validate: {
+      /**
+       * @startsWith : 사업자 등록번호 자체의 유효성 체크
+       * @patternCheck : "-"를 제외한 글자 수 체크
+       */
+      startsWith: (v: string) => {
+        let result = false;
+        let numberMap = v
+          .replace(/-/gi, "")
+          .split("")
+          .map(function (d) {
+            return parseInt(d, 10);
+          });
+        let keyArr = [1, 3, 7, 1, 3, 7, 1, 3, 5];
+        let chk = 0;
+        keyArr.forEach(function (d, i) {
+          chk += d * numberMap[i];
+        });
+        chk += (keyArr[8] * numberMap[8]) / 10;
+        if (numberMap[9] === (10 - Math.floor(chk % 10)) % 10) {
+          result = true;
+        }
+        return result || "유효한 사업자등록번호가 아닙니다.";
+      },
+      patternCheck: (v: string) => {
+        let result = false;
+        if (v.replaceAll("-", "").length === 10) {
+          result = true;
+        }
+        return result || "사업자 등록번호는 10자리를 입력해주세요.";
+      },
+    },
+  };
+
+  if (required) {
+    returnBaseObj.required = "사업자 등록번호 입력은 필수 입력사항입니다.";
   }
 
   return returnBaseObj;
