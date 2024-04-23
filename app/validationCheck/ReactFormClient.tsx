@@ -14,6 +14,9 @@ import {
 } from "@/utils/common/validityTesting/reactHookFormReturnOption/option";
 import { useForm } from "react-hook-form";
 
+// 임시
+import "./input.scss";
+
 interface IProps {
   data: {
     email: string;
@@ -262,7 +265,6 @@ export default function ReactFormClient({ data }: IProps) {
         <label htmlFor="createDt">날짜</label>
         <input
           {...register("createDt")}
-          required
           id="brno"
           type="date"
           aria-invalid={
@@ -275,16 +277,20 @@ export default function ReactFormClient({ data }: IProps) {
       </div>
 
       {/* 날짜 2 */}
-      <div style={{ display: "flex" }}>
-        {`createDtDetail 확인 > `}
-        <p>{`변경 전 : ${watch("createDtDetail")} / `}</p>
+      <div className="etc">
+        <span>{`디테일 변경 전 `}</span>
+        <p>{watch("createDtDetail")}</p>
+      </div>
+      <div className="etc">
+        <span>{`디테일 변경 후 `}</span>
+
         <p>
-          {` 변경 후 : ${insertHyphenToString(
+          {insertHyphenToString(
             "DATE",
             watch("createDtDetail"),
             "YYYYMMDDHHmmss",
             "YYYY-MM-DD HH:mm:ss"
-          )}`}
+          )}
         </p>
       </div>
 

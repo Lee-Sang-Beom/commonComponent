@@ -1,0 +1,50 @@
+form {
+  width: calc(100% - 50px);
+  height: auto;
+  margin: 10px auto;
+  box-sizing: border-box;
+  border: 1px solid black;
+
+  div {
+    padding: 10px;
+
+    label {
+      border: 1px solid blue;
+      padding: 5px;
+      margin-right: 10px;
+    }
+    input {
+      border: 1px solid blue;
+
+      padding: 5px;
+    }
+
+    small {
+      display: block;
+      margin-top: 5px;
+      color: #ab0a0a;
+    }
+  }
+
+  div.etc {
+    display: flex;
+
+    span,
+    p {
+      display: inline-block;
+      border: 1px solid blue;
+
+      padding: 5px;
+    }
+
+    span {
+      margin-right: 10px;
+    }
+  }
+
+  button {
+    width: 100px;
+    height: 50px;
+    border: 1px solid purple;
+  }
+}
