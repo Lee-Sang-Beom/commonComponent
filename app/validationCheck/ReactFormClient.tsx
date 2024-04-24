@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import "./input.scss";
 import { useEffect } from "react";
 import Input from "@/components/Input/Input";
+import moment from "moment";
 
 interface IProps {
   data: {
@@ -171,7 +172,7 @@ export default function ReactFormClient({ data }: IProps) {
         <Input
           {...register("phoneNumber", phoneNumberReactHookFormOption(true))}
           type="text"
-          placeholder="01000000000"
+          placeholder="휴대폰 번호를 입력해주세요."
           aria-invalid={
             isSubmitted ? (errors.phoneNumber ? "true" : "false") : undefined
           }
@@ -200,7 +201,7 @@ export default function ReactFormClient({ data }: IProps) {
         <Input
           {...register("regionNumber", regionNumberReactHookFormOption(true))}
           type="text"
-          placeholder="01000000000"
+          placeholder="지역 번호를 입력해주세요."
           aria-invalid={
             isSubmitted ? (errors.regionNumber ? "true" : "false") : undefined
           }
@@ -229,7 +230,7 @@ export default function ReactFormClient({ data }: IProps) {
         <Input
           {...register("commonNumber", commonNumberReactHookFormOption())}
           type="text"
-          placeholder="01000000000"
+          placeholder="공통 전화번호를 입력해주세요."
           aria-invalid={
             isSubmitted ? (errors.commonNumber ? "true" : "false") : undefined
           }
@@ -285,7 +286,7 @@ export default function ReactFormClient({ data }: IProps) {
         <Input
           {...register("pw", passwordReactHookFormOption(true))}
           type="password"
-          placeholder="1q2w3e4r"
+          placeholder="패스워드를 입력해주세요."
           aria-invalid={
             isSubmitted ? (errors.pw ? "true" : "false") : undefined
           }
@@ -304,10 +305,10 @@ export default function ReactFormClient({ data }: IProps) {
         <Input
           {...register(
             "pwConfirm",
-            passwordConfirmReactHookFormOption(watch("pw"))
+            passwordConfirmReactHookFormOption(watch("pw"), true)
           )}
           type="password"
-          placeholder="1q2w3e4r"
+          placeholder="패스워드 확인을 진행해주세요."
           aria-invalid={
             isSubmitted ? (errors.pwConfirm ? "true" : "false") : undefined
           }
@@ -364,7 +365,11 @@ export default function ReactFormClient({ data }: IProps) {
 
       {/* 날짜 2 : Date 형식으로 들어온 데이터를 YYYY-MM-DD HH:mm:ss 형식으로 변환*/}
       <div className="input_box">
-        <p>{`디테일 날짜 출력 예시 1 (Date 객체를 커스텀 포맷팅된 날짜 형태로 출력하기)`}</p>
+        <p>
+          {`디테일 날짜 출력 예시 1 (Date 객체를 커스텀 포맷팅된 날짜 형태로 출력하기)`}
+        </p>
+        <p className="etc_txt">{moment(watch("createDtDetail")).format("")}</p>
+
         <p className="etc_txt">
           {insertHyphenToString(
             "DATE",
@@ -379,7 +384,11 @@ export default function ReactFormClient({ data }: IProps) {
 
       {/* 날짜 3 : 문자열 형식으로 들어온 데이터를  YYYY-MM-DD HH:mm:ss 형식으로 변환 */}
       <div className="input_box">
-        <p>{`디테일 날짜 출력 예시 2 (String 문자열을 커스텀 포맷팅된 날짜 형태로 출력하기)`}</p>
+        <p>
+          {`디테일 날짜 출력 예시 2 (String 문자열을 커스텀 포맷팅된 날짜 형태로 출력하기)`}
+        </p>
+        <p className="etc_txt">{watch("createDtDetailString")}</p>
+
         <p className="etc_txt">
           {insertHyphenToString(
             "DATE",
