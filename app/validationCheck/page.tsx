@@ -12,7 +12,7 @@ export default function Page() {
       id: "user01",
       brno: "3227200402",
       createDt: "20240423",
-      createDtDetail: "20240423123000",
+      createDtDetail: "20240101133059",
     },
   };
 
