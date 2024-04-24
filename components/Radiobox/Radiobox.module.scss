@@ -1,0 +1,157 @@
+.radio_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+  .radio_inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+
+    input.radio {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      background-color: var(--gray-100);
+      border-radius: var(--br-50pro);
+      cursor: pointer;
+
+      // size
+      &.xsm {
+        width: 2.8rem;
+        height: 2.8rem;
+        font-size: var(--fs-14);
+
+        & + .radio_txt {
+          font-size: var(--fs-14);
+        }
+      }
+      &.sm {
+        width: 3.2rem;
+        height: 3.2rem;
+      }
+      &.md {
+        // 기본 사이즈
+        width: 4.4rem;
+        height: 4.4rem;
+      }
+      &.lg {
+        width: 5.6rem;
+        height: 5.6rem;
+        font-size: var(--fs-18);
+        & + .radio_txt {
+          font-size: var(--fs-18);
+        }
+      }
+      &.xlg {
+        width: 6.4rem;
+        height: 6.4rem;
+        font-size: var(--fs-18);
+        & + .radio_txt {
+          font-size: var(--fs-18);
+        }
+      }
+
+      /* color */
+      // 기본 컬러
+      &.white {
+        border: 1px solid var(--gray-300);
+      }
+      &.black {
+        border: 1px solid var(--gray-1000);
+      }
+      &.mainColor {
+        border: 1px solid var(--mcolor);
+        color: var(--mcolor);
+      }
+      &.red {
+        border: 1px solid var(--error03) !important;
+      }
+
+      /* checked */
+      &:checked {
+        position: relative;
+        border-color: var(--mcolor);
+
+        &::before {
+          content: "";
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          background-color: var(--gray-100);
+          border: 1px solid var(--mcolor);
+          z-index: 2;
+        }
+
+        &::after {
+          content: "";
+          width: 50%;
+          height: 50%;
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          background-color: var(--mcolor);
+          border-radius: var(--br-50pro);
+          z-index: 3;
+        }
+      }
+
+      /* border */
+      &.br_square_round_1 {
+        border-radius: var(--br-3);
+      }
+      &.br_square_round_2 {
+        &.xsm {
+          border-radius: var(--br-8);
+        }
+        &.sm {
+          border-radius: var(--br-10);
+        }
+        &.md {
+          border-radius: var(--br-12);
+        }
+        &.lg {
+          border-radius: var(--br-14);
+        }
+        &.xlg {
+          border-radius: var(--br-16);
+        }
+      }
+      &.br_round {
+        border-radius: var(--br-50);
+      }
+
+      // disabled
+      &:disabled,
+      &.disabled {
+        cursor: default !important;
+        background-color: var(--gray-200) !important;
+        border-color: var(--gray-200) !important;
+
+        &:checked {
+          &::before {
+            background-color: var(--gray-200) !important;
+          }
+
+          &::after {
+            background-color: var(--gray-600) !important;
+          }
+        }
+      }
+    }
+  }
+}
+// 반응형
+// 모s바일
+@media screen and (max-width: 768px) {
+  input.inp {
+    font-size: var(--fs-14);
+  }
+}
