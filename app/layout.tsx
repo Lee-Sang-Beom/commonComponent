@@ -2,6 +2,34 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/globals.scss";
 import style from "./page.module.scss";
+import localFont from "next/font/local";
+
+const pretendard = localFont({
+  src: [
+    {
+      path: "../fonts/Pretendard/Pretendard-Light.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Pretendard/Pretendard-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Pretendard/Pretendard-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Pretendard/Pretendard-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-pretendard",
+  display: "fallback",
+});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${pretendard.variable}`}>
         <div className={style.menu}>
           <a href="/form" title="form요소">
             form요소

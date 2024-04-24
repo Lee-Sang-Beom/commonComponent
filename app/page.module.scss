@@ -4,15 +4,14 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
   padding: 3rem;
 
   a {
     width: fit-content;
     padding: 1rem 3rem;
-    background-color: cornflowerblue;
+    border: solid 1px #404040;
     border-radius: var(--br-5);
-    font-size: 2rem;
-    font-family: bold;
+    font-size: 18px;
   }
 }
