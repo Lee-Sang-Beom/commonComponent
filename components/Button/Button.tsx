@@ -4,7 +4,7 @@ import { Ref, forwardRef, useState } from "react";
 import style from "./Button.module.scss";
 
 interface ButtonProps {
-  size?: "sm" | "md";
+  size?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
   // TODO: 디자인에 맞게 추가
   border?: "br_3" | "br_50";
@@ -17,14 +17,14 @@ interface ButtonProps {
 }
 
 /**
- * @param size?: 버튼 크기 (기본 lg)
- * @return "sm" | "md";
+ * @param size?: 버튼 크기 (기본 md)
+ * @return "xsm" | "sm" | "lg" | "xlg";;
  *
  * @param border?: 보더 사이즈 (기본 0)
  * @return "br_3" | "br_50";
  *
  * @param color?: 버튼 색상 (기본 white)
- * @returns string
+ * @returns string (black, mainColor, mainColorBorder)
  *
  * @param text: 버튼 text
  * @returns string
@@ -79,7 +79,15 @@ const TextButton = (
         setIsHover(false);
       }}
       className={`${style.btn} ${
-        size === "sm" ? style.sm : size === "md" ? style.md : style.lg
+        size === "xsm"
+          ? style.xsm
+          : size === "sm"
+          ? style.sm
+          : size === "lg"
+          ? style.lg
+          : size === "xlg"
+          ? style.xlg
+          : style.md
       } ${color && color !== "" ? style[color] : style.white} ${
         border === "br_3" ? style.br_3 : border === "br_50" ? style.br_50 : ""
       } ${isHover === true ? `${style[color + "_hover"]}` : ""}`}

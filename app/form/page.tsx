@@ -6,25 +6,32 @@ import Input from "@/components/Input/Input";
 export default function FormPage() {
   return (
     <>
-      <Button text={"기본 버튼 lg"} id={"btnBasicLg"} onClickEvent={() => {}} />
       <Button
-        text={"disabled 버튼 lg"}
-        color="disabled"
-        id={"btnDisabledLg"}
+        text={"기본 버튼 xlg"}
+        id={"btnBasicXlg"}
+        size="xlg"
         onClickEvent={() => {}}
       />
       <Button
-        text={"블루 보더 버튼 md"}
-        color="blueBorder"
-        size="md"
-        id={"btnBlueBorderMd"}
-        onClickEvent={() => {}}
-      />
-      <Button
-        text={"검정 버튼 sm"}
+        text={"검정 버튼 lg"}
+        id={"btnBasicLg"}
+        size="lg"
         color="black"
+        onClickEvent={() => {}}
+      />
+      <Button text={"기본 버튼 md"} id={"btnBasicMd"} onClickEvent={() => {}} />
+      <Button
+        text={"기본 메인컬러 보더 버튼 sm"}
+        id={"btnBasicSm"}
         size="sm"
-        id={"btnBlackMd"}
+        color="mainColorBorder"
+        onClickEvent={() => {}}
+      />
+      <Button
+        text={"기본 메인컬러 버튼 xsm"}
+        id={"btnBasicXsm"}
+        size="xsm"
+        color="mainColor"
         onClickEvent={() => {}}
       />
 

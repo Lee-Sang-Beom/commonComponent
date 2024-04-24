@@ -4,7 +4,7 @@ import React, { Ref, forwardRef, useEffect, useState } from "react";
 import style from "./Input.module.scss";
 
 interface InputProps {
-  inpSize?: "sm" | "md";
+  inpSize?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
   // TODO: 디자인에 맞게 추가
   border?: "br_3" | "br_50";
