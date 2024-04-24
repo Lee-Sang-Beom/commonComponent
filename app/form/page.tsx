@@ -39,14 +39,16 @@ export default function FormPage() {
       <br />
       <br />
 
-      <Input value={"기본 인풋 보더 그레이"} />
+      <Input value={"기본 인풋 보더 그레이"} title={"기본 인풋 보더 그레이"} />
       <Input
+        title="블루 인풋 md br_50"
         color="blue"
         value={"블루 인풋 md br_50"}
         inpSize={"md"}
         border="br_50"
       />
       <Input
+        title="레드 보더 인풋 sm br_3"
         color="redBorder"
         value={"레드 보더 인풋 sm br_3"}
         inpSize={"sm"}
