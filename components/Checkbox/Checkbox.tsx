@@ -1,10 +1,10 @@
 "use client";
 
 import React, { Ref, forwardRef, useEffect, useId, useState } from "react";
-import style from "./Input.module.scss";
-import { FieldErrors, FieldValues } from "react-hook-form";
+import style from "./Checkbox.module.scss";
+import { FieldValues } from "react-hook-form";
 
-interface InputProps {
+interface CheckboxProps {
   inpSize?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
@@ -31,7 +31,7 @@ interface InputProps {
  * @returns string
  */
 
-const Input = (
+const Checkbox = (
   {
     inpSize,
     color,
@@ -40,20 +40,20 @@ const Input = (
     value,
     partialErrorObj,
     ...props
-  }: InputProps & React.HTMLProps<HTMLInputElement>,
+  }: CheckboxProps & React.HTMLProps<HTMLInputElement>,
   ref: Ref<HTMLInputElement>
 ) => {
   const id = useId();
 
   return (
-    <div className={style.inp_box}>
+    <div className={style.check_box}>
       <label htmlFor={`${id}_ ${title}`} className="screen_out">
-        {title ? title : "BasicInput"}
+        {title}
       </label>
       <input
-        type="text"
+        type="checkbox"
         id={`${id}_${title}`}
-        className={`${style.inp} ${
+        className={`${style.checkbox} ${
           inpSize === "xsm"
             ? style.xsm
             : inpSize === "sm"
@@ -71,9 +71,8 @@ const Input = (
         ref={ref}
         {...props}
       />
-      {partialErrorObj && <small role="alert">{partialErrorObj.message}</small>}
     </div>
   );
 };
 
-export default forwardRef(Input);
+export default forwardRef(Checkbox);
