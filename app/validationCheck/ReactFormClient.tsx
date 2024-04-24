@@ -31,7 +31,8 @@ interface IProps {
     id: string;
     brno: string;
     createDt: string;
-    createDtDetail: string;
+    createDtDetail: string | Date;
+    createDtDetailString: string;
   };
 }
 
@@ -46,7 +47,8 @@ interface IForm {
   id: string;
   brno: string;
   createDt: string;
-  createDtDetail: string;
+  createDtDetail: string | Date;
+  createDtDetailString: string;
 }
 export default function ReactFormClient({ data }: IProps) {
   const {
@@ -85,6 +87,7 @@ export default function ReactFormClient({ data }: IProps) {
         "YYYY-MM-DD"
       ),
       createDtDetail: data.createDtDetail,
+      createDtDetailString: data.createDtDetailString,
     },
   });
 
@@ -359,21 +362,28 @@ export default function ReactFormClient({ data }: IProps) {
         />
       </div>
 
-      {/* 날짜 2 */}
-
-      {/* 변경 전 */}
+      {/* 날짜 2 : Date 형식으로 들어온 데이터를 YYYY-MM-DD HH:mm:ss 형식으로 변환*/}
       <div className="input_box">
-        <p>{`디테일 날짜 출력 예시 (변경 이전)`}</p>
-        <p className="etc_txt">{watch("createDtDetail")}</p>
-      </div>
-
-      {/* 변경 후 */}
-      <div className="input_box">
-        <p>{`디테일 날짜 출력 예시 (변경 이후)`}</p>
+        <p>{`디테일 날짜 출력 예시 1 (Date 객체를 커스텀 포맷팅된 날짜 형태로 출력하기)`}</p>
         <p className="etc_txt">
           {insertHyphenToString(
             "DATE",
             watch("createDtDetail"),
+
+            // incomingMomentDateType undefined 전달 시, baseString를 default 날짜 객체로 읽어들임
+            undefined,
+            "YYYY-MM-DD HH:mm:ss"
+          )}
+        </p>
+      </div>
+
+      {/* 날짜 3 : 문자열 형식으로 들어온 데이터를  YYYY-MM-DD HH:mm:ss 형식으로 변환 */}
+      <div className="input_box">
+        <p>{`디테일 날짜 출력 예시 2 (String 문자열을 커스텀 포맷팅된 날짜 형태로 출력하기)`}</p>
+        <p className="etc_txt">
+          {insertHyphenToString(
+            "DATE",
+            watch("createDtDetailString"),
             "YYYYMMDDHHmmss",
             "YYYY-MM-DD HH:mm:ss"
           )}
