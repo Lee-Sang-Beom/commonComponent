@@ -5,10 +5,9 @@ import style from "./Input.module.scss";
 import { FieldErrors, FieldValues } from "react-hook-form";
 
 interface InputProps {
-  inpSize?: "sm" | "md";
+  inpSize?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
-  // TODO: 디자인에 맞게 추가
-  border?: "br_3" | "br_50";
+  border?: "br_square_round_1" | "br_square_round_2" | "br_round";
   title: string;
   value?: string | number;
   partialErrorObj?: FieldValues;
@@ -16,14 +15,14 @@ interface InputProps {
 
 /**
  *
- * @param inpSize?: 인풋 크기 (기본 lg)
- * @return "sm" | "md";
+ * @param inpSize?: 인풋 크기  (기본 md)
+ * @return "xsm" | "sm" | "lg" | "xlg";
  *
  * @param color?: 인풋 색상 (기본 white)
- * @returns  string
+ * @returns string (black, mainColor, disabled)
  *
  * @param border?: 보더 사이즈 (기본 0)
- * @return "br_3" | "br_50";
+ * @return "br_square_round_1" | "br_square_round_2" | "br_round";
  *
  * @param value?: 인풋 value // react-hook-form을 사용하면 안보내도 됨
  * @returns string | number
@@ -52,12 +51,21 @@ const Input = (
         {title ? title : "BasicInput"}
       </label>
       <input
-        id={`${id}_ ${title}`}
+        type="text"
+        id={`${id}_${title}`}
         className={`${style.inp} ${
-          inpSize === "sm" ? style.sm : inpSize === "md" ? style.md : style.lg
+          inpSize === "xsm"
+            ? style.xsm
+            : inpSize === "sm"
+            ? style.sm
+            : inpSize === "lg"
+            ? style.lg
+            : inpSize === "xlg"
+            ? style.xlg
+            : style.md
         } ${color && color !== "" ? style[color] : style.white} ${
-          border === "br_3" ? style.br_3 : border === "br_50" ? style.br_50 : ""
-        }`}
+          border ? style[border] : ""
+        } ${partialErrorObj && style.red}`}
         disabled={color === "disabled" ? true : false}
         value={value}
         ref={ref}

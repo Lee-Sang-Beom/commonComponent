@@ -56,6 +56,9 @@ export default function RootLayout({
           <a href="/fileInput" title="file input">
             file input
           </a>
+          <a href="/excelDown" title="엑셀 다운로드">
+            엑셀 다운로드
+          </a>
           <a href="/table" title="table">
             table요소
           </a>

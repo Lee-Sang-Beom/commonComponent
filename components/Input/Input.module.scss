@@ -3,11 +3,76 @@ input.inp {
   height: 100%;
   box-sizing: border-box;
   overflow: hidden;
-
-  // 기본 컬러
+  font-size: var(--fs-16);
   background-color: var(--gray-100);
-  border: 1px solid var(--gray-500);
   color: var(--gray-1000);
+
+  // size
+  &.xsm {
+    height: 2.8rem;
+    font-size: var(--fs-14);
+    padding: 0 1rem;
+  }
+  &.sm {
+    height: 3.2rem;
+    padding: 0 1.2rem;
+  }
+  &.md {
+    // 기본 사이즈
+    height: 4.4rem;
+    padding: 0 2rem;
+  }
+  &.lg {
+    height: 5.6rem;
+    font-size: var(--fs-18);
+    padding: 0 2.4rem;
+  }
+  &.xlg {
+    height: 6.4rem;
+    font-size: var(--fs-18);
+    padding: 0 3rem;
+  }
+
+  /* color */
+  // 기본 컬러
+  &.white {
+    border: 1px solid var(--gray-300);
+  }
+  &.black {
+    border: 1px solid var(--gray-1000);
+  }
+  &.mainColor {
+    border: 1px solid var(--mcolor);
+    color: var(--mcolor);
+  }
+  &.red {
+    border: 1px solid var(--error03) !important;
+  }
+
+  /* border */
+  &.br_square_round_1 {
+    border-radius: var(--br-3);
+  }
+  &.br_square_round_2 {
+    &.xsm {
+      border-radius: var(--br-8);
+    }
+    &.sm {
+      border-radius: var(--br-10);
+    }
+    &.md {
+      border-radius: var(--br-12);
+    }
+    &.lg {
+      border-radius: var(--br-14);
+    }
+    &.xlg {
+      border-radius: var(--br-16);
+    }
+  }
+  &.br_round {
+    border-radius: var(--br-50);
+  }
 
   // disabled
   &.disabled {
@@ -15,41 +80,6 @@ input.inp {
     color: var(--gray-600) !important;
     border: solid 1px var(--gray-200) !important;
     cursor: default !important;
-  }
-
-  // 기본 사이즈
-  height: 4.4rem;
-  padding: 1.1rem 1.2rem;
-  font-size: var(--fs-18);
-
-  // size
-  &.sm {
-    height: 2.8rem;
-    padding: 0.3rem 1.2rem;
-
-    font-size: var(--fs-14);
-  }
-  &.md {
-    height: 3.2rem;
-    padding: 0.5rem 1.2rem;
-    font-size: var(--fs-16);
-  }
-
-  /* color */
-  &.blue {
-    background-color: var(--mblue02);
-    color: var(--gray-100);
-  }
-  &.redBorder {
-    border-color: red;
-  }
-
-  /* border */
-  &.br_3 {
-    border-radius: var(--br-5);
-  }
-  &.br_50 {
-    border-radius: var(--br-50);
   }
 }
 
