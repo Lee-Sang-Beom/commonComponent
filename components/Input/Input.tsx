@@ -1,15 +1,17 @@
 "use client";
 
-import React, { Ref, forwardRef, useEffect, useState } from "react";
+import React, { Ref, forwardRef, useEffect, useId, useState } from "react";
 import style from "./Input.module.scss";
+import { FieldErrors, FieldValues } from "react-hook-form";
 
 interface InputProps {
   inpSize?: "sm" | "md";
   color?: string;
   // TODO: 디자인에 맞게 추가
   border?: "br_3" | "br_50";
-  title?: string;
-  value: string | number;
+  title: string;
+  value?: string | number;
+  partialErrorObj?: FieldValues;
 }
 
 /**
@@ -23,10 +25,10 @@ interface InputProps {
  * @param border?: 보더 사이즈 (기본 0)
  * @return "br_3" | "br_50";
  *
- * @param value: 인풋 value
+ * @param value?: 인풋 value // react-hook-form을 사용하면 안보내도 됨
  * @returns string | number
  *
- * @param title?: 인풋 title
+ * @param title: input title로, 한 페이지 내에서 겹치지 않는 input 대상명을 정확히 보내주어야 함
  * @returns string
  */
 
@@ -37,27 +39,20 @@ const Input = (
     title,
     border,
     value,
+    partialErrorObj,
     ...props
   }: InputProps & React.HTMLProps<HTMLInputElement>,
   ref: Ref<HTMLInputElement>
 ) => {
-  const [idValue, setIdValue] = useState<number>(0);
-
-  useEffect(() => {
-    const randomValue = new Uint32Array(1);
-    window.crypto.getRandomValues(randomValue);
-    if (idValue === 0) {
-      setIdValue(randomValue[0]);
-    }
-  }, []);
+  const id = useId();
 
   return (
     <>
-      <label htmlFor={`input_${idValue}`} className="screen_out">
+      <label htmlFor={`${id}_ ${title}`} className="screen_out">
         {title ? title : "BasicInput"}
       </label>
       <input
-        id={`input_${idValue}`}
+        id={`${id}_ ${title}`}
         className={`${style.inp} ${
           inpSize === "sm" ? style.sm : inpSize === "md" ? style.md : style.lg
         } ${color && color !== "" ? style[color] : style.white} ${
@@ -68,6 +63,7 @@ const Input = (
         ref={ref}
         {...props}
       />
+      {partialErrorObj && <small role="alert">{partialErrorObj.message}</small>}
     </>
   );
 };

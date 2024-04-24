@@ -18,6 +18,7 @@ import { useForm } from "react-hook-form";
 // 임시
 import "./input.scss";
 import { useEffect } from "react";
+import Input from "@/components/Input/Input";
 
 interface IProps {
   data: {
@@ -89,7 +90,18 @@ export default function ReactFormClient({ data }: IProps) {
 
   const onSubmit = async (data: IForm) => {
     await new Promise((r) => setTimeout(r, 1000));
-    console.log("1초 후 handleSubmit 동작: ", data);
+
+    // removeHyphenToString 메소드는 빈 값이나 존재하지 않는 값을 보내면 무조건 빈 string을 반환함
+    const postData = {
+      ...data,
+      phoneNumber: removeHyphenToString(data.phoneNumber),
+      regionNumber: removeHyphenToString(data.regionNumber),
+      commonNumber: removeHyphenToString(data.commonNumber),
+      brno: removeHyphenToString(data.brno),
+      createDt: removeHyphenToString(data.createDt),
+    };
+
+    console.log("postData is ", postData);
 
     // POST API 추가
   };
@@ -104,221 +116,212 @@ export default function ReactFormClient({ data }: IProps) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* 이메일 */}
-      <div>
-        <label htmlFor="email">이메일</label>
-        <input
-          {...register("email", emailReactHookFormOption(true))}
-          id="email"
-          type="text"
-          placeholder="test@email.com"
-          // 웹 접근성을 위해 사용 (어떤 필드가 유효하지 않은지 스크린 리더를 사용하여 사용자에게 알려줌)
-          // "true"이면 입력 필드에 오류가 있음을 알림
-          aria-invalid={
-            isSubmitted ? (errors.email ? "true" : "false") : undefined
-          }
-        />
-        {errors.email && <small role="alert">{errors.email.message}</small>}
-      </div>
+      <Input
+        {...register("email", emailReactHookFormOption(true))}
+        type="text"
+        placeholder="이메일을 입력해주세요."
+        aria-invalid={
+          isSubmitted ? (errors.email ? "true" : "false") : undefined
+        }
+        // 별도 컴포넌트 기능
+        title="email"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.email}
+      />
 
       {/* 이름 */}
-      <div>
-        <label htmlFor="name">이름</label>
-        <input
-          {...register("name", {
-            required: "이름은 필수 입력입니다.",
+      <Input
+        {...register("name", {
+          required: "이름은 필수 입력입니다.",
 
-            // 최소 길이를 따라야 하는 경우
-            minLength: {
-              value: 2,
-              message: "2글자 이상 입력해주세요.",
-            },
-          })}
-          id="name"
-          type="text"
-          placeholder="이름"
-          aria-invalid={
-            isSubmitted ? (errors.name ? "true" : "false") : undefined
-          }
-        />
-        {errors.name && <small role="alert">{errors.name.message}</small>}
-      </div>
+          // 최소 길이를 따라야 하는 경우
+          minLength: {
+            value: 2,
+            message: "2글자 이상 입력해주세요.",
+          },
+        })}
+        type="text"
+        placeholder="이름을 입력해주세요."
+        aria-invalid={
+          isSubmitted ? (errors.name ? "true" : "false") : undefined
+        }
+        // 별도  컴포넌트 기능
+        title="name"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.name}
+      />
 
       {/* 휴대폰번호 */}
-      <div>
-        <label htmlFor="phoneNumber">휴대폰번호</label>
-        <input
-          {...register("phoneNumber", phoneNumberReactHookFormOption(true))}
-          id="phoneNumber"
-          type="text"
-          placeholder="01000000000"
-          aria-invalid={
-            isSubmitted ? (errors.phoneNumber ? "true" : "false") : undefined
-          }
-          value={insertHyphenToString("TEL_NO", watch("phoneNumber") || "")}
-          onChange={(e) => {
-            setValue(
-              "phoneNumber",
-              removeHyphenToString(e.currentTarget.value),
-              {
-                shouldValidate: true,
-              }
-            );
-          }}
-        />
-        {errors.phoneNumber && (
-          <small role="alert">{errors.phoneNumber.message}</small>
-        )}
-      </div>
+      <Input
+        {...register("phoneNumber", phoneNumberReactHookFormOption(true))}
+        type="text"
+        placeholder="01000000000"
+        aria-invalid={
+          isSubmitted ? (errors.phoneNumber ? "true" : "false") : undefined
+        }
+        value={insertHyphenToString("TEL_NO", watch("phoneNumber") || "")}
+        onChange={(e) => {
+          setValue("phoneNumber", removeHyphenToString(e.currentTarget.value), {
+            shouldValidate: true,
+          });
+        }}
+        // 별도  컴포넌트 기능
+        title="phoneNumber"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.phoneNumber}
+      />
 
       {/* 지역 번호 */}
-      <div>
-        <label htmlFor="regionNumber">지역 번호</label>
-        <input
-          {...register("regionNumber", regionNumberReactHookFormOption(true))}
-          id="regionNumber"
-          type="text"
-          placeholder="01000000000"
-          aria-invalid={
-            isSubmitted ? (errors.regionNumber ? "true" : "false") : undefined
-          }
-          value={insertHyphenToString("TEL_NO", watch("regionNumber") || "")}
-          onChange={(e) => {
-            setValue(
-              "regionNumber",
-              removeHyphenToString(e.currentTarget.value),
-              {
-                shouldValidate: true,
-              }
-            );
-          }}
-        />
-        {errors.regionNumber && (
-          <small role="alert">{errors.regionNumber.message}</small>
-        )}
-      </div>
+      <Input
+        {...register("regionNumber", regionNumberReactHookFormOption(true))}
+        type="text"
+        placeholder="01000000000"
+        aria-invalid={
+          isSubmitted ? (errors.regionNumber ? "true" : "false") : undefined
+        }
+        value={insertHyphenToString("TEL_NO", watch("regionNumber") || "")}
+        onChange={(e) => {
+          setValue(
+            "regionNumber",
+            removeHyphenToString(e.currentTarget.value),
+            {
+              shouldValidate: true,
+            }
+          );
+        }}
+        // 별도 컴포넌트 기능
+        title="regionNumber"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.regionNumber}
+      />
 
       {/* 공통 전화번호  */}
-      <div>
-        <label htmlFor="commonNumber">공통 전화번호</label>
-        <input
-          {...register("commonNumber", commonNumberReactHookFormOption())}
-          id="commonNumber"
-          type="text"
-          placeholder="01000000000"
-          aria-invalid={
-            isSubmitted ? (errors.commonNumber ? "true" : "false") : undefined
-          }
-          value={insertHyphenToString("TEL_NO", watch("commonNumber") || "")}
-          onChange={(e) => {
-            setValue(
-              "commonNumber",
-              removeHyphenToString(e.currentTarget.value),
-              {
-                shouldValidate: true,
-              }
-            );
-          }}
-        />
-        {errors.commonNumber && (
-          <small role="alert">{errors.commonNumber.message}</small>
-        )}
-      </div>
+      <Input
+        {...register("commonNumber", commonNumberReactHookFormOption())}
+        type="text"
+        placeholder="01000000000"
+        aria-invalid={
+          isSubmitted ? (errors.commonNumber ? "true" : "false") : undefined
+        }
+        value={insertHyphenToString("TEL_NO", watch("commonNumber") || "")}
+        onChange={(e) => {
+          setValue(
+            "commonNumber",
+            removeHyphenToString(e.currentTarget.value),
+            {
+              shouldValidate: true,
+            }
+          );
+        }}
+        // 별도 컴포넌트 기능
+        title="commonNumber"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.commonNumber}
+      />
 
       {/* ID */}
-      <div>
-        <label htmlFor="id">ID</label>
-        <input
-          {...register("id", {
-            required: "아이디는 필수 입력입니다.",
+      <Input
+        {...register("id", {
+          required: "아이디는 필수 입력입니다.",
 
-            // 최소 길이 4글자 이상
-            minLength: {
-              value: 4,
-              message: "아이디는 최소 4글자 이상이어야 합니다.",
-            },
-          })}
-          id="id"
-          type="text"
-          placeholder="user01"
-          aria-invalid={
-            isSubmitted ? (errors.id ? "true" : "false") : undefined
-          }
-        />
-        {errors.id && <small role="alert">{errors.id.message}</small>}
-      </div>
+          // 최소 길이 4글자 이상
+          minLength: {
+            value: 4,
+            message: "아이디는 최소 4글자 이상이어야 합니다.",
+          },
+        })}
+        type="text"
+        placeholder="아이디를 입력해주세요."
+        aria-invalid={isSubmitted ? (errors.id ? "true" : "false") : undefined}
+        // 별도 컴포넌트 기능
+        title="id"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.id}
+      />
 
       {/* PW */}
-      <div>
-        <label htmlFor="pw">PW</label>
-        <input
-          {...register("pw", passwordReactHookFormOption(true))}
-          id="pw"
-          type="password"
-          placeholder="1q2w3e4r"
-          aria-invalid={
-            isSubmitted ? (errors.pw ? "true" : "false") : undefined
-          }
-        />
-        {errors.pw && <small role="alert">{errors.pw.message}</small>}
-      </div>
+      <Input
+        {...register("pw", passwordReactHookFormOption(true))}
+        type="password"
+        placeholder="1q2w3e4r"
+        aria-invalid={isSubmitted ? (errors.pw ? "true" : "false") : undefined}
+        // 별도 컴포넌트 기능
+        title="pw"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.pw}
+      />
 
       {/* PW 확인 */}
-      <div>
-        <label htmlFor="pwConfirm">PWConfirm</label>
-        <input
-          {...register(
-            "pwConfirm",
-            passwordConfirmReactHookFormOption(watch("pw"))
-          )}
-          id="pwConfirm"
-          type="password"
-          placeholder="1q2w3e4r"
-          aria-invalid={
-            isSubmitted ? (errors.pwConfirm ? "true" : "false") : undefined
-          }
-        />
-        {errors.pwConfirm && (
-          <small role="alert">{errors.pwConfirm.message}</small>
+      <Input
+        {...register(
+          "pwConfirm",
+          passwordConfirmReactHookFormOption(watch("pw"))
         )}
-      </div>
+        type="password"
+        placeholder="1q2w3e4r"
+        aria-invalid={
+          isSubmitted ? (errors.pwConfirm ? "true" : "false") : undefined
+        }
+        // 별도 컴포넌트 기능
+        title="pwConfirm"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.pwConfirm}
+      />
 
       {/* 사업자 등록번호 */}
-      <div>
-        <label htmlFor="brno">사업자 등록번호</label>
-        <input
-          {...register("brno", brnoReactHookFormOption(true))}
-          id="brno"
-          type="text"
-          aria-invalid={
-            isSubmitted ? (errors.brno ? "true" : "false") : undefined
-          }
-          value={insertHyphenToString("BRNO", watch("brno") || "")}
-          onChange={(e) => {
-            setValue("brno", removeHyphenToString(e.currentTarget.value), {
-              shouldValidate: true,
-            });
-          }}
-        />
-        {errors.brno && <small role="alert">{errors.brno.message}</small>}
-      </div>
+      <Input
+        {...register("brno", brnoReactHookFormOption(true))}
+        type="text"
+        aria-invalid={
+          isSubmitted ? (errors.brno ? "true" : "false") : undefined
+        }
+        value={insertHyphenToString("BRNO", watch("brno") || "")}
+        onChange={(e) => {
+          setValue("brno", removeHyphenToString(e.currentTarget.value), {
+            shouldValidate: true,
+          });
+        }}
+        // 별도 컴포넌트 기능
+        title="brno"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.brno}
+      />
 
       {/* 날짜 */}
-      <div>
-        <label htmlFor="createDt">날짜</label>
-        <input
-          {...register("createDt")}
-          id="brno"
-          type="date"
-          aria-invalid={
-            isSubmitted ? (errors.brno ? "true" : "false") : undefined
-          }
-        />
-        {errors.createDt && (
-          <small role="alert">{errors.createDt.message}</small>
-        )}
-      </div>
+      <Input
+        {...register("createDt")}
+        type="date"
+        aria-invalid={
+          isSubmitted ? (errors.createDt ? "true" : "false") : undefined
+        }
+        // 별도 컴포넌트 기능
+        title="createDt"
+        color="white"
+        inpSize={"md"}
+        border="br_50"
+        partialErrorObj={errors.createDt}
+      />
 
       {/* 날짜 2 */}
+
       <div className="etc">
         <span>{`디테일 변경 전 `}</span>
         <p>{watch("createDtDetail")}</p>
