@@ -10,18 +10,18 @@ import moment from "moment";
  */
 export function insertHyphenToString(
   type: "BRNO" | "TEL_NO" | "DATE",
-  baseString: string | null | undefined,
+  baseString: string | Date | null | undefined,
   incomingMomentDateType?: string,
   outcomingMomentDateType?: string
 ) {
   // 예상치 못한 값인 경우 빈 문자열 반환
-  if (!baseString || baseString.length <= 0) {
+  if (!baseString) {
     return "";
   }
 
   // 이미 하이픈(-)이 존재하면 전부 빼버림
   let resultString = baseString.toString().replaceAll("-", "");
-  const incomingDateType = incomingMomentDateType || "YYYYMMDD";
+  const incomingDateType = incomingMomentDateType || undefined;
   const outcomingDateType = outcomingMomentDateType || "YYYY-MM-DD";
 
   switch (type) {
@@ -37,9 +37,14 @@ export function insertHyphenToString(
       break;
 
     case "DATE":
-      resultString = moment(resultString, incomingDateType).format(
-        outcomingDateType
-      );
+      /**
+       * 1. incomingDateType이 boolean으로 false에 치환되는 값이라면 일반 Date객체를 대상으로 변환되게끔 구성
+       *
+       * 2. 만약, 지정한 incomingDateType이 따로 존재하면 그에 따른 패턴으로 string값을 읽어들임
+       */
+      resultString = incomingDateType
+        ? moment(resultString, incomingDateType).format(outcomingDateType)
+        : moment(resultString).format(outcomingDateType);
       break;
 
     default:
