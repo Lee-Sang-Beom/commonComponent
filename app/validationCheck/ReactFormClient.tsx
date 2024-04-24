@@ -8,6 +8,7 @@ import {
   brnoReactHookFormOption,
   commonNumberReactHookFormOption,
   emailReactHookFormOption,
+  passwordConfirmReactHookFormOption,
   passwordReactHookFormOption,
   phoneNumberReactHookFormOption,
   regionNumberReactHookFormOption,
@@ -16,6 +17,7 @@ import { useForm } from "react-hook-form";
 
 // 임시
 import "./input.scss";
+import { useEffect } from "react";
 
 interface IProps {
   data: {
@@ -39,6 +41,7 @@ interface IForm {
   regionNumber: string;
   commonNumber: string;
   pw: string;
+  pwConfirm: string;
   id: string;
   brno: string;
   createDt: string;
@@ -72,6 +75,7 @@ export default function ReactFormClient({ data }: IProps) {
       commonNumber: insertHyphenToString("TEL_NO", data.commonNumber),
       brno: insertHyphenToString("BRNO", data.brno),
       pw: data.pw,
+      pwConfirm: "",
       id: data.id,
       createDt: insertHyphenToString(
         "DATE",
@@ -89,6 +93,13 @@ export default function ReactFormClient({ data }: IProps) {
 
     // POST API 추가
   };
+
+  useEffect(() => {
+    // 비밀번호 변경 시, 자동으로 pwConfirm 유효성을 검사하도록 구성
+    setValue("pwConfirm", watch("pwConfirm") || "", {
+      shouldValidate: true,
+    });
+  }, [watch("pw")]);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -249,6 +260,26 @@ export default function ReactFormClient({ data }: IProps) {
           }
         />
         {errors.pw && <small role="alert">{errors.pw.message}</small>}
+      </div>
+
+      {/* PW 확인 */}
+      <div>
+        <label htmlFor="pwConfirm">PWConfirm</label>
+        <input
+          {...register(
+            "pwConfirm",
+            passwordConfirmReactHookFormOption(watch("pw"))
+          )}
+          id="pwConfirm"
+          type="password"
+          placeholder="1q2w3e4r"
+          aria-invalid={
+            isSubmitted ? (errors.pwConfirm ? "true" : "false") : undefined
+          }
+        />
+        {errors.pwConfirm && (
+          <small role="alert">{errors.pwConfirm.message}</small>
+        )}
       </div>
 
       {/* 사업자 등록번호 */}

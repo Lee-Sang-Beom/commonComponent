@@ -197,6 +197,39 @@ export function passwordReactHookFormOption(
 }
 
 /**
+ * @passwordConfirmReactHookFormOption : 패스워드 확인에 대한 register() 함수의 두 번째 인자 Option값
+ *
+ * @pw : 비교 대상
+ * @required : 필수 입력사항인지 true, false를 보내면 됨
+ */
+export function passwordConfirmReactHookFormOption(
+  pw: string,
+  required?: boolean
+) {
+  const returnBaseObj: ReactHookFormOption = {};
+
+  if (required) {
+    returnBaseObj.required = "비밀번호 확인란의 입력은 필수 입력사항입니다.";
+  }
+
+  returnBaseObj.validate = {
+    /**
+     * @patternCheck : 비밀번호, 비밀번호 확인 입력값 비교 체크
+     */
+    patternCheck: (v: string) => {
+      if (!required && v.length <= 0) return true;
+
+      let result = false;
+      if (pw === v) {
+        result = true;
+      }
+      return result || "비밀번호가 일치하지 않습니다.";
+    },
+  };
+  return returnBaseObj;
+}
+
+/**
  * @brnoReactHookFormOption : 사업자 등록번호에 대한 register() 함수의 두 번째 인자 Option값
  *
  * @required : 필수 입력사항인지 true, false를 보내면 됨
