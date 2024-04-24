@@ -19,14 +19,44 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div className={style.menu}>
+          <a href="/validationCheck" title="table">
+            React-Hook-Form
+          </a>
           <a href="/form" title="form요소">
             form요소
           </a>
-          <a href="/table" title="table">
-            table
+          <a href="/fileInput" title="file input">
+            file input
           </a>
-          <a href="/validationCheck" title="table">
-            React-Hook-Form
+          <a href="/table" title="table">
+            table요소
+          </a>
+          <a href="/scrollAni" title="scroll ani">
+            scroll ani
+          </a>
+          <a href="/dialog" title="dialog">
+            dialog
+          </a>
+          <a href="/alertDialog" title="alert dialog">
+            alert dialog
+          </a>
+          <a href="/autoAlert" title="auto alert">
+            auto alert
+          </a>
+          <a href="/loadingDialog" title="loading dialog">
+            loading dialog
+          </a>
+          <a href="/sitemap" title="sitemap">
+            sitemap
+          </a>
+          <a href="/gnb" title="gnb">
+            gnb
+          </a>
+          <a href="/tab" title="tab">
+            tab
+          </a>
+          <a href="/topBtn" title="top btn">
+            top btn
           </a>
         </div>
         {children}
