@@ -3,8 +3,10 @@
 import style from "./Form.module.scss";
 import Button from "@/components/Button/Button";
 import Checkbox from "@/components/Checkbox/Checkbox";
+import Chip from "@/components/Chip/Chip";
 import Input from "@/components/Input/Input";
 import Radiobox from "@/components/Radiobox/Radiobox";
+import Switch from "@/components/Switch/Switch";
 import Textarea from "@/components/Textarea/Textarea";
 
 export default function FormPage() {
@@ -51,6 +53,12 @@ export default function FormPage() {
             onClickEvent={() => {}}
           />
           <Button
+            text={"none"}
+            color={"none"}
+            id={"btnBasicMd"}
+            onClickEvent={() => {}}
+          />
+          <Button
             text={"disabled"}
             color={"disabled"}
             id={"btnBasicMd"}
@@ -92,8 +100,15 @@ export default function FormPage() {
             inpSize={"xsm"}
             border={"br_round"}
           />
+          <Input title={""} placeholder={"none"} color={"none"} />
           <Input title={""} placeholder={"disabled"} color={"disabled"} />
         </div>
+      </div>
+
+      {/* 셀렉트 박스 --------------------------- */}
+      <div className={style.box}>
+        <h3>SELECTBOX</h3>
+        <div className={style.inner}></div>
       </div>
 
       {/* 체크 박스 --------------------------- */}
@@ -120,6 +135,7 @@ export default function FormPage() {
             color={"mainColor"}
             border="br_round"
           />
+          <Checkbox title={""} color={"none"} />
           <Checkbox title={""} color={"disabled"} checked={true} />
         </div>
       </div>
@@ -217,6 +233,23 @@ export default function FormPage() {
 
           <Radiobox
             title={"바"}
+            color={"none"}
+            items={[
+              {
+                name: "사과ㅇㄴㄹ",
+                value: "apple",
+                id: "apple",
+              },
+              {
+                name: "바나나",
+                value: "banana",
+                id: "banana",
+              },
+            ]}
+          />
+
+          <Radiobox
+            title={"사"}
             color={"black"}
             items={[
               {
@@ -235,7 +268,7 @@ export default function FormPage() {
           />
 
           <Radiobox
-            title={"사"}
+            title={"아"}
             color={"disabled"}
             items={[
               {
@@ -286,6 +319,7 @@ export default function FormPage() {
             taSize={"xsm"}
             border={"br_round"}
           />
+          <Textarea title={""} placeholder={"none"} color={"none"} />
           <Textarea title={""} placeholder={"disabled"} color={"disabled"} />
         </div>
       </div>
@@ -293,17 +327,106 @@ export default function FormPage() {
       {/* 스위치 --------------------------- */}
       <div className={style.box}>
         <h3>SWITCH</h3>
-        <div className={style.inner}></div>
+        <div className={style.inner}>
+          <Switch title={""} inpSize={"xlg"} />
+          <Switch
+            title={""}
+            color={"black"}
+            inpSize={"lg"}
+            border={"br_square_round_1"}
+          />
+          <Switch title={""} />
+          <Switch
+            title={""}
+            color={"mainColor"}
+            inpSize={"sm"}
+            border={"br_square_round_2"}
+          />
+          <Switch
+            title={""}
+            color={"mainColor"}
+            inpSize={"xsm"}
+            border={"br_round"}
+          />
+          <Switch title={""} color="none" border={"br_square_round_2"} />
+          <Switch title={""} color="disabled" border={"br_square_round_2"} />
+        </div>
       </div>
-      {/* 인풋 --------------------------- */}
+
+      {/* 칩 --------------------------- */}
       <div className={style.box}>
-        <h3></h3>
-        <div className={style.inner}></div>
-      </div>
-      {/* 인풋 --------------------------- */}
-      <div className={style.box}>
-        <h3></h3>
-        <div className={style.inner}></div>
+        <h3>CHIP</h3>
+        <div className={style.inner}>
+          <Chip
+            chipData={{
+              name: "xlg blackBorder",
+              value: "xlg blackBorder",
+              group: "",
+            }}
+            chipSize={"xlg"}
+            color={"blackBorder"}
+            title={""}
+          />
+          <Chip
+            chipData={{
+              name: "lg br_square_round_1 black",
+              value: "lg br_square_round_1 black",
+              group: "",
+            }}
+            chipSize={"lg"}
+            border={"br_square_round_1"}
+            color={"black"}
+            title={""}
+          />
+          <Chip
+            chipData={{
+              name: "기본 칩",
+              value: "기본 칩",
+              group: "",
+            }}
+            title={""}
+          />
+          <Chip
+            chipData={{
+              name: "sm br_square_round_2 mainColor",
+              value: "sm br_square_round_2 mainColor",
+              group: "",
+            }}
+            chipSize={"sm"}
+            border={"br_square_round_2"}
+            color={"mainColor"}
+            title={""}
+          />
+          <Chip
+            chipData={{
+              name: "xsm br_square_round_2 mainColor",
+              value: "xsm br_square_round_2 mainColor",
+              group: "",
+            }}
+            chipSize={"xsm"}
+            border={"br_round"}
+            color={"mainColorBorder"}
+            title={""}
+          />
+          <Chip
+            chipData={{
+              name: "none",
+              value: "none",
+              group: "",
+            }}
+            color={"none"}
+            title={""}
+          />
+          <Chip
+            chipData={{
+              name: "disabled",
+              value: "disabled",
+              group: "",
+            }}
+            color={"disabled"}
+            title={""}
+          />
+        </div>
       </div>
     </>
   );

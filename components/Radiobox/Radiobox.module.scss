@@ -76,6 +76,11 @@
         position: relative;
         border-color: var(--mcolor);
 
+        // none
+        &.none {
+          border: 1px solid var(--mcolor);
+        }
+
         &::before {
           content: "";
           width: 100%;

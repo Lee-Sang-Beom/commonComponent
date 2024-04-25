@@ -52,6 +52,10 @@
     &.red {
       border: 1px solid var(--error03) !important;
     }
+    // none
+    .none {
+      border: none;
+    }
 
     /* border */
     &.br_square_round_1 {
@@ -85,6 +89,12 @@
       border: solid 1px var(--gray-200) !important;
       cursor: default !important;
     }
+  }
+
+  .txt_error {
+    display: block;
+    margin-top: 1rem;
+    color: var(--error03);
   }
 }
 // 반응형
