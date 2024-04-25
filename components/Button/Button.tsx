@@ -27,7 +27,7 @@ interface ButtonProps {
  * @return "br_square_round_1" | "br_square_round_2" | "br_round";
  *
  * @param color?: 버튼 색상 (기본 white)
- * @returns string (black, mainColor, mainColorBorder, disabled)
+ * @returns string (black, mainColor, mainColorBorder, disabled, none)
  *
  * @param text: 버튼 text
  * @returns string

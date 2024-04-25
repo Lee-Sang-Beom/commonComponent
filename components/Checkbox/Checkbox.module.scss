@@ -4,6 +4,7 @@ input.checkbox {
   box-sizing: border-box;
   overflow: hidden;
   background-color: var(--gray-100);
+  cursor: pointer;
 
   // size
   &.xsm {
