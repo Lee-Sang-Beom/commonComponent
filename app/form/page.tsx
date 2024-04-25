@@ -17,53 +17,49 @@ export default function FormPage() {
         <h3>BUTTON</h3>
         <div className={style.inner}>
           <Button
-            text={"xlg br_square_round_1"}
             id={"btnBasicXlg"}
             size="xlg"
             border="br_square_round_1"
             onClickEvent={() => {}}
-          />
+          >
+            xlg br_square_round_1
+          </Button>
           <Button
-            text={"black lg br_square_round_2"}
             id={"btnBasicLg"}
             size="lg"
             color="black"
             border={"br_square_round_2"}
             onClickEvent={() => {}}
-          />
+          >
+            black lg br_square_round_2
+          </Button>
+          <Button id={"btnBasicMd"} onClickEvent={() => {}}>
+            기본 버튼
+          </Button>
           <Button
-            text={"기본 버튼"}
-            id={"btnBasicMd"}
-            onClickEvent={() => {}}
-          />
-          <Button
-            text={"mainColorBorder sm br_square_round_2"}
             id={"btnBasicSm"}
             size="sm"
             color="mainColorBorder"
             border={"br_square_round_2"}
             onClickEvent={() => {}}
-          />
+          >
+            mainColorBorder sm br_square_round_2
+          </Button>
           <Button
-            text={"mainColor xsm br_round"}
             id={"btnBasicXsm"}
             size="xsm"
             color="mainColor"
             border={"br_round"}
             onClickEvent={() => {}}
-          />
-          <Button
-            text={"none"}
-            color={"none"}
-            id={"btnBasicMd"}
-            onClickEvent={() => {}}
-          />
-          <Button
-            text={"disabled"}
-            color={"disabled"}
-            id={"btnBasicMd"}
-            onClickEvent={() => {}}
-          />
+          >
+            mainColor xsm br_round
+          </Button>
+          <Button color={"none"} id={"btnBasicMd"} onClickEvent={() => {}}>
+            none
+          </Button>
+          <Button color={"disabled"} id={"btnBasicMd"} onClickEvent={() => {}}>
+            disabled
+          </Button>
         </div>
       </div>
 
