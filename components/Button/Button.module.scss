@@ -63,7 +63,7 @@ button.btn {
 
   //hover
   // 기본 컬러 호버
-  &:hover {
+  &.white:hover {
     background-color: var(--gray-1000);
     border-color: var(--gray-1000);
     color: var(--gray-100);
