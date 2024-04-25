@@ -4,7 +4,7 @@ import { Ref, forwardRef, useState } from "react";
 import style from "./Button.module.scss";
 
 interface ButtonProps {
-  type?: "submit" | "reset";
+  type?: "submit" | "reset" | "top";
   size?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
@@ -15,6 +15,7 @@ interface ButtonProps {
   onClickEvent: () => void;
   onBlur?: () => void;
   noneHover?: true;
+  btnStyle?: React.CSSProperties;
 }
 
 /**
@@ -63,6 +64,7 @@ const TextButton = (
     title,
     id,
     noneHover,
+    btnStyle,
   }: ButtonProps,
   ref: Ref<HTMLButtonElement>
 ) => {
@@ -73,12 +75,22 @@ const TextButton = (
     <button
       ref={ref}
       id={id}
-      type={type ? type : "button"}
+      type={type ? (type !== "top" ? type : "button") : "button"}
       role="button"
       title={title ? title : "commonBTN"}
       aria-label={title ? title : "button"}
       tabIndex={tabIndex !== undefined ? tabIndex : 0}
-      onClick={onClickEvent}
+      onClick={() => {
+        if (type) {
+          if (type === "top") {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          } else {
+            onClickEvent();
+          }
+        } else {
+          onClickEvent();
+        }
+      }}
       onBlur={onBlur ? onBlur : () => {}}
       onMouseEnter={() => {
         if (noneHover === undefined) {
@@ -104,6 +116,7 @@ const TextButton = (
         border ? style[border] : ""
       } ${isHover === true ? `${style[color + "_hover"]}` : ""}`}
       disabled={color === "disabled" ? true : false}
+      style={{ ...btnStyle }}
     >
       {children}
     </button>
