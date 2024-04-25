@@ -1,10 +1,11 @@
 "use client";
 
 import React, { Ref, forwardRef, useEffect, useId, useState } from "react";
-import style from "./Input.module.scss";
-import { FieldErrors, FieldValues } from "react-hook-form";
+import style from "./Switch.module.scss";
+import { FieldValues } from "react-hook-form";
 
-interface InputProps {
+interface SwitchProps {
+  txt?: { left: string; right: string };
   inpSize?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
@@ -15,11 +16,14 @@ interface InputProps {
 
 /**
  *
+ * @param txt?: 좌우 텍스트
+ * @return { left: string, right: string };
+ *
  * @param inpSize?: 인풋 크기  (기본 md)
  * @return "xsm" | "sm" | "lg" | "xlg";
  *
  * @param color?: 인풋 색상 (기본 white)
- * @returns string (black, mainColor, disabled, none)
+ * @returns string (black, mainColor, disabled)
  *
  * @param border?: 보더 사이즈 (기본 0)
  * @return "br_square_round_1" | "br_square_round_2" | "br_round";
@@ -31,8 +35,9 @@ interface InputProps {
  * @returns string
  */
 
-const Input = (
+const Switch = (
   {
+    txt,
     inpSize,
     color,
     title,
@@ -40,20 +45,21 @@ const Input = (
     value,
     partialErrorObj,
     ...props
-  }: InputProps & React.HTMLProps<HTMLInputElement>,
+  }: SwitchProps & React.HTMLProps<HTMLInputElement>,
   ref: Ref<HTMLInputElement>
 ) => {
   const id = useId();
 
   return (
-    <div className={style.inp_box}>
+    <div className={style.switch_box}>
       <label htmlFor={`${id}_ ${title}`} className="screen_out">
-        {title ? title : "BasicInput"}
+        {title}
       </label>
+      {txt && txt.left ? <span>{txt.left}</span> : ""}
       <input
-        type="text"
+        type="checkbox"
         id={`${id}_${title}`}
-        className={`${style.inp} ${
+        className={`${style.switch} ${
           inpSize === "xsm"
             ? style.xsm
             : inpSize === "sm"
@@ -71,13 +77,9 @@ const Input = (
         ref={ref}
         {...props}
       />
-      {partialErrorObj && (
-        <small role="alert" className={style.txt_error}>
-          {partialErrorObj.message}
-        </small>
-      )}
+      {txt && txt.right ? <span>{txt.right}</span> : ""}
     </div>
   );
 };
 
-export default forwardRef(Input);
+export default forwardRef(Switch);
