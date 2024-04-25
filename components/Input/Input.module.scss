@@ -86,6 +86,12 @@
       cursor: default !important;
     }
   }
+
+  .txt_error {
+    display: block;
+    margin-top: 1rem;
+    color: var(--error03);
+  }
 }
 // 반응형
 // 모s바일
