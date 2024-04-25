@@ -4,7 +4,7 @@ import { Ref, forwardRef, useState } from "react";
 import style from "./Button.module.scss";
 
 interface ButtonProps {
-  type?: "submit" | "reset" | "top";
+  type?: "submit" | "reset";
   size?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
@@ -75,22 +75,12 @@ const TextButton = (
     <button
       ref={ref}
       id={id}
-      type={type ? (type !== "top" ? type : "button") : "button"}
+      type={type ? type : "button"}
       role="button"
       title={title ? title : "commonBTN"}
       aria-label={title ? title : "button"}
       tabIndex={tabIndex !== undefined ? tabIndex : 0}
-      onClick={() => {
-        if (type) {
-          if (type === "top") {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          } else {
-            onClickEvent();
-          }
-        } else {
-          onClickEvent();
-        }
-      }}
+      onClick={onClickEvent}
       onBlur={onBlur ? onBlur : () => {}}
       onMouseEnter={() => {
         if (noneHover === undefined) {
