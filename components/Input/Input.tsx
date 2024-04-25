@@ -71,7 +71,11 @@ const Input = (
         ref={ref}
         {...props}
       />
-      {partialErrorObj && <small role="alert">{partialErrorObj.message}</small>}
+      {partialErrorObj && (
+        <small role="alert" className={style.txt_error}>
+          {partialErrorObj.message}
+        </small>
+      )}
     </div>
   );
 };
