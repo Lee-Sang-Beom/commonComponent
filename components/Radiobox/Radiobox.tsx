@@ -27,7 +27,7 @@ interface RadioboxProps {
  * @return "xsm" | "sm" | "lg" | "xlg";
  *
  * @param color?: 인풋 색상 (기본 white)
- * @returns string (black, mainColor, disabled)
+ * @returns string (black, mainColor, disabled, none)
  *
  * @param border?: 보더 사이즈 (기본 0)
  * @return "br_square_round_1" | "br_square_round_2" | "br_round";

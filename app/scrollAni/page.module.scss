@@ -1,0 +1,63 @@
+.box {
+  width: 100%;
+  display: inline-block;
+}
+.box1_1 {
+  width: 100%;
+  height: 900px;
+  background-color: #f00;
+}
+.box1_2 {
+  width: 100%;
+  height: 900px;
+  background-color: #000;
+}
+.box1_3 {
+  width: 100%;
+  height: 900px;
+  background-color: #fea620;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.App h1 {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10vmin;
+  padding: 10vmin;
+  height: 60vmin;
+  overflow-y: scroll;
+  outline: 3px solid burlywood;
+}
+
+.emoji {
+  background: hsla(0, 0%, 100%, 0.2);
+  border-radius: 3vmin;
+  display: block;
+  padding: 3vmin 10vmin;
+  box-shadow: 0 2px 3px 0 hsla(0, 0%, 0%, 0.07),
+    0 10px 15px 0 hsla(0, 0%, 0%, 0.05);
+  font-size: 40vmin;
+  line-height: 160%;
+}
+
+.App svg {
+  width: 100px;
+  height: 50px;
+  fill: transparent;
+  path {
+    stroke: #000;
+    stroke-width: 20;
+  }
+}

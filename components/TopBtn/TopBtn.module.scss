@@ -1,0 +1,24 @@
+.btn_top {
+  position: fixed;
+
+  button {
+    aspect-ratio: 1 / 1;
+  }
+
+  &.topLeft {
+    left: 7rem;
+    top: 7rem;
+  }
+  &.topRgiht {
+    right: 7rem;
+    top: 7rem;
+  }
+  &.bottomLeft {
+    left: 7rem;
+    bottom: 7rem;
+  }
+  &.bottomRight {
+    right: 7rem;
+    bottom: 7rem;
+  }
+}

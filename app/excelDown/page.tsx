@@ -45,12 +45,13 @@ export default function TablePage() {
   return (
     <>
       <Button
-        text={"엑셀 다운로드"}
         id={""}
         onClickEvent={function (): void {
           ExcelExport(data, header, "test");
         }}
-      ></Button>
+      >
+        엑셀 다운로드
+      </Button>
       <br />
       <br />
       <Table<any>

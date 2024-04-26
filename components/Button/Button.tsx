@@ -9,11 +9,13 @@ interface ButtonProps {
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
   title?: string;
-  text: string;
+  children: React.ReactNode | React.ReactNode[];
   id: string;
   tabIndex?: number;
   onClickEvent: () => void;
   onBlur?: () => void;
+  noneHover?: true;
+  btnStyle?: React.CSSProperties;
 }
 
 /**
@@ -27,9 +29,9 @@ interface ButtonProps {
  * @return "br_square_round_1" | "br_square_round_2" | "br_round";
  *
  * @param color?: 버튼 색상 (기본 white)
- * @returns string (black, mainColor, mainColorBorder, disabled)
+ * @returns string (black, mainColor, mainColorBorder, disabled, none)
  *
- * @param text: 버튼 text
+ * @param children: 버튼 text
  * @returns string
  *
  * @param title?: 버튼 title
@@ -46,6 +48,8 @@ interface ButtonProps {
  *
  * @param id: 버튼 id
  * @returns string
+ *
+ * @param noneHover?: 호버 없음
  */
 const TextButton = (
   {
@@ -54,11 +58,13 @@ const TextButton = (
     color,
     border,
     onClickEvent,
-    text,
+    children,
     tabIndex,
     onBlur,
     title,
     id,
+    noneHover,
+    btnStyle,
   }: ButtonProps,
   ref: Ref<HTMLButtonElement>
 ) => {
@@ -71,16 +77,20 @@ const TextButton = (
       id={id}
       type={type ? type : "button"}
       role="button"
-      title={title ? title : text}
-      aria-label={title ? title : text}
+      title={title ? title : "commonBTN"}
+      aria-label={title ? title : "button"}
       tabIndex={tabIndex !== undefined ? tabIndex : 0}
       onClick={onClickEvent}
       onBlur={onBlur ? onBlur : () => {}}
       onMouseEnter={() => {
-        setIsHover(true);
+        if (noneHover === undefined) {
+          setIsHover(true);
+        }
       }}
       onMouseLeave={() => {
-        setIsHover(false);
+        if (noneHover === undefined) {
+          setIsHover(false);
+        }
       }}
       className={`${style.btn} ${
         size === "xsm"
@@ -96,8 +106,9 @@ const TextButton = (
         border ? style[border] : ""
       } ${isHover === true ? `${style[color + "_hover"]}` : ""}`}
       disabled={color === "disabled" ? true : false}
+      style={{ ...btnStyle }}
     >
-      {text}
+      {children}
     </button>
   );
 };

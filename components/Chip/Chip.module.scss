@@ -1,18 +1,11 @@
-button.btn {
-  cursor: pointer;
+.chip {
   width: 100%;
   height: 100%;
-  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.6rem;
-  box-sizing: border-box;
-  overflow: hidden;
-  transition: all 0.2s;
-  color: var(--gray-1000);
   background-color: var(--gray-100);
-  border: 1px solid var(--gray-100);
+  color: var(--gray-1000);
 
   // size
   &.xsm {
@@ -27,7 +20,6 @@ button.btn {
   &.md {
     // 기본 사이즈
     height: 4.4rem;
-    font-size: var(--fs-16);
     padding: 0 2rem;
   }
   &.lg {
@@ -42,46 +34,26 @@ button.btn {
   }
 
   /* color */
+  // 기본 컬러
   &.white {
-    // 기본 컬러
-    border-color: var(--gray-300);
+    border: 1px solid var(--gray-300);
+  }
+  &.blackBorder {
+    border: 1px solid var(--gray-1000);
   }
   &.black {
+    border: 1px solid var(--gray-1000);
     background-color: var(--gray-1000);
-    border-color: var(--gray-1000);
     color: var(--gray-100);
   }
   &.mainColor {
     background-color: var(--mcolor);
-    border-color: var(--mcolor);
+    border: 1px solid var(--mcolor);
     color: var(--gray-100);
   }
   &.mainColorBorder {
-    border-color: var(--mcolor);
+    border: 1px solid var(--mcolor);
     color: var(--mcolor);
-  }
-
-  //hover
-  // 기본 컬러 호버
-  &.white:hover {
-    background-color: var(--gray-1000);
-    border-color: var(--gray-1000);
-    color: var(--gray-100);
-  }
-  &.black_hover {
-    background-color: var(--gray-100);
-    color: var(--gray-1000);
-    border-color: var(--gray-300);
-  }
-  &.mainColor_hover {
-    background-color: var(--gray-100);
-    border-color: var(--mcolor);
-    color: var(--mcolor);
-  }
-  &.mainColorBorder_hover {
-    background-color: var(--mcolor);
-    border-color: var(--mcolor);
-    color: var(--gray-100);
   }
 
   /* border */
@@ -113,15 +85,14 @@ button.btn {
   &.disabled {
     background-color: var(--gray-200) !important;
     color: var(--gray-600) !important;
-    border-color: var(--gray-200) !important;
+    border: solid 1px var(--gray-200) !important;
     cursor: default !important;
   }
 }
-
 // 반응형
 // 모s바일
 @media screen and (max-width: 768px) {
-  button.btn {
+  input.inp {
     font-size: var(--fs-14);
   }
 }
