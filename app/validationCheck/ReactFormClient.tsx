@@ -2,12 +2,14 @@
 
 import {
   insertHyphenToString,
+  removeCommaToString,
   removeHyphenToString,
 } from "@/utils/common/common";
 import {
   brnoReactHookFormOption,
   commonNumberReactHookFormOption,
   emailReactHookFormOption,
+  onlyNumberReactHookFormOption,
   passwordConfirmReactHookFormOption,
   passwordReactHookFormOption,
   phoneNumberReactHookFormOption,
@@ -34,6 +36,7 @@ interface IProps {
     createDt: string;
     createDtDetail: string | Date;
     createDtDetailString: string;
+    cost: number | string;
   };
 }
 
@@ -50,6 +53,7 @@ interface IForm {
   createDt: string;
   createDtDetail: string | Date;
   createDtDetailString: string;
+  cost: number | string;
 }
 export default function ReactFormClient({ data }: IProps) {
   const {
@@ -89,6 +93,7 @@ export default function ReactFormClient({ data }: IProps) {
       ),
       createDtDetail: data.createDtDetail,
       createDtDetailString: data.createDtDetailString,
+      cost: Number(data.cost),
     },
   });
 
@@ -103,6 +108,7 @@ export default function ReactFormClient({ data }: IProps) {
       commonNumber: removeHyphenToString(data.commonNumber),
       brno: removeHyphenToString(data.brno),
       createDt: removeHyphenToString(data.createDt),
+      cost: removeCommaToString(data.cost.toString()),
     };
 
     console.log("postData is ", postData);
@@ -133,8 +139,8 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도 컴포넌트 기능
           title="email"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.email}
         />
       </div>
@@ -160,8 +166,8 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도  컴포넌트 기능
           title="name"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.name}
         />
       </div>
@@ -189,8 +195,8 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도  컴포넌트 기능
           title="phoneNumber"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.phoneNumber}
         />
       </div>
@@ -218,8 +224,8 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도 컴포넌트 기능
           title="regionNumber"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.regionNumber}
         />
       </div>
@@ -247,8 +253,8 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도 컴포넌트 기능
           title="commonNumber"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.commonNumber}
         />
       </div>
@@ -274,8 +280,8 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도 컴포넌트 기능
           title="id"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.id}
         />
       </div>
@@ -293,8 +299,8 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도 컴포넌트 기능
           title="pw"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.pw}
         />
       </div>
@@ -315,8 +321,8 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도 컴포넌트 기능
           title="pwConfirm"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.pwConfirm}
         />
       </div>
@@ -325,7 +331,7 @@ export default function ReactFormClient({ data }: IProps) {
       <div className="input_box">
         <p>사업자 등록번호</p>
         <Input
-          {...register("brno", brnoReactHookFormOption(true))}
+          {...register("brno", brnoReactHookFormOption(false))}
           type="text"
           aria-invalid={
             isSubmitted ? (errors.brno ? "true" : "false") : undefined
@@ -339,9 +345,37 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도 컴포넌트 기능
           title="brno"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.brno}
+        />
+      </div>
+
+      {/* 사업자 등록번호 */}
+      <div className="input_box">
+        <p>COST</p>
+        <Input
+          {...register("cost", onlyNumberReactHookFormOption(false, "비용"))}
+          type="text"
+          aria-invalid={
+            isSubmitted ? (errors.cost ? "true" : "false") : undefined
+          }
+          value={insertHyphenToString("GENERAL", watch("cost") || "")}
+          onChange={(e) => {
+            setValue(
+              "cost",
+              removeCommaToString(e.currentTarget.value.toString()),
+              {
+                shouldValidate: true,
+              }
+            );
+          }}
+          // 별도 컴포넌트 기능
+          title="cost"
+          color="white"
+          inpSize={"lg"}
+          border="br_square_round_1"
+          partialErrorObj={errors.cost}
         />
       </div>
 
@@ -357,8 +391,8 @@ export default function ReactFormClient({ data }: IProps) {
           // 별도 컴포넌트 기능
           title="createDt"
           color="white"
-          inpSize={"md"}
-          border="br_50"
+          inpSize={"lg"}
+          border="br_square_round_1"
           partialErrorObj={errors.createDt}
         />
       </div>

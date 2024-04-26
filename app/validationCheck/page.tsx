@@ -14,6 +14,7 @@ export default function Page() {
       createDt: "20240423",
       createDtDetail: new Date(),
       createDtDetailString: "20240401123059",
+      cost: 6500000,
     },
   };
 
