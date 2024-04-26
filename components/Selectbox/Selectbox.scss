@@ -1,8 +1,8 @@
-.inp_box {
+.select_box {
   width: 100%;
   height: 100%;
 
-  input.inp {
+  .select {
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -10,6 +10,29 @@
     font-size: var(--fs-16);
     background-color: var(--gray-100);
     color: var(--gray-1000);
+
+    & > div {
+      padding: 0 !important;
+      height: 100% !important;
+      min-height: unset !important;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      & > span {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    fieldset {
+      width: 0;
+      padding: 0;
+      border: none;
+    }
 
     // size
     &.xsm {
@@ -58,6 +81,9 @@
     }
 
     /* border */
+    &.br_suqare {
+      border-radius: 0;
+    }
     &.br_square_round_1 {
       border-radius: var(--br-3);
     }
@@ -97,10 +123,34 @@
     color: var(--error03);
   }
 }
+
+// 셀렉트옵션
+ul.MuiList-root.MuiList-padding.MuiMenu-list {
+  max-height: 17.2rem;
+
+  li {
+    font-size: var(--fs-16);
+
+    &:hover {
+      background-color: var(--gray-200);
+    }
+
+    &.Mui-selected {
+      color: var(--gray-100);
+      background-color: var(--mcolor);
+    }
+  }
+}
+
 // 반응형
 // 모s바일
 @media screen and (max-width: 768px) {
   input.inp {
     font-size: var(--fs-14);
+  }
+  ul.MuiList-root.MuiList-padding.MuiMenu-list {
+    li {
+      font-size: var(--fs-14);
+    }
   }
 }

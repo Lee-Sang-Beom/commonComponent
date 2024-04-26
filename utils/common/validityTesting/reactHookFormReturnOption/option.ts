@@ -1,5 +1,7 @@
+import { removeCommaToString } from "../../common";
 import {
   emailRegex,
+  generalNumRegex,
   passwordRegex,
   phoneAndRegionCommonNumberRegex,
   phoneNumberRegex,
@@ -243,6 +245,8 @@ export function brnoReactHookFormOption(required?: boolean) {
        * @patternCheck : "-"를 제외한 글자 수 체크
        */
       startsWith: (v: string) => {
+        if (!required && v.length <= 0) return true;
+
         let result = false;
         let numberMap = v
           .replace(/-/gi, "")
@@ -262,6 +266,8 @@ export function brnoReactHookFormOption(required?: boolean) {
         return result || "유효한 사업자등록번호가 아닙니다.";
       },
       patternCheck: (v: string) => {
+        if (!required && v.length <= 0) return true;
+
         let result = false;
         if (v.replaceAll("-", "").length === 10) {
           result = true;
@@ -273,6 +279,46 @@ export function brnoReactHookFormOption(required?: boolean) {
 
   if (required) {
     returnBaseObj.required = "사업자 등록번호 입력은 필수 입력사항입니다.";
+  }
+
+  return returnBaseObj;
+}
+
+/**
+ * @onlyNumberReactHookFormOption : 오직 숫자값을 포함하는가에 대한 register() 함수의 두 번째 인자 Option값
+ *
+ * @required : 필수 입력사항인지 true, false를 보내면 됨
+ */
+export function onlyNumberReactHookFormOption(
+  required?: boolean,
+  messageLabelTitle?: string
+) {
+  const returnBaseObj: ReactHookFormOption = {
+    // validate 함수를 직접 만들어서 validation을 할 수 있다.
+    validate: {
+      /**
+       * @patternCheck : "-"를 제외한 글자 수 체크
+       */
+
+      patternCheck: (v: string) => {
+        if (!required && v.length <= 0) return true;
+
+        let result = false;
+        if (generalNumRegex.test(removeCommaToString(v))) {
+          result = true;
+        }
+        return (
+          result ||
+          `${messageLabelTitle || "해당"} 입력란은 숫자로만 입력되어야 합니다.`
+        );
+      },
+    },
+  };
+
+  if (required) {
+    returnBaseObj.required = `${
+      messageLabelTitle || "해당"
+    } 입력란은 필수 입력사항입니다.`;
   }
 
   return returnBaseObj;
