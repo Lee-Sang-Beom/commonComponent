@@ -59,6 +59,7 @@ const Switch = (
       <input
         type="checkbox"
         id={`${id}_${title}`}
+        title={title}
         className={`${style.switch} ${
           inpSize === "xsm"
             ? style.xsm

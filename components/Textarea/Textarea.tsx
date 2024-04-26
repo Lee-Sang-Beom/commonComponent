@@ -78,10 +78,11 @@ export default function Textarea({
   return (
     <>
       <label htmlFor={`${id}_ ${title}`} className="screen_out">
-        {title ? title : "BasicTextarea"}
+        {title}
       </label>
       <textarea
         id={`${id}_${title}`}
+        title={title}
         className={`${style.textarea} ${
           taSize === "xsm"
             ? style.xsm
