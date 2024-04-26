@@ -22,6 +22,7 @@ import "./input.scss";
 import { useEffect } from "react";
 import Input from "@/components/Input/Input";
 import moment from "moment";
+import SubmitForm from "@/components/SubmitForm/SubmitForm";
 
 interface IProps {
   data: {
@@ -125,7 +126,7 @@ export default function ReactFormClient({ data }: IProps) {
   }, [watch("pw")]);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <SubmitForm onSubmit={handleSubmit(onSubmit)}>
       {/* 이메일 */}
       <div className="input_box">
         <p>이메일</p>
@@ -235,7 +236,7 @@ export default function ReactFormClient({ data }: IProps) {
         <p>공통 전화번호</p>
         <Input
           {...register("commonNumber", commonNumberReactHookFormOption())}
-          type="text"
+          type="tel"
           placeholder="공통 전화번호를 입력해주세요."
           aria-invalid={
             isSubmitted ? (errors.commonNumber ? "true" : "false") : undefined
@@ -437,6 +438,6 @@ export default function ReactFormClient({ data }: IProps) {
       <button type="submit" disabled={isSubmitting}>
         로그인
       </button>
-    </form>
+    </SubmitForm>
   );
 }
