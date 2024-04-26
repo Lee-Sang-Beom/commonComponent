@@ -6,8 +6,10 @@ import Checkbox from "@/components/Checkbox/Checkbox";
 import Chip from "@/components/Chip/Chip";
 import Input from "@/components/Input/Input";
 import Radiobox from "@/components/Radiobox/Radiobox";
+import Selectbox from "@/components/Selectbox/Selectbox";
 import Switch from "@/components/Switch/Switch";
 import Textarea from "@/components/Textarea/Textarea";
+import { SelectChangeEvent } from "@mui/material";
 
 export default function FormPage() {
   return (
@@ -21,6 +23,7 @@ export default function FormPage() {
             size="xlg"
             border="br_square_round_1"
             onClickEvent={() => {}}
+            title={""}
           >
             xlg br_square_round_1
           </Button>
@@ -30,10 +33,11 @@ export default function FormPage() {
             color="black"
             border={"br_square_round_2"}
             onClickEvent={() => {}}
+            title={""}
           >
             black lg br_square_round_2
           </Button>
-          <Button id={"btnBasicMd"} onClickEvent={() => {}}>
+          <Button id={"btnBasicMd"} onClickEvent={() => {}} title={""}>
             기본 버튼
           </Button>
           <Button
@@ -42,6 +46,7 @@ export default function FormPage() {
             color="mainColorBorder"
             border={"br_square_round_2"}
             onClickEvent={() => {}}
+            title={""}
           >
             mainColorBorder sm br_square_round_2
           </Button>
@@ -51,13 +56,24 @@ export default function FormPage() {
             color="mainColor"
             border={"br_round"}
             onClickEvent={() => {}}
+            title={""}
           >
             mainColor xsm br_round
           </Button>
-          <Button color={"none"} id={"btnBasicMd"} onClickEvent={() => {}}>
+          <Button
+            color={"none"}
+            id={"btnBasicMd"}
+            onClickEvent={() => {}}
+            title={""}
+          >
             none
           </Button>
-          <Button color={"disabled"} id={"btnBasicMd"} onClickEvent={() => {}}>
+          <Button
+            color={"disabled"}
+            id={"btnBasicMd"}
+            onClickEvent={() => {}}
+            title={""}
+          >
             disabled
           </Button>
         </div>
@@ -104,7 +120,78 @@ export default function FormPage() {
       {/* 셀렉트 박스 --------------------------- */}
       <div className={style.box}>
         <h3>SELECTBOX</h3>
-        <div className={style.inner}></div>
+        <div className={style.inner}>
+          <Selectbox
+            items={[
+              { name: "123", value: "123", group: "" },
+              { name: "456", value: "456", group: "" },
+            ]}
+            title={""}
+            size={"xlg"}
+            onChange={() => {}}
+          />
+          <Selectbox
+            items={[
+              { name: "123", value: "123", group: "" },
+              { name: "456", value: "456", group: "" },
+            ]}
+            title={""}
+            size={"lg"}
+            color={"black"}
+            border={"br_square_round_2"}
+            onChange={() => {}}
+          />
+          <Selectbox
+            items={[
+              { name: "123", value: "123", group: "" },
+              { name: "456", value: "456", group: "" },
+              { name: "789", value: "789", group: "" },
+              { name: "ㅁㄴㅇ", value: "ㅁㄴㅇ", group: "" },
+              { name: "asd", value: "asd", group: "" },
+              { name: "fgh", value: "fgh", group: "" },
+              { name: "ㅋㅌㅊ", value: "ㅋㅊㅌ", group: "" },
+            ]}
+            title={""}
+            onChange={() => {}}
+          />
+          <Selectbox
+            items={[
+              { name: "123", value: "123", group: "" },
+              { name: "456", value: "456", group: "" },
+            ]}
+            title={""}
+            size={"sm"}
+            color={"mainColor"}
+            border={"br_square_round_2"}
+            onChange={() => {}}
+          />
+          <Selectbox
+            items={[
+              { name: "123", value: "123", group: "" },
+              { name: "456", value: "456", group: "" },
+            ]}
+            title={""}
+            size={"xsm"}
+            color={"mainColor"}
+            border={"br_round"}
+            onChange={() => {}}
+          />
+          <Selectbox
+            items={[
+              { name: "123", value: "123", group: "" },
+              { name: "456", value: "456", group: "" },
+            ]}
+            title={""}
+            color={"none"}
+            onChange={() => {}}
+          />
+          <Selectbox
+            items={[]}
+            title={""}
+            onChange={() => {}}
+            color={"disabled"}
+          />
+        </div>
       </div>
 
       {/* 체크 박스 --------------------------- */}

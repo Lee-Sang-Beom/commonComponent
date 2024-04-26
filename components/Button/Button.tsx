@@ -8,7 +8,7 @@ interface ButtonProps {
   size?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
-  title?: string;
+  title: string;
   children: React.ReactNode | React.ReactNode[];
   id: string;
   tabIndex?: number;
@@ -77,8 +77,8 @@ const TextButton = (
       id={id}
       type={type ? type : "button"}
       role="button"
-      title={title ? title : "commonBTN"}
-      aria-label={title ? title : "button"}
+      title={title}
+      aria-label={title}
       tabIndex={tabIndex !== undefined ? tabIndex : 0}
       onClick={onClickEvent}
       onBlur={onBlur ? onBlur : () => {}}
