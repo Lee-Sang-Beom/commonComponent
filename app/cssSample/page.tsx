@@ -4,6 +4,7 @@ import style from "./page.module.scss";
 import { FaArrowDown } from "react-icons/fa6";
 import FileInput from "@/components/FileInput/FileInput";
 import Button from "@/components/Button/Button";
+import { SubjectOutlined } from "@mui/icons-material";
 
 export default function CssAnimation() {
   return (
@@ -17,7 +18,9 @@ export default function CssAnimation() {
           </div>
         </div>
         <div className={style.tb_container}>
-          <p>list</p>
+          <p>
+            <SubjectOutlined fontSize="large" /> list
+          </p>
           <table className={style.tb_st1}>
             <caption>반응형 테이블</caption>
             <colgroup>
@@ -171,7 +174,7 @@ export default function CssAnimation() {
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
-                    size={"xsm"}
+                    size={"sm"}
                     border="br_square_round_1"
                     compName={""}
                     isAvailableDeleteFile
