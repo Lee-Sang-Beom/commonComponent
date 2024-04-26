@@ -3,7 +3,7 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { FileDto } from "@/types/common/commonType";
 import { FiXCircle, FiXSquare } from "react-icons/fi";
-import "./FileInput.scss";
+import "./FileInputTitle.scss";
 import Button from "@/components/Button/Button";
 
 interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
@@ -75,13 +75,12 @@ interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
      */
     isDownload?: boolean;
     disabled?: boolean;
-    btnType: "outer" | "inner";
     border?: "br_square_round_1" | "br_square_round_2" | "br_round";
 }
 
 // 2023-10-06 local Data 관리만 넣어놓음.
 // 서버에 저장된 파일을 관리하는 것은 차후 개발해 나가야함
-const FileInput = React.forwardRef(
+const FileInputTitle = React.forwardRef(
     (
         {
             id,
@@ -100,7 +99,7 @@ const FileInput = React.forwardRef(
             hideRegisterBtn,
             isDownload,
             disabled,
-            btnType,
+
             border,
             ...props
         }: FileInputProps,
@@ -245,10 +244,65 @@ const FileInput = React.forwardRef(
                  * input과 분리된 Label 영역
                  * htmlFor에 전달되는 id, labelClassName, labelTitle props를 사용
                  */}
-                <label htmlFor={id} className={labelClassName ? labelClassName : ""}>
-                    {labelTitle ? labelTitle : ""}
-                </label>
-
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <label htmlFor={id} className={labelClassName ? labelClassName : ""}>
+                        {labelTitle ? labelTitle : ""}
+                    </label>
+                    <div style={{ display: "flex", gap: "6px" }}>
+                        {!isDownload ? null : (
+                            <Button
+                                color="mainColorBorder"
+                                onClickEvent={() => {
+                                    if (existFiles && existFiles.length) {
+                                        existFiles?.map((file: FileDto, i: number) => {
+                                            fetch(
+                                                process.env.NEXT_PUBLIC_HOST +
+                                                    "/utils/files/download/" +
+                                                    file.svrFileNm,
+                                                {
+                                                    method: "GET",
+                                                }
+                                            )
+                                                .then((res) => {
+                                                    return res.blob();
+                                                })
+                                                .then((blob) => {
+                                                    const url = window.URL.createObjectURL(blob);
+                                                    const a = document.createElement("a");
+                                                    a.href = url;
+                                                    a.download = file.cliFileNm;
+                                                    document.body.appendChild(a);
+                                                    a.click();
+                                                    setTimeout((_: any) => {
+                                                        window.URL.revokeObjectURL(url);
+                                                    }, 60000);
+                                                    a.remove();
+                                                });
+                                        });
+                                    }
+                                }}
+                                title="파일찾기: 새 창으로 열림"
+                                id="btn"
+                                size={size ? size : undefined}
+                                border={border}
+                            >
+                                다운로드
+                            </Button>
+                        )}
+                        {hideRegisterBtn ? null : (
+                            <Button
+                                onClickEvent={handleButtonClick}
+                                title="파일찾기: 새 창으로 열림"
+                                id="file_btn"
+                                color="mainColor"
+                                size={size && (size == "lg" || size == "xlg") ? undefined : size ? size : undefined}
+                                border={border}
+                            >
+                                파일찾기
+                            </Button>
+                        )}
+                    </div>
+                </div>
                 {/* input 태그로 사용되는 영역: Radix theme에서 제공하는 input은 file을 사용하기에 적합하지 않아 기본 HTML Input으로 사용 */}
                 <input
                     type="file"
@@ -262,27 +316,13 @@ const FileInput = React.forwardRef(
                     {...props}
                 />
                 {/* 파일목록을 출력하는 영역 */}
-                <div
-                    className={`files_box ${btnType} ${
-                        (size == "lg" || size == "xlg") && btnType == "inner" ? "md" : size ? size : "md"
-                    } ${border}`}
-                >
+                <div className={`files_box ${size} ${border}`}>
                     {(files === undefined || files.length === 0) &&
                     (existFiles === undefined || existFiles.length === 0) ? (
                         // 서버에 있는 파일 + 로컬에 있는 파일 둘 다 아무것도 없으면?
-                        <span
-                            className={`${btnType} ${
-                                (size == "lg" || size == "xlg") && btnType == "inner" ? "md" : size ? size : "md"
-                            } ${border}`}
-                        >
-                            등록된 파일이 없습니다.
-                        </span>
+                        <span className={` ${size} ${border}`}>등록된 파일이 없습니다.</span>
                     ) : (
-                        <ul
-                            className={`${btnType} ${
-                                (size == "lg" || size == "xlg") && btnType == "inner" ? "md" : size ? size : "md"
-                            } ${border}`}
-                        >
+                        <ul className={` ${size} ${border}`}>
                             {/* 1. 서버에서 관리되는 파일이 아닌, 로컬에서 관리되는 파일 출력 */}
                             {files &&
                                 Array.from(files).map((file, index) => {
@@ -353,72 +393,10 @@ const FileInput = React.forwardRef(
                             })}
                         </ul>
                     )}
-                    {!isDownload ? null : (
-                        <Button
-                            color="mainColorBorder"
-                            onClickEvent={() => {
-                                if (existFiles && existFiles.length) {
-                                    existFiles?.map((file: FileDto, i: number) => {
-                                        fetch(
-                                            process.env.NEXT_PUBLIC_HOST + "/utils/files/download/" + file.svrFileNm,
-                                            {
-                                                method: "GET",
-                                            }
-                                        )
-                                            .then((res) => {
-                                                return res.blob();
-                                            })
-                                            .then((blob) => {
-                                                const url = window.URL.createObjectURL(blob);
-                                                const a = document.createElement("a");
-                                                a.href = url;
-                                                a.download = file.cliFileNm;
-                                                document.body.appendChild(a);
-                                                a.click();
-                                                setTimeout((_: any) => {
-                                                    window.URL.revokeObjectURL(url);
-                                                }, 60000);
-                                                a.remove();
-                                            });
-                                    });
-                                }
-                            }}
-                            title="파일찾기: 새 창으로 열림"
-                            id="btn"
-                            size={
-                                (size == "lg" || size == "xlg") && btnType == "inner"
-                                    ? undefined
-                                    : size
-                                    ? size
-                                    : undefined
-                            }
-                            border={border}
-                        >
-                            다운로드
-                        </Button>
-                    )}
-                    {hideRegisterBtn ? null : (
-                        <Button
-                            onClickEvent={handleButtonClick}
-                            title="파일찾기: 새 창으로 열림"
-                            id="file_btn"
-                            color="mainColor"
-                            size={
-                                (size == "lg" || size == "xlg") && btnType == "inner"
-                                    ? undefined
-                                    : size
-                                    ? size
-                                    : undefined
-                            }
-                            border={border}
-                        >
-                            파일찾기
-                        </Button>
-                    )}
                 </div>
             </>
         );
     }
 );
-FileInput.displayName = "FileInput";
-export default FileInput;
+FileInputTitle.displayName = "FileInputTitle";
+export default FileInputTitle;
