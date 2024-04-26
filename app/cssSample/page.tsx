@@ -113,6 +113,7 @@ export default function CssAnimation() {
                 id={"btnBasiclg"}
                 border="br_square_round_1"
                 onClickEvent={() => {}}
+                color="black"
               >
                 목록
               </Button>
@@ -171,6 +172,7 @@ export default function CssAnimation() {
                     onFile={() => {}}
                     onDelete={() => {}}
                     size={"xsm"}
+                    border="br_square_round_1"
                     compName={""}
                     isAvailableDeleteFile
                     btnType="inner"

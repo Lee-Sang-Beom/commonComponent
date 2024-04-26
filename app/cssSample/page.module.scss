@@ -28,7 +28,7 @@
   width: 139px;
   height: 139px;
   position: absolute;
-  bottom: 200px;
+  top: 550px;
   right: 5%;
   z-index: 3;
   transition-duration: 0.8s;
@@ -47,7 +47,7 @@
   font-size: 200px;
   position: absolute;
   right: 0;
-  bottom: -120px;
+  bottom: 0;
   letter-spacing: -0.03em;
   font-weight: 700;
   color: #406eb6;
@@ -80,7 +80,6 @@
   width: 100%;
   display: flex;
   gap: 20px;
-  margin-top: 50px;
   background: url(https://www.hyosungheavyindustries.com/resources/kr/images/main/photo_mv_now.jpg)
     no-repeat;
   background-size: 100% auto;
@@ -114,12 +113,12 @@
 .tb_container {
   width: 100%;
   display: inline-block;
-  margin-top: 20px;
 }
 .tb_container p {
   font-size: 20px;
   margin: 20px 0 10px 0;
 }
+
 /**table**/
 .wrap table {
   display: table;
@@ -135,6 +134,9 @@
   margin: -1px;
   overflow: hidden;
   clip-path: polygon(0 0, 0 0, 0 0);
+}
+.tb_st1 thead {
+  background-color: #f4f5f6;
 }
 .tb_st1 tr {
   border-bottom: 1px solid #ddd;
@@ -198,6 +200,7 @@
 .tb_st1_view dt {
   padding: 10px 0;
   text-align: center;
+  background-color: #f4f5f6;
 }
 .tb_st1_view dt,
 .tb_st1_view dd {
@@ -241,7 +244,7 @@
 }
 .file strong {
   width: 100px;
-  padding-top: 5px;
+  padding-top: 10px;
 }
 .file ul {
   width: calc(100% - 100px);
