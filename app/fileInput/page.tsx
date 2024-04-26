@@ -73,6 +73,7 @@ export default function FileInputPage() {
                     size={"xsm"}
                     compName={""}
                     isAvailableDeleteFile
+                    isDownload
                     border="br_square_round_2"
                 />
                 <FileInputOuter
@@ -125,7 +126,7 @@ export default function FileInputPage() {
                 <FileInputTitle
                     multiple
                     labelTitle="TITLE TEXT"
-                    ref={outer1Ref}
+                    ref={title1Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
@@ -138,7 +139,7 @@ export default function FileInputPage() {
                 <br />
                 <FileInputTitle
                     multiple
-                    ref={outer2Ref}
+                    ref={title2Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
@@ -151,7 +152,7 @@ export default function FileInputPage() {
                 <FileInputTitle
                     isAvailableDeleteFile={true}
                     multiple
-                    ref={outer3Ref}
+                    ref={title3Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
@@ -161,7 +162,7 @@ export default function FileInputPage() {
                 <br />
                 <FileInputTitle
                     multiple
-                    ref={outer4Ref}
+                    ref={title4Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
@@ -173,7 +174,7 @@ export default function FileInputPage() {
                 <br />
                 <FileInputTitle
                     multiple
-                    ref={outer5Ref}
+                    ref={title5Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
