@@ -1,0 +1,15 @@
+.box {
+    width: 100%;
+    padding: 3rem;
+    margin-bottom: 5rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    h3 {
+        font-size: var(--fs-36);
+        font-weight: bold;
+        margin-bottom: 2rem;
+    }
+}

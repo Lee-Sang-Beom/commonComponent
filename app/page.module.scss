@@ -1,17 +1,19 @@
 // menu ------------------------------------------------------------
 .menu {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 1rem;
-  padding: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 3rem;
+    box-sizing: border-box;
 
-  a {
-    width: fit-content;
-    padding: 1rem 3rem;
-    border: solid 1px #404040;
-    border-radius: var(--br-5);
-    font-size: 18px;
-  }
+    a {
+        width: fit-content;
+        padding: 1rem 3rem;
+        border: solid 1px #404040;
+        border-radius: var(--br-5);
+        font-size: 18px;
+    }
 }
