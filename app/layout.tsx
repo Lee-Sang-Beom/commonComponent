@@ -89,6 +89,9 @@ export default function RootLayout({
           <a href="/topBtn" title="top btn">
             top btn
           </a>
+          <a href="/cssSample" title="css Sample">
+            css Sample
+          </a>
         </div>
         {children}
       </body>
