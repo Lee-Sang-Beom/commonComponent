@@ -363,13 +363,9 @@ export default function ReactFormClient({ data }: IProps) {
           }
           value={insertHyphenToString("GENERAL", watch("cost") || "")}
           onChange={(e) => {
-            setValue(
-              "cost",
-              removeCommaToString(e.currentTarget.value.toString()),
-              {
-                shouldValidate: true,
-              }
-            );
+            setValue("cost", removeCommaToString(e.currentTarget.value), {
+              shouldValidate: true,
+            });
           }}
           // 별도 컴포넌트 기능
           title="cost"
