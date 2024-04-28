@@ -63,6 +63,7 @@ const Radiobox = (
               type="radio"
               name={title}
               id={`${id}_${item.id}`}
+              title={title}
               className={`${style.radio} ${
                 inpSize === "xsm"
                   ? style.xsm
@@ -84,7 +85,7 @@ const Radiobox = (
               checked={item.checked}
               {...props}
             />
-            <span className={style.radio_txt} title={title ? title : ""}>
+            <span className={style.radio_txt} title={title}>
               {item.name}
             </span>
           </div>

@@ -53,6 +53,7 @@ const Checkbox = (
       <input
         type="checkbox"
         id={`${id}_${title}`}
+        title={title}
         className={`${style.checkbox} ${
           inpSize === "xsm"
             ? style.xsm

@@ -1,8 +1,9 @@
 "use client";
-import FileInput from "@/components/FileInput/FileInput";
 import styles from "./FileInputPage.module.scss";
 import { useRef } from "react";
 import FileInputTitle from "@/components/FileInput/FileInputTitle";
+import FileInputInner from "@/components/FileInput/FileInputInner";
+import FileInputOuter from "@/components/FileInput/FileInputOuter";
 
 export default function FileInputPage() {
     const inner1Ref = useRef(null);
@@ -27,32 +28,31 @@ export default function FileInputPage() {
         <>
             <div className={styles.box}>
                 <h3>FileInput - inner btn</h3>
-                <FileInput
+                <FileInputInner
                     multiple
                     ref={inner1Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
-                    size={"xsm"}
                     compName={""}
                     isAvailableDeleteFile
-                    btnType="inner"
                     border="br_square_round_2"
+                    labelTitle="inner fileInput"
                     isDownload
                 />
-                <FileInput
+                <FileInputInner
                     multiple
                     ref={inner2Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
-                    size={"sm"}
+                    size={"lg"}
                     compName={""}
                     isAvailableDeleteFile
-                    btnType="inner"
                     border="br_square_round_2"
+                    labelTitle="inner fileInput2"
                 />
-                <FileInput
+                <FileInputInner
                     isAvailableDeleteFile={true}
                     multiple
                     ref={inner3Ref}
@@ -60,13 +60,14 @@ export default function FileInputPage() {
                     onFile={() => {}}
                     onDelete={() => {}}
                     compName={""}
-                    btnType="inner"
                     border="br_square_round_2"
+                    size="xlg"
+                    labelTitle="inner fileInput3"
                 />
             </div>
             <div className={styles.box}>
                 <h3>FileInput - outer btn</h3>
-                <FileInput
+                <FileInputOuter
                     multiple
                     ref={outer1Ref}
                     id={""}
@@ -75,10 +76,11 @@ export default function FileInputPage() {
                     size={"xsm"}
                     compName={""}
                     isAvailableDeleteFile
-                    btnType="outer"
+                    isDownload
                     border="br_square_round_2"
+                    labelTitle="outer fileInput"
                 />
-                <FileInput
+                <FileInputOuter
                     multiple
                     ref={outer2Ref}
                     id={""}
@@ -87,10 +89,10 @@ export default function FileInputPage() {
                     size={"sm"}
                     compName={""}
                     isAvailableDeleteFile
-                    btnType="outer"
                     border="br_square_round_2"
+                    labelTitle="outer fileInput2"
                 />
-                <FileInput
+                <FileInputOuter
                     isAvailableDeleteFile={true}
                     multiple
                     ref={outer3Ref}
@@ -98,10 +100,10 @@ export default function FileInputPage() {
                     onFile={() => {}}
                     onDelete={() => {}}
                     compName={""}
-                    btnType="outer"
                     border="br_square_round_2"
+                    labelTitle="outer fileInput3"
                 />
-                <FileInput
+                <FileInputOuter
                     multiple
                     ref={outer4Ref}
                     id={""}
@@ -110,10 +112,10 @@ export default function FileInputPage() {
                     size={"lg"}
                     compName={""}
                     isAvailableDeleteFile={true}
-                    btnType="outer"
                     border="br_square_round_2"
+                    labelTitle="outer fileInput4"
                 />
-                <FileInput
+                <FileInputOuter
                     multiple
                     ref={outer5Ref}
                     id={""}
@@ -122,8 +124,8 @@ export default function FileInputPage() {
                     size={"xlg"}
                     compName={""}
                     isAvailableDeleteFile
-                    btnType="outer"
                     border="br_square_round_2"
+                    labelTitle="outer fileInput5"
                 />
             </div>
 
@@ -132,7 +134,7 @@ export default function FileInputPage() {
                 <FileInputTitle
                     multiple
                     labelTitle="TITLE TEXT"
-                    ref={outer1Ref}
+                    ref={title1Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
@@ -145,7 +147,7 @@ export default function FileInputPage() {
                 <br />
                 <FileInputTitle
                     multiple
-                    ref={outer2Ref}
+                    ref={title2Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
@@ -158,7 +160,7 @@ export default function FileInputPage() {
                 <FileInputTitle
                     isAvailableDeleteFile={true}
                     multiple
-                    ref={outer3Ref}
+                    ref={title3Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
@@ -168,7 +170,7 @@ export default function FileInputPage() {
                 <br />
                 <FileInputTitle
                     multiple
-                    ref={outer4Ref}
+                    ref={title4Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}
@@ -180,7 +182,7 @@ export default function FileInputPage() {
                 <br />
                 <FileInputTitle
                     multiple
-                    ref={outer5Ref}
+                    ref={title5Ref}
                     id={""}
                     onFile={() => {}}
                     onDelete={() => {}}

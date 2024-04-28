@@ -48,11 +48,12 @@ const Input = (
   return (
     <div className={style.inp_box}>
       <label htmlFor={`${id}_ ${title}`} className="screen_out">
-        {title ? title : "BasicInput"}
+        {title}
       </label>
       <input
         type="text"
         id={`${id}_${title}`}
+        title={title}
         className={`${style.inp} ${
           inpSize === "xsm"
             ? style.xsm

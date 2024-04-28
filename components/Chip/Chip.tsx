@@ -34,7 +34,7 @@ interface ChipProps {
  * @param border?: 보더 사이즈 (기본 0)
  * @return "br_square_round_1" | "br_square_round_2" | "br_round";
  *
- * @param title: input title로, 한 페이지 내에서 겹치지 않는 input 대상명을 정확히 보내주어야 함
+ * @param title: title로, 한 페이지 내에서 겹치지 않는 스위치 대상명을 정확히 보내주어야 함
  * @returns string
  */
 
