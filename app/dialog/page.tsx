@@ -1,6 +1,6 @@
 "use client";
 
-import style from "./dialog.module.scss";
+import style from "./dialogPage.module.scss";
 import Button from "@/components/Button/Button";
 import DialogComp from "@/components/Dialog/Dialog";
 import Textarea from "@/components/Textarea/Textarea";
