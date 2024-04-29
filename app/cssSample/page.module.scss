@@ -5,8 +5,41 @@
   box-sizing: border-box;
   position: relative;
 }
+.wrap span {
+  box-sizing: border-box;
+}
 .wrap svg {
   vertical-align: middle;
+}
+.chip_box {
+  width: 100px;
+  margin: 0 auto;
+}
+.switch_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.check_box ul {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.check_box ul li {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+.chk_txt {
+  margin-left: 10px;
+}
+.radio_box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.select_box {
+  width: 200px;
 }
 @keyframes rotation {
   to {
