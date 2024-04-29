@@ -82,7 +82,8 @@ const Radiobox = (
               }
               value={item.value}
               ref={ref}
-              checked={item.checked}
+              // checked={item.checked}
+              defaultChecked={item.checked ? item.checked : false}
               {...props}
             />
             <span className={style.radio_txt} title={title}>

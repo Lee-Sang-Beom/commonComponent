@@ -18,10 +18,6 @@ export default function AutoAlert({}: AutoAlertProps) {
   const [text] = useRecoilState(openAlertText);
   const [status] = useRecoilState<StatusType>(openAlertStatus);
 
-  useEffect(() => {
-    console.log("status", status);
-  }, [status]);
-
   return (
     <Alert
       className={`${openState ? "animation_wrap" : ""}`}

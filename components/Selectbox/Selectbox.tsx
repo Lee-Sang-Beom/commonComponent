@@ -1,12 +1,14 @@
 "use client";
 
-import React, { useId } from "react";
+import React, { useEffect, useId } from "react";
 import "./Selectbox.scss";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { FieldValues } from "react-hook-form";
-
+import clsx from "clsx";
+import { withStyles } from "@mui/styles";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 export interface SelectboxType {
   name: string;
   value: string | number;
@@ -58,11 +60,22 @@ export default function Selectbox({
 }: SelectboxProps) {
   const id = useId();
 
-  const [age, setAge] = React.useState("");
-
-  const handleChange = (event: SelectChangeEvent) => {
-    setAge(event.target.value);
+  // 커스텀 셀렉트 아이콘
+  const iconStyles = {
+    selectIcon: {
+      color: "var(--gray-1000)",
+    },
   };
+  const CustomExpandMore = withStyles(iconStyles)(
+    ({ className, classes, ...rest }: any) => {
+      return (
+        <ExpandMoreIcon
+          {...rest}
+          className={clsx(className, classes.selectIcon)}
+        />
+      );
+    }
+  );
 
   return (
     <FormControl className="select_box">
@@ -78,6 +91,13 @@ export default function Selectbox({
         title={title}
         defaultValue={""}
         onChange={onChange}
+        onMouseUp={() => {
+          const addSizeClass = document.querySelector(
+            ".MuiList-root.MuiMenu-list"
+          );
+
+          addSizeClass?.classList.add(size ? size : "md");
+        }}
         disabled={color === "disabled" ? true : false}
         className={`select ${
           size === "xsm"
@@ -92,6 +112,7 @@ export default function Selectbox({
         } ${color && color !== "" ? color : "white"} ${
           border ? border : "br_suqare"
         } ${partialErrorObj && "red"}`}
+        IconComponent={CustomExpandMore}
       >
         <MenuItem value={""}>전체</MenuItem>
         {items.map((item: SelectboxType) => {
