@@ -2,9 +2,15 @@
 import Input from "@/components/Input/Input";
 import style from "./page.module.scss";
 import { FaArrowDown } from "react-icons/fa6";
-import FileInput from "@/components/FileInput/FileInput";
 import Button from "@/components/Button/Button";
 import { SubjectOutlined } from "@mui/icons-material";
+import FileInputOuter from "@/components/FileInput/FileInputOuter";
+import Chip from "@/components/Chip/Chip";
+import Switch from "@/components/Switch/Switch";
+import Radiobox from "@/components/Radiobox/Radiobox";
+import Checkbox from "@/components/Checkbox/Checkbox";
+import Textarea from "@/components/Textarea/Textarea";
+import Selectbox from "@/components/Selectbox/Selectbox";
 
 export default function CssAnimation() {
   return (
@@ -47,7 +53,20 @@ export default function CssAnimation() {
                 <td data-label="타이틀2">텍스트2</td>
                 <td data-label="타이틀3">텍스트3</td>
                 <td data-label="타이틀4">텍스트4</td>
-                <td data-label="타이틀5">텍스트5</td>
+                <td data-label="타이틀5">
+                  <div className={style.chip_box}>
+                    <Chip
+                      chipData={{
+                        name: "진행중",
+                        value: "진행중",
+                        group: "",
+                      }}
+                      chipSize={"xsm"}
+                      color={"blackBorder"}
+                      title={"진행중"}
+                    />
+                  </div>
+                </td>
               </tr>
               <tr>
                 <td scope="row" data-label="타이틀1">
@@ -88,6 +107,7 @@ export default function CssAnimation() {
                         size="xsm"
                         border="br_square_round_1"
                         onClickEvent={() => {}}
+                        title={""}
                       >
                         다운로드
                       </Button>
@@ -101,6 +121,7 @@ export default function CssAnimation() {
                         size="xsm"
                         border="br_square_round_1"
                         onClickEvent={() => {}}
+                        title={""}
                       >
                         다운로드
                       </Button>
@@ -117,6 +138,7 @@ export default function CssAnimation() {
                 border="br_square_round_1"
                 onClickEvent={() => {}}
                 color="black"
+                title={""}
               >
                 목록
               </Button>
@@ -125,11 +147,11 @@ export default function CssAnimation() {
           <ul className={style.prevnext}>
             <li className={style.prev}>
               <span>이전글</span>
-              <a href="">2023년도 한국전력기술 사전정보공표 항목(7.1 기준)</a>
+              <a href="">2023년도 이전글 이전글 이전글 이전글 이전글 이전글</a>
             </li>
             <li className={style.next}>
               <span>다음글</span>
-              <a href="">2023년도 한국전력기술 사전정보공표 항목(7.1 기준)</a>
+              <a href="">2023년도 다음글 다음글 다음글 다음글 다음글 다음글</a>
             </li>
           </ul>
           <p>write</p>
@@ -141,7 +163,17 @@ export default function CssAnimation() {
             </colgroup>
             <tbody>
               <tr>
-                <th scope="col">작성자</th>
+                <th scope="col">토글</th>
+                <td>
+                  <div className={style.switch_box}>
+                    <span className={style.switch_txt}>비공개</span>
+                    <Switch title={""} inpSize={"xsm"} border={"br_round"} />
+                    <span className={style.switch_txt}>공개</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="col">인풋</th>
                 <td>
                   <Input
                     placeholder={"sm br_square_round_1"}
@@ -152,33 +184,93 @@ export default function CssAnimation() {
                 </td>
               </tr>
               <tr>
-                <th scope="col">제목</th>
+                <th scope="col">라디오박스</th>
                 <td>
-                  <Input
-                    placeholder={"sm br_square_round_1"}
-                    title={""}
-                    inpSize={"sm"}
-                    border={"br_square_round_1"}
-                  />
+                  <div className={style.radio_box}>
+                    <Radiobox
+                      title={"마"}
+                      inpSize="xsm"
+                      items={[
+                        {
+                          name: "사과",
+                          value: "apple",
+                          id: "apple",
+                        },
+                        {
+                          name: "바나나",
+                          value: "banana",
+                          id: "banana",
+                        },
+                      ]}
+                    />
+                  </div>
                 </td>
               </tr>
               <tr>
-                <th scope="col">내용작성</th>
-                <td>에디터가 들어갈 공간입니다.</td>
+                <th scope="col">체크박스</th>
+                <td>
+                  <div className={style.check_box}>
+                    <ul>
+                      <li>
+                        <Checkbox
+                          title={""}
+                          inpSize="xsm"
+                          border="br_square_round_1"
+                        />{" "}
+                        <span className={style.chk_txt}>사과</span>
+                      </li>
+                      <li>
+                        <Checkbox
+                          title={""}
+                          inpSize="xsm"
+                          border="br_square_round_1"
+                        />{" "}
+                        <span className={style.chk_txt}>바나나</span>
+                      </li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="col">셀렉트박스</th>
+                <td>
+                  <div className={style.select_box}>
+                    <Selectbox
+                      items={[
+                        { name: "123", value: "123", group: "" },
+                        { name: "456", value: "456", group: "" },
+                      ]}
+                      title={""}
+                      size={"xsm"}
+                      border={"br_square_round_1"}
+                      onChange={() => {}}
+                    />
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="col">textarea</th>
+                <td>
+                  <Textarea
+                    placeholder={"내용을 작성해주세요."}
+                    title={""}
+                    taSize={"xsm"}
+                    border={"br_square_round_1"}
+                  />
+                </td>
               </tr>
               <tr>
                 <th scope="col">첨부파일</th>
                 <td>
-                  <FileInput
+                  <FileInputOuter
                     multiple
                     id={""}
+                    size={"sm"}
                     onFile={() => {}}
                     onDelete={() => {}}
-                    size={"sm"}
                     border="br_square_round_1"
                     compName={""}
                     isAvailableDeleteFile
-                    btnType="inner"
                   />
                 </td>
               </tr>
