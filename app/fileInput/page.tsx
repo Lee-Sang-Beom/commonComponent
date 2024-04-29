@@ -37,6 +37,7 @@ export default function FileInputPage() {
                     compName={""}
                     isAvailableDeleteFile
                     border="br_square_round_2"
+                    labelTitle="inner fileInput"
                     isDownload
                 />
                 <FileInputInner
@@ -49,6 +50,7 @@ export default function FileInputPage() {
                     compName={""}
                     isAvailableDeleteFile
                     border="br_square_round_2"
+                    labelTitle="inner fileInput2"
                 />
                 <FileInputInner
                     isAvailableDeleteFile={true}
@@ -60,6 +62,7 @@ export default function FileInputPage() {
                     compName={""}
                     border="br_square_round_2"
                     size="xlg"
+                    labelTitle="inner fileInput3"
                 />
             </div>
             <div className={styles.box}>
@@ -75,6 +78,7 @@ export default function FileInputPage() {
                     isAvailableDeleteFile
                     isDownload
                     border="br_square_round_2"
+                    labelTitle="outer fileInput"
                 />
                 <FileInputOuter
                     multiple
@@ -86,6 +90,7 @@ export default function FileInputPage() {
                     compName={""}
                     isAvailableDeleteFile
                     border="br_square_round_2"
+                    labelTitle="outer fileInput2"
                 />
                 <FileInputOuter
                     isAvailableDeleteFile={true}
@@ -96,6 +101,7 @@ export default function FileInputPage() {
                     onDelete={() => {}}
                     compName={""}
                     border="br_square_round_2"
+                    labelTitle="outer fileInput3"
                 />
                 <FileInputOuter
                     multiple
@@ -107,6 +113,7 @@ export default function FileInputPage() {
                     compName={""}
                     isAvailableDeleteFile={true}
                     border="br_square_round_2"
+                    labelTitle="outer fileInput4"
                 />
                 <FileInputOuter
                     multiple
@@ -118,6 +125,7 @@ export default function FileInputPage() {
                     compName={""}
                     isAvailableDeleteFile
                     border="br_square_round_2"
+                    labelTitle="outer fileInput5"
                 />
             </div>
 

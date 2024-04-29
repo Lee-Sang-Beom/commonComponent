@@ -15,7 +15,7 @@ interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
     /**
      * @labelTitle : Label에 들어갈 이름. 이름이 있다면 전달하고 없으면 전달하지 않는다. (ex: 아이디, 비밀번호 등등)
      */
-    labelTitle?: string;
+    labelTitle: string;
 
     /**
      * @labelClassName : Label에 부여할 className (input에 전달할 className은 기본 className props로 전달)
@@ -243,7 +243,7 @@ const FileInputOuter = React.forwardRef(
                  * input과 분리된 Label 영역
                  * htmlFor에 전달되는 id, labelClassName, labelTitle props를 사용
                  */}
-                <label htmlFor={id} className={labelClassName ? labelClassName : ""}>
+                <label htmlFor={id} className={labelClassName ? labelClassName + " screen_out" : "screen_out"}>
                     {labelTitle ? labelTitle : ""}
                 </label>
 
