@@ -10,6 +10,7 @@ interface SitemapProps {
   menuData: any[];
   btnDirection?: "center" | "left" | "right";
   sitemapDirection?: "left" | "right" | "bottom";
+  session: any;
 }
 
 /**
@@ -26,6 +27,7 @@ export default function Sitemap({
   menuData,
   btnDirection,
   sitemapDirection,
+  session,
 }: SitemapProps) {
   // 사이트맵 열기
   const [open, setOpen] = useState<boolean>(false);
@@ -64,6 +66,7 @@ export default function Sitemap({
             setOpen(!open);
           }}
           noneHover={true}
+          title={""}
         >
           <span></span>
           <span></span>

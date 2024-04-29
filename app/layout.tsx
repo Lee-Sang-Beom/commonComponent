@@ -65,6 +65,9 @@ export default function RootLayout({
             <a href="/table" title="table">
               table요소
             </a>
+            <a href="/ckEditor" title="ck editor">
+              ck editor
+            </a>
             <a href="/scrollAni" title="scroll ani">
               scroll ani
             </a>
@@ -83,13 +86,13 @@ export default function RootLayout({
             <a href="/sitemap" title="sitemap">
               sitemap
             </a>
-            <a href="/gnb" title="gnb">
-              gnb
+            <a href="/header" title="header">
+              header
             </a>
             <a href="/tab" title="tab">
               tab
             </a>
-            <a href="/topBtn" title="top btn">
+            <a href="/topbtn" title="top btn">
               top btn
             </a>
             <a href="/cssSample" title="css Sample">
