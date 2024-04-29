@@ -1,6 +1,6 @@
 "use client";
 
-import style from "./Form.module.scss";
+import style from "./FormPage.module.scss";
 import Button from "@/components/Button/Button";
 import Checkbox from "@/components/Checkbox/Checkbox";
 import Chip from "@/components/Chip/Chip";

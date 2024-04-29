@@ -1,6 +1,6 @@
 "use client";
 
-import style from "./autoAlert.module.scss";
+import style from "./autoAlertPage.module.scss";
 import Button from "@/components/Button/Button";
 import { useAutoAlert } from "@/hooks/alert/useAutoAlert";
 
