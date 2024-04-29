@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "@/styles/globals.scss";
 import style from "./page.module.scss";
 import localFont from "next/font/local";
+import RecoilRootProvider from "@/provider/RecoilProvider";
+import AutoAlert from "@/components/AutoAlert/AutoAlert";
 
 const pretendard = localFont({
   src: [
@@ -46,54 +48,57 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${pretendard.variable}`}>
-        <div className={style.menu}>
-          <a href="/validationCheck" title="table">
-            React-Hook-Form
-          </a>
-          <a href="/form" title="form요소">
-            form요소
-          </a>
-          <a href="/fileInput" title="file input">
-            file input
-          </a>
-          <a href="/excelDown" title="엑셀 다운로드">
-            엑셀 다운로드
-          </a>
-          <a href="/table" title="table">
-            table요소
-          </a>
-          <a href="/scrollAni" title="scroll ani">
-            scroll ani
-          </a>
-          <a href="/dialog" title="dialog">
-            dialog
-          </a>
-          <a href="/alertDialog" title="alert dialog">
-            alert dialog
-          </a>
-          <a href="/autoAlert" title="auto alert">
-            auto alert
-          </a>
-          <a href="/loadingDialog" title="loading dialog">
-            loading dialog
-          </a>
-          <a href="/sitemap" title="sitemap">
-            sitemap
-          </a>
-          <a href="/gnb" title="gnb">
-            gnb
-          </a>
-          <a href="/tab" title="tab">
-            tab
-          </a>
-          <a href="/topBtn" title="top btn">
-            top btn
-          </a>
-          <a href="/cssSample" title="css Sample">
-            css Sample
-          </a>
-        </div>
-        {children}
+        <RecoilRootProvider>
+          <div className={style.menu}>
+            <a href="/validationCheck" title="table">
+              React-Hook-Form
+            </a>
+            <a href="/form" title="form요소">
+              form요소
+            </a>
+            <a href="/fileInput" title="file input">
+              file input
+            </a>
+            <a href="/excelDown" title="엑셀 다운로드">
+              엑셀 다운로드
+            </a>
+            <a href="/table" title="table">
+              table요소
+            </a>
+            <a href="/scrollAni" title="scroll ani">
+              scroll ani
+            </a>
+            <a href="/dialog" title="dialog">
+              dialog
+            </a>
+            <a href="/alertDialog" title="alert dialog">
+              alert dialog
+            </a>
+            <a href="/autoAlert" title="auto alert">
+              auto alert
+            </a>
+            <a href="/loadingDialog" title="loading dialog">
+              loading dialog
+            </a>
+            <a href="/sitemap" title="sitemap">
+              sitemap
+            </a>
+            <a href="/gnb" title="gnb">
+              gnb
+            </a>
+            <a href="/tab" title="tab">
+              tab
+            </a>
+            <a href="/topBtn" title="top btn">
+              top btn
+            </a>
+            <a href="/cssSample" title="css Sample">
+              css Sample
+            </a>
+          </div>
+          {children}
+          <AutoAlert />
+        </RecoilRootProvider>
       </body>
     </html>
   );

@@ -5,12 +5,12 @@ import React, { Dispatch, SetStateAction } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Button from "../Button/Button";
 import { IoClose } from "react-icons/io5";
 
 interface DialogCompProps {
+  type?: "alert";
   width?: "xs" | "sm" | "lg" | "xl";
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
@@ -22,6 +22,9 @@ interface DialogCompProps {
 
 /**
  *
+ * @param type?: 팝업 타입 (기본 다이얼로그)
+ * @returns "alert";
+ *
  * @param closeFocusRef?:팝업이 닫히고 이동할 Element 요소 (테이블 내 개별 다이얼로그가 있을 시 사용)
  * @returns
  *
@@ -30,6 +33,7 @@ interface DialogCompProps {
  */
 
 export default function DialogComp({
+  type,
   width,
   open,
   setOpen,
@@ -58,6 +62,8 @@ export default function DialogComp({
       aria-labelledby={`scroll-dialog-${title}`}
       aria-describedby="scroll-dialog-description"
       maxWidth={width ? width : "md"}
+      fullWidth={true}
+      className={`${type === "alert" ? "type_alert" : ""}`}
     >
       <DialogTitle id={`scroll-dialog-${title}`}>
         <p>{title}</p>
