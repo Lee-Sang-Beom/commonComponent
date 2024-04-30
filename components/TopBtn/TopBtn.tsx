@@ -62,7 +62,11 @@ export default function TopBtn({
       className={`${style.btn_top} ${
         position ? style[position] : style.bottomRight
       }`}
-      style={{ opacity: opacity, transition: "all 0.3s" }}
+      style={{
+        opacity: opacity,
+        transition: "all 0.3s",
+        zIndex: opacity === 0 ? "-1" : "999999",
+      }}
     >
       <Button
         id={"topBtn"}
