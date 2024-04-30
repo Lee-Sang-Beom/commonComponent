@@ -103,6 +103,22 @@ export default function aniSample() {
             </a>
           </li>
         </ul>
+        <p className={style.title}>TEXT</p>
+        <div className={style.wrapper}>
+          <svg>
+            <text x="50%" y="50%" dy=".35em" text-anchor="middle">
+              wisdom.lksmart.
+            </text>
+          </svg>
+        </div>
+        <p>
+          <a
+            target="_blank"
+            href="https://www.cssportal.com/css-animated-text-generator/"
+          >
+            텍스트 애니메이션 자동생성 링크
+          </a>
+        </p>
       </div>
     </>
   );
