@@ -3,7 +3,7 @@ import Input from "@/components/Input/Input";
 import style from "./page.module.scss";
 import { FaArrowDown } from "react-icons/fa6";
 import Button from "@/components/Button/Button";
-import { SubjectOutlined } from "@mui/icons-material";
+import { Opacity, SubjectOutlined } from "@mui/icons-material";
 import FileInputOuter from "@/components/FileInput/FileInputOuter";
 import Chip from "@/components/Chip/Chip";
 import Switch from "@/components/Switch/Switch";
@@ -11,18 +11,72 @@ import Radiobox from "@/components/Radiobox/Radiobox";
 import Checkbox from "@/components/Checkbox/Checkbox";
 import Textarea from "@/components/Textarea/Textarea";
 import Selectbox from "@/components/Selectbox/Selectbox";
+import { useRef } from "react";
+import { motion, useScroll } from "framer-motion";
+import { duration } from "moment";
+import { Fade } from "@mui/material";
 
 export default function CssAnimation() {
+  const outer1Ref = useRef(null);
+
   return (
     <>
       <div className={style.wrap}>
-        {/* morphism & Container Query*/}
+        {/* morphism & Container Query */}
         <div className={style.container}>
           <div className={style.morphism}>
             <div className={style.box}>morphism</div>
             <div className={style.box}>Container Query</div>
           </div>
         </div>
+        {/* search table */}
+        <div className={style.search_tb}>
+          <div className={style.select_box}>
+            <span>구분</span>
+            <Selectbox
+              items={[
+                { name: "123", value: "123", group: "" },
+                { name: "456", value: "456", group: "" },
+              ]}
+              title={""}
+              border={"br_square_round_1"}
+              onChange={() => {}}
+            />
+          </div>
+          <div className={style.date_box}>
+            <Input
+              placeholder={""}
+              title={""}
+              type="date"
+              border={"br_square_round_1"}
+            />
+            <span>~</span>
+            <Input
+              placeholder={""}
+              title={""}
+              type="date"
+              border={"br_square_round_1"}
+            />
+          </div>
+          <div className={style.search_txt}>
+            <Input
+              placeholder={"검색어를 입력해주세요."}
+              title={""}
+              type="text"
+              border={"br_square_round_1"}
+            />
+            <Button
+              id={"btnBasiclg"}
+              color="black"
+              border="br_square_round_1"
+              onClickEvent={() => {}}
+              title={""}
+            >
+              검색
+            </Button>
+          </div>
+        </div>
+        {/* table */}
         <div className={style.tb_container}>
           <p>
             <SubjectOutlined fontSize="large" /> list
@@ -47,13 +101,11 @@ export default function CssAnimation() {
             </thead>
             <tbody>
               <tr>
-                <td scope="row" data-label="타이틀1">
-                  텍스트1
-                </td>
-                <td data-label="타이틀2">텍스트2</td>
-                <td data-label="타이틀3">텍스트3</td>
-                <td data-label="타이틀4">텍스트4</td>
-                <td data-label="타이틀5">
+                <td scope="row">텍스트1</td>
+                <td>텍스트2</td>
+                <td>텍스트3</td>
+                <td>텍스트4</td>
+                <td>
                   <div className={style.chip_box}>
                     <Chip
                       chipData={{
@@ -69,13 +121,24 @@ export default function CssAnimation() {
                 </td>
               </tr>
               <tr>
-                <td scope="row" data-label="타이틀1">
-                  텍스트1
+                <td scope="row">텍스트1</td>
+                <td>텍스트2</td>
+                <td>텍스트3</td>
+                <td>텍스트4</td>
+                <td>
+                  <div className={style.chip_box}>
+                    <Chip
+                      chipData={{
+                        name: "진행중",
+                        value: "진행중",
+                        group: "",
+                      }}
+                      chipSize={"xsm"}
+                      color={"blackBorder"}
+                      title={"진행중"}
+                    />
+                  </div>
                 </td>
-                <td data-label="타이틀2">텍스트2</td>
-                <td data-label="타이틀3">텍스트3</td>
-                <td data-label="타이틀4">텍스트4</td>
-                <td data-label="타이틀5">텍스트5</td>
               </tr>
             </tbody>
           </table>
@@ -176,7 +239,7 @@ export default function CssAnimation() {
                 <th scope="col">인풋</th>
                 <td>
                   <Input
-                    placeholder={"sm br_square_round_1"}
+                    placeholder={"내용을 입력해주세요."}
                     title={""}
                     inpSize={"sm"}
                     border={"br_square_round_1"}
@@ -264,13 +327,15 @@ export default function CssAnimation() {
                 <td>
                   <FileInputOuter
                     multiple
+                    ref={outer1Ref}
                     id={""}
-                    size={"sm"}
                     onFile={() => {}}
                     onDelete={() => {}}
-                    border="br_square_round_1"
+                    size={"xsm"}
                     compName={""}
                     isAvailableDeleteFile
+                    border="br_square_round_1"
+                    labelTitle="outer fileInput"
                   />
                 </td>
               </tr>
@@ -290,7 +355,10 @@ export default function CssAnimation() {
         </div>
         {/* scrollDown Ani */}
         <div className={style.scrollDown}>
-          <img src="https://www.nstel.co.kr/asset/img/main/scrollCircle.png" />
+          <img
+            src="https://www.nstel.co.kr/asset/img/main/scrollCircle.png"
+            alt="scroll down"
+          />
           <FaArrowDown />
         </div>
       </div>
