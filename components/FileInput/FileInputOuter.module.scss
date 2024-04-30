@@ -12,6 +12,14 @@
     gap: 1rem;
     border: 0;
 
+    .btn_box {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        box-sizing: border-box;
+        gap: 1rem;
+    }
+
     &.xsm {
         & > button {
             width: 85px !important;
@@ -173,6 +181,27 @@
     }
     .files_box li {
         font-size: var(--fs-14);
+    }
+
+    // -----
+    .files_box {
+        border: none;
+        flex-wrap: wrap;
+
+        & > ul,
+        & > span {
+            width: 100%;
+            // border: 1px solid var(--gray-300);
+            // padding: 1rem;
+            font-size: var(--fs-14) !important;
+            padding: 1rem !important;
+            box-sizing: border-box;
+            min-height: 2.5rem !important;
+            max-height: 7.5rem !important;
+        }
+        .btn_box {
+            width: 100%;
+        }
     }
 }
 .files_box button svg {

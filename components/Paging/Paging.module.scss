@@ -1,0 +1,96 @@
+/* hover 시 background f3f3f3 */
+
+.pg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  .number_button {
+    color: var(--gray-1000);
+    width: 32px;
+    height: 32px;
+    border-radius: var(--br-5);
+    position: relative;
+    background-color: var(--gray-100);
+    border: 1px solid var(--gray-200);
+  }
+
+  /* HOVER */
+  .number_button:hover {
+    background-color: var(--info01);
+    color: var(--mblue03);
+    border-color: var(--mblue03);
+  }
+
+  /* ON */
+  .number_button.on {
+    background-color: var(--mblue03);
+    color: var(--gray-100);
+    border-color: var(--mblue03);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .arrow_button {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--br-5);
+    padding: 6px;
+    color: var(--gray-1000);
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--gray-200);
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  /* 데이터가 없을떄 */
+  .arrow_button.noData,
+  .arrow_button.noMorePage {
+    color: var(--gray-800);
+    cursor: default !important;
+    background-color: var(--gray-200);
+    border-color: var(vaR(--gray-200));
+  }
+}
+
+.m_pg {
+  width: 100%;
+  padding: 1.2rem;
+  box-sizing: border-box;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 2rem;
+  /* border: 1px solid var(--gray-4); */
+  background: var(--mblue03);
+  color: var(--gray-100);
+  border-radius: var(--br-5);
+  gap: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .pg {
+    display: none;
+  }
+  .m_pg {
+    display: flex;
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}
