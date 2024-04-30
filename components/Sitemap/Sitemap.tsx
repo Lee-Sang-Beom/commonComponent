@@ -81,7 +81,8 @@ export default function Sitemap({
           sitemapDirection ? style[sitemapDirection] : ""
         } ${open ? style.open : ""}`}
       >
-        디자인 추가
+        <div className="pc">asdas</div>
+        <div className="mobile">mobile</div>
       </div>
     </>
   );
