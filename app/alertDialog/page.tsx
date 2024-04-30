@@ -1,6 +1,6 @@
 "use client";
 
-import style from "./AlertDialog.module.scss";
+import style from "./AlertDialogPage.module.scss";
 import Button from "@/components/Button/Button";
 import DialogComp from "@/components/Dialog/Dialog";
 import Textarea from "@/components/Textarea/Textarea";

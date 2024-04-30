@@ -4,6 +4,7 @@ import React, { useEffect, useId } from "react";
 import "./Selectbox.scss";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { FieldValues } from "react-hook-form";
 import clsx from "clsx";
@@ -24,6 +25,7 @@ interface SelectboxProps {
   value?: string;
   partialErrorObj?: FieldValues;
   onChange: (event: SelectChangeEvent) => void;
+  placeholder?: string;
 }
 
 /**
@@ -45,7 +47,7 @@ interface SelectboxProps {
  *
  * @param onChange
  *
- * @param placeholder
+ * @param placeholder? placeholder가 있고 value 값이 ""인 데이터가 있으면 value 값이 ""인 데이터가 우선 적용
  */
 
 export default function Selectbox({
@@ -56,6 +58,7 @@ export default function Selectbox({
   border,
   value,
   partialErrorObj,
+  placeholder,
   onChange,
 }: SelectboxProps) {
   const id = useId();
@@ -78,11 +81,11 @@ export default function Selectbox({
   );
 
   return (
-    <FormControl className="select_box">
-      {/* <InputLabel id={`${id}_${title}_label`}>{placeholder}</InputLabel> */}
-      <label htmlFor={`${id}_ ${title}_label`} className="screen_out">
+    <FormControl className={`select_box`}>
+      <label htmlFor={`${id}_ ${title}_label`} className={`screen_out`}>
         {title}
       </label>
+
       <Select
         displayEmpty
         inputProps={{ "aria-label": "Without label" }}
@@ -98,6 +101,14 @@ export default function Selectbox({
 
           addSizeClass?.classList.add(size ? size : "md");
         }}
+        renderValue={(selected) => {
+          if (selected.length === 0) {
+            return placeholder;
+          }
+
+          return items.find((item) => item.value === selected)?.name;
+        }}
+        value={value}
         disabled={color === "disabled" ? true : false}
         className={`select ${
           size === "xsm"
@@ -114,7 +125,6 @@ export default function Selectbox({
         } ${partialErrorObj && "red"}`}
         IconComponent={CustomExpandMore}
       >
-        <MenuItem value={""}>전체</MenuItem>
         {items.map((item: SelectboxType) => {
           return (
             <MenuItem key={`${id}_${item.value}`} value={item.value}>
