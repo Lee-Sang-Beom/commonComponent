@@ -97,10 +97,13 @@ export default function RootLayout({
               top btn
             </a>
             <a href="/scrollAni" title="scroll ani">
-              scroll ani
+              scroll ani Sample
             </a>
             <a href="/cssSample" title="css Sample">
               css Sample
+            </a>
+            <a href="/aniSample" title="ani Sample">
+              ani Sample
             </a>
           </div>
           {children}
