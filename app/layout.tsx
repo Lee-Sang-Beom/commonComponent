@@ -68,9 +68,10 @@ export default function RootLayout({
             <a href="/ckEditor" title="ck editor">
               ck editor
             </a>
-            <a href="/scrollAni" title="scroll ani">
-              scroll ani
+            <a href="/PagiNation" title="Pagination">
+              Pagination
             </a>
+
             <a href="/dialog" title="dialog">
               dialog
             </a>
@@ -94,6 +95,9 @@ export default function RootLayout({
             </a>
             <a href="/topbtn" title="top btn">
               top btn
+            </a>
+            <a href="/scrollAni" title="scroll ani">
+              scroll ani
             </a>
             <a href="/cssSample" title="css Sample">
               css Sample
