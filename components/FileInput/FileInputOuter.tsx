@@ -59,7 +59,7 @@ interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
     isAvailableDeleteFile?: boolean;
 
     /**
-     * @size : "sm" | "md" | "lg"
+     * @size :"xsm" | "sm" | "lg" | "xlg", 넣지 않으면 기본 md 적용
      */
     size?: "xsm" | "sm" | "lg" | "xlg";
 
@@ -75,6 +75,9 @@ interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
      */
     isDownload?: boolean;
     disabled?: boolean;
+    /**
+     * @border border 타입을 넣어주면 사이즈에 맞는 border 자동 적용
+     */
     border?: "br_square_round_1" | "br_square_round_2" | "br_round";
 }
 
@@ -339,56 +342,60 @@ const FileInputOuter = React.forwardRef(
                             })}
                         </ul>
                     )}
-                    {!isDownload ? null : (
-                        <Button
-                            color="mainColorBorder"
-                            onClickEvent={() => {
-                                if (existFiles && existFiles.length) {
-                                    existFiles?.map((file: FileDto, i: number) => {
-                                        fetch(
-                                            process.env.NEXT_PUBLIC_HOST + "/utils/files/download/" + file.svrFileNm,
-                                            {
-                                                method: "GET",
-                                            }
-                                        )
-                                            .then((res) => {
-                                                return res.blob();
-                                            })
-                                            .then((blob) => {
-                                                const url = window.URL.createObjectURL(blob);
-                                                const a = document.createElement("a");
-                                                a.href = url;
-                                                a.download = file.cliFileNm;
-                                                document.body.appendChild(a);
-                                                a.click();
-                                                setTimeout((_: any) => {
-                                                    window.URL.revokeObjectURL(url);
-                                                }, 60000);
-                                                a.remove();
-                                            });
-                                    });
-                                }
-                            }}
-                            title="파일찾기: 새 창으로 열림"
-                            id="btn"
-                            size={size}
-                            border={border}
-                        >
-                            다운로드
-                        </Button>
-                    )}
-                    {hideRegisterBtn ? null : (
-                        <Button
-                            onClickEvent={handleButtonClick}
-                            title="파일찾기: 새 창으로 열림"
-                            id="file_btn"
-                            color="mainColor"
-                            size={size}
-                            border={border}
-                        >
-                            파일찾기
-                        </Button>
-                    )}
+                    <div className={style.btn_box}>
+                        {!isDownload ? null : (
+                            <Button
+                                color="mainColorBorder"
+                                onClickEvent={() => {
+                                    if (existFiles && existFiles.length) {
+                                        existFiles?.map((file: FileDto, i: number) => {
+                                            fetch(
+                                                process.env.NEXT_PUBLIC_HOST +
+                                                    "/utils/files/download/" +
+                                                    file.svrFileNm,
+                                                {
+                                                    method: "GET",
+                                                }
+                                            )
+                                                .then((res) => {
+                                                    return res.blob();
+                                                })
+                                                .then((blob) => {
+                                                    const url = window.URL.createObjectURL(blob);
+                                                    const a = document.createElement("a");
+                                                    a.href = url;
+                                                    a.download = file.cliFileNm;
+                                                    document.body.appendChild(a);
+                                                    a.click();
+                                                    setTimeout((_: any) => {
+                                                        window.URL.revokeObjectURL(url);
+                                                    }, 60000);
+                                                    a.remove();
+                                                });
+                                        });
+                                    }
+                                }}
+                                title="파일찾기: 새 창으로 열림"
+                                id="btn"
+                                size={size}
+                                border={border}
+                            >
+                                다운로드
+                            </Button>
+                        )}
+                        {hideRegisterBtn ? null : (
+                            <Button
+                                onClickEvent={handleButtonClick}
+                                title="파일찾기: 새 창으로 열림"
+                                id="file_btn"
+                                color="mainColor"
+                                size={size}
+                                border={border}
+                            >
+                                파일찾기
+                            </Button>
+                        )}
+                    </div>
                 </div>
             </>
         );

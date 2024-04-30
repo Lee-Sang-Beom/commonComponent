@@ -12,6 +12,16 @@
     gap: 1rem;
     border: 1px solid var(--gray-300);
     border-radius: 0;
+    position: relative;
+
+    .btn_box {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        box-sizing: border-box;
+        gap: 1rem;
+    }
+
     &.md {
         // min-height: 2.4rem;
         max-height: 13.2rem;
@@ -121,6 +131,40 @@
         & > ul {
             font-size: var(--fs-14);
         }
+
+        /* border */
+        &.br_square_round_1 {
+            & > span,
+            & > ul {
+                border-radius: var(--br-3);
+            }
+        }
+        &.br_square_round_2 {
+            &.md {
+                & > span,
+                & > ul {
+                    border-radius: var(--br-8);
+                }
+            }
+            &.lg {
+                & > span,
+                & > ul {
+                    border-radius: var(--br-10);
+                }
+            }
+            &.xlg {
+                & > span,
+                & > ul {
+                    border-radius: var(--br-12);
+                }
+            }
+        }
+        &.br_round {
+            & > span,
+            & > ul {
+                border-radius: var(--br-50);
+            }
+        }
     }
     .files_box .sm,
     .files_box button {
@@ -134,7 +178,26 @@
     .files_box li {
         font-size: var(--fs-14);
     }
+
+    // -----
+    .files_box {
+        border: none;
+        flex-wrap: wrap;
+
+        & > ul,
+        & > span {
+            width: 100%;
+            border: 1px solid var(--gray-300);
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+        .btn_box {
+            width: 100%;
+        }
+    }
 }
+
+//
 .files_box button svg {
     vertical-align: middle;
 }

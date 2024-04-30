@@ -59,7 +59,7 @@ interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
     isAvailableDeleteFile?: boolean;
 
     /**
-     * @size : "sm" | "md" | "lg"
+     * @size :"xsm" | "sm" | "lg" | "xlg", 넣지 않으면 기본 md 적용
      */
     size?: "xsm" | "sm" | "lg" | "xlg";
 
@@ -75,6 +75,9 @@ interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
      */
     isDownload?: boolean;
     disabled?: boolean;
+    /**
+     * @border border 타입을 넣어주면 사이즈에 맞는 border 자동 적용
+     */
     border?: "br_square_round_1" | "br_square_round_2" | "br_round";
 }
 
