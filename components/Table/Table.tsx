@@ -2,6 +2,7 @@
 import CSS from "csstype";
 import React, { Ref, forwardRef, useEffect, useRef, useState } from "react";
 import style from "./Table.module.scss";
+import Checkbox from "../Checkbox/Checkbox";
 
 export interface TableHeader {
     /**
@@ -229,8 +230,9 @@ const Table = forwardRef(
                                         if (thead.form === "allCheck" || thead.form === "check") {
                                             return (
                                                 <td key={`check_${thead.value}`}>
-                                                    <input
-                                                        type="checkbox"
+                                                    <Checkbox
+                                                        title="체크박스"
+                                                        inpSize="xsm"
                                                         id={"thChekcBox"}
                                                         data-value={trIndex}
                                                         style={{ margin: "0 auto" }}
@@ -248,7 +250,10 @@ const Table = forwardRef(
                                                                 ? true
                                                                 : false
                                                         }
+                                                        // @ts-ignore
                                                         onChange={({ target: { checked } }) => {
+                                                            console.log("checked : ", checked);
+
                                                             if (checked === true) {
                                                                 if (setCheckYn) {
                                                                     setCheckYn("Y");

@@ -1,0 +1,95 @@
+.tb_top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 0.5rem;
+
+    .title_box {
+        width: auto;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-end;
+        gap: 1.5rem;
+
+        .title {
+            height: 30px;
+            font-size: var(--fs-22);
+            font-weight: 700;
+        }
+
+        .count {
+            color: #666;
+
+            span {
+                color: var(--mblue03);
+                font-weight: 500;
+            }
+        }
+    }
+
+    .btn_box {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem;
+
+        & > span > button,
+        & > button {
+            width: 3rem;
+            box-sizing: border-box;
+
+            svg {
+                font-size: var(--fs-20);
+            }
+        }
+
+        // &.cms {
+        & > span > button,
+        & > button {
+            width: fit-content;
+            min-width: unset;
+            padding-left: 1.2rem;
+            padding-right: 1.2rem;
+
+            svg {
+                font-size: var(--fs-20);
+            }
+            // }
+        }
+    }
+}
+
+// 반응형
+@media screen and (max-width: 768px) {
+    .select_box {
+        display: none;
+    }
+}
+
+@media all and (max-width: 410px) {
+    .btn_box button {
+        width: auto;
+        padding: 0;
+        border: none !important;
+        align-items: end;
+    }
+    .btn_box button {
+        width: auto !important;
+    }
+    .title {
+        font-size: var(--fs-16) !important;
+    }
+}
+
+// 프린트
+@media print {
+    .tb_top {
+        .title_box {
+            .title {
+                height: 20px;
+                font-size: var(--fs-16);
+            }
+        }
+    }
+}
