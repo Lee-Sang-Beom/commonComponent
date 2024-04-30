@@ -123,15 +123,18 @@ export default function FormPage() {
         <div className={style.inner}>
           <Selectbox
             items={[
+              { name: "전체", value: "555", group: "" },
               { name: "123", value: "123", group: "" },
               { name: "456", value: "456", group: "" },
             ]}
             title={""}
             size={"xlg"}
             onChange={() => {}}
+            placeholder="이름을 선택해주세요."
           />
           <Selectbox
             items={[
+              { name: "전체", value: "ㅁㄴㅇ", group: "" },
               { name: "123", value: "123", group: "" },
               { name: "456", value: "456", group: "" },
             ]}
@@ -140,9 +143,11 @@ export default function FormPage() {
             color={"black"}
             border={"br_square_round_2"}
             onChange={() => {}}
+            placeholder="이름을 선택해주세요."
           />
           <Selectbox
             items={[
+              { name: "전체", value: "7345", group: "" },
               { name: "123", value: "123", group: "" },
               { name: "456", value: "456", group: "" },
               { name: "789", value: "789", group: "" },
@@ -151,11 +156,14 @@ export default function FormPage() {
               { name: "fgh", value: "fgh", group: "" },
               { name: "ㅋㅌㅊ", value: "ㅋㅊㅌ", group: "" },
             ]}
+            placeholder="전체"
             title={""}
+            value="123"
             onChange={() => {}}
           />
           <Selectbox
             items={[
+              { name: "전체", value: "vwef", group: "" },
               { name: "123", value: "123", group: "" },
               { name: "456", value: "456", group: "" },
             ]}
@@ -164,9 +172,11 @@ export default function FormPage() {
             color={"mainColor"}
             border={"br_square_round_2"}
             onChange={() => {}}
+            placeholder="전체"
           />
           <Selectbox
             items={[
+              { name: "전체", value: "123all", group: "" },
               { name: "123", value: "123", group: "" },
               { name: "456", value: "456", group: "" },
             ]}
@@ -175,21 +185,25 @@ export default function FormPage() {
             color={"mainColor"}
             border={"br_round"}
             onChange={() => {}}
+            placeholder="이름을 선택해주세요."
           />
           <Selectbox
             items={[
+              { name: "전체", value: "qawceq", group: "" },
               { name: "123", value: "123", group: "" },
               { name: "456", value: "456", group: "" },
             ]}
             title={""}
             color={"none"}
             onChange={() => {}}
+            placeholder="전체"
           />
           <Selectbox
             items={[]}
             title={""}
             onChange={() => {}}
             color={"disabled"}
+            placeholder="disabled"
           />
         </div>
       </div>
