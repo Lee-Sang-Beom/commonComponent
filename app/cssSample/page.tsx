@@ -35,12 +35,13 @@ export default function CssAnimation() {
             <span>구분</span>
             <Selectbox
               items={[
+                { name: "전체", value: "555", group: "" },
                 { name: "123", value: "123", group: "" },
                 { name: "456", value: "456", group: "" },
               ]}
               title={""}
-              border={"br_square_round_1"}
               onChange={() => {}}
+              placeholder="구분선택"
             />
           </div>
           <div className={style.date_box}>
@@ -303,10 +304,11 @@ export default function CssAnimation() {
                         { name: "123", value: "123", group: "" },
                         { name: "456", value: "456", group: "" },
                       ]}
-                      title={""}
+                      title={"선택"}
                       size={"xsm"}
                       border={"br_square_round_1"}
                       onChange={() => {}}
+                      placeholder="선택"
                     />
                   </div>
                 </td>
