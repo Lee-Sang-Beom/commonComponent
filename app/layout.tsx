@@ -103,6 +103,15 @@ export default function RootLayout({
                     {children}
                     <AutoAlert />
                 </RecoilRootProvider>
+                <p
+                    style={{
+                        textAlign: "center",
+                        fontSize: "250px",
+                        marginTop: "200px",
+                    }}
+                >
+                    ദ്ദിㆆ_ㆆ&#41;
+                </p>
             </body>
         </html>
     );
