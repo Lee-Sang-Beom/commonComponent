@@ -1,14 +1,36 @@
 "use client";
 import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  Variants,
+  useSpring,
+  useTransform,
+  useMotionValue,
+  useVelocity,
+  useAnimationFrame,
+} from "framer-motion";
+import { duration } from "moment";
+import { Fade } from "@mui/material";
 import style from "./page.module.scss";
+import { useState } from "react";
 
 // 초기 상태 initial
 // 목표 상태 animate
 // 마지막 상태 exit
 // 전환 방법 transition
 
+const itemVariants = {
+  initial: {
+    opacity: 0,
+    y: 0,
+    transition: { type: "spring", stiffness: 300, damping: 24 },
+  },
+  animate: { opacity: 1, y: 20, transition: { duration: 0.2 } },
+};
+
 export default function ScrollAnimation() {
+  const [isOpen, setIsOpen] = useState(false);
   const scrollRef = useRef(null);
   const emojiVariants = {
     hidden: { opacity: 0, y: 100, rotateY: 300 },
@@ -62,6 +84,43 @@ export default function ScrollAnimation() {
       amount: 0.1,
     },
   };
+
+  const list = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
+  const item = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    transition: {
+      duration: 0.5,
+      bounce: 0.5,
+      Fade: "fadeIn",
+      delayChildren: 0.5, // 자식 컴포넌트는 0.5초 느리게 나타나게 하는 속성
+      staggerChildren: 0.2, //  자식 컴포넌트 하나 나타나고 그다음 컴포넌트에 0.2초 딜레이 부여
+    },
+  };
+  const boxmotion = {
+    hidden: { opacity: 0, y: 100, rotateY: 300 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateY: 0,
+      transition: {
+        rotateY: {
+          duration: 0.3,
+        },
+        y: {
+          type: "spring",
+          damping: 3,
+          stiffness: 50,
+          restDelta: 0.01,
+          duration: 0.3,
+        },
+      },
+    },
+  };
   return (
     <>
       <div className={style.App} ref={scrollRef}>
@@ -77,7 +136,7 @@ export default function ScrollAnimation() {
             />
           </motion.svg>
         </p> */}
-        <div className={style.container} style={{ marginBottom: "900px" }}>
+        <div className={style.container} style={{ marginBottom: "500px" }}>
           {items.map(([emoji, label], i) => (
             <motion.div
               className={style.emoji}
@@ -93,7 +152,7 @@ export default function ScrollAnimation() {
             </motion.div>
           ))}
         </div>
-        <p style={{ marginBottom: "900px" }}>
+        <p style={{ marginBottom: "500px" }}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
             <motion.path
               d="M528 160V416c0 8.8-7.2 16-16 16H320c0-44.2-35.8-80-80-80H176c-44.2 0-80 35.8-80 80H64c-8.8 0-16-7.2-16-16V160H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM272 256a64 64 0 1 0 -128 0 64 64 0 1 0 128 0zm104-48c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24H376zm0 96c-13.3 0-24 10.7-24 24s10.7 24 24 24h80c13.3 0 24-10.7 24-24s-10.7-24-24-24H376z"
@@ -157,6 +216,46 @@ export default function ScrollAnimation() {
             ></motion.line>
           </svg>
         </p>
+        {/* text Ani */}
+        <motion.div className={style.test_box}>
+          <motion.ul>
+            <motion.li
+              variants={boxmotion}
+              initial="hidden"
+              whileInView="visible"
+            >
+              Item 1{" "}
+            </motion.li>
+            <motion.li
+              variants={boxmotion}
+              initial="hidden"
+              whileInView="visible"
+            >
+              Item 2{" "}
+            </motion.li>
+            <motion.li
+              variants={boxmotion}
+              initial="hidden"
+              whileInView="visible"
+            >
+              Item 3{" "}
+            </motion.li>
+            <motion.li
+              variants={boxmotion}
+              initial="hidden"
+              whileInView="visible"
+            >
+              Item 4{" "}
+            </motion.li>
+            <motion.li
+              variants={boxmotion}
+              initial="hidden"
+              whileInView="visible"
+            >
+              Item 5{" "}
+            </motion.li>
+          </motion.ul>
+        </motion.div>
       </div>
     </>
   );
