@@ -15,13 +15,12 @@ import jsPDF from "jspdf";
 import ExcelExport from "@/hooks/ExcelDownload/ExcelExport";
 import { useReactToPrint } from "react-to-print";
 import TableBottom from "@/components/TableBottom/TableBottom";
-
 export default function TablePage() {
     const tableRef = useRef<HTMLTableElement>(null);
     const header: TableHeader[] = [
         {
             name: "선택",
-            value: "",
+            value: "select",
             form: "allCheck",
             width: "5%",
         },

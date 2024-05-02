@@ -169,10 +169,11 @@ const Table = forwardRef(
                                 case "allCheck":
                                     return (
                                         <th key={`thCheck_${thead.value}_${thead.name}`}>
-                                            <input
-                                                type="checkbox"
+                                            <Checkbox
+                                                title="모두 선택"
                                                 id={"thChekcBoxAll"}
                                                 style={{ margin: "0 auto" }}
+                                                inpSize="xsm"
                                                 checked={
                                                     data.length === 0
                                                         ? false
@@ -180,6 +181,7 @@ const Table = forwardRef(
                                                         ? true
                                                         : false
                                                 }
+                                                // @ts-ignore
                                                 onChange={({ target: { checked } }) => {
                                                     if (checked === true) {
                                                         if (setCheckYn) {
