@@ -99,6 +99,9 @@ export default function RootLayout({
                         <a href="/aniSample" title="ani Sample">
                             ani Sample
                         </a>
+                        <a href="/slider" title="ani Sample">
+                            slider (한줄공지 포함)
+                        </a>
                     </div>
                     {children}
                     <AutoAlert />
