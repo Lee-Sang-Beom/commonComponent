@@ -425,26 +425,11 @@ export default function FormPage() {
       <div className={style.box}>
         <h3>SWITCH</h3>
         <div className={style.inner}>
-          <Switch title={""} inpSize={"xlg"} />
-          <Switch
-            title={""}
-            color={"black"}
-            inpSize={"lg"}
-            border={"br_square_round_1"}
-          />
           <Switch title={""} />
-          <Switch
-            title={""}
-            color={"mainColor"}
-            inpSize={"sm"}
-            border={"br_square_round_2"}
-          />
-          <Switch
-            title={""}
-            color={"mainColor"}
-            inpSize={"xsm"}
-            border={"br_round"}
-          />
+          <Switch title={""} color={"black"} border={"br_square_round_1"} />
+          <Switch title={""} />
+          <Switch title={""} color={"mainColor"} border={"br_square_round_2"} />
+          <Switch title={""} color={"mainColor"} border={"br_round"} />
           <Switch title={""} color="none" border={"br_square_round_2"} />
           <Switch title={""} color="disabled" border={"br_square_round_2"} />
         </div>

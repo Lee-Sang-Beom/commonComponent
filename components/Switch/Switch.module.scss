@@ -5,31 +5,32 @@ input.switch {
   overflow: hidden;
   background-color: var(--gray-100);
   color: var(--gray-1000);
+  height: 2.4rem;
   aspect-ratio: 2 / 1;
   position: relative;
   transition: all 0.3s;
 
   // size
-  &.xsm {
-    height: 2.8rem;
+  // &.xsm {
+  //   height: 2.8rem;
 
-    font-size: var(--fs-14);
-  }
-  &.sm {
-    height: 3.2rem;
-  }
-  &.md {
-    // 기본 사이즈
-    height: 4.4rem;
-  }
-  &.lg {
-    height: 5.6rem;
-    font-size: var(--fs-18);
-  }
-  &.xlg {
-    height: 6.4rem;
-    font-size: var(--fs-18);
-  }
+  //   font-size: var(--fs-14);
+  // }
+  // &.sm {
+  //   height: 3.2rem;
+  // }
+  // &.md {
+  //   // 기본 사이즈
+  //   height: 4.4rem;
+  // }
+  // &.lg {
+  //   height: 5.6rem;
+  //   font-size: var(--fs-18);
+  // }
+  // &.xlg {
+  //   height: 6.4rem;
+  //   font-size: var(--fs-18);
+  // }
 
   /* color */
   // 기본 컬러
