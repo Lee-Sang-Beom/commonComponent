@@ -351,7 +351,6 @@ export default function ReactFormClient({ data }: IProps) {
           partialErrorObj={errors.brno}
         />
       </div>
-
       {/* 사업자 등록번호 */}
       <div className="input_box">
         <p>COST</p>
@@ -375,7 +374,6 @@ export default function ReactFormClient({ data }: IProps) {
           partialErrorObj={errors.cost}
         />
       </div>
-
       {/* 날짜 */}
       <div className="input_box">
         <p>날짜</p>
