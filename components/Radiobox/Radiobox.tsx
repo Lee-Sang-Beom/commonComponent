@@ -14,7 +14,6 @@ export interface Radioboxtype {
 
 interface RadioboxProps {
   items: Radioboxtype[];
-  inpSize?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
   title: string;
@@ -39,7 +38,6 @@ interface RadioboxProps {
 const Radiobox = (
   {
     items,
-    inpSize,
     color,
     title,
     border,
@@ -65,18 +63,8 @@ const Radiobox = (
               id={`${id}_${item.id}`}
               title={title}
               className={`${style.radio} ${
-                inpSize === "xsm"
-                  ? style.xsm
-                  : inpSize === "sm"
-                  ? style.sm
-                  : inpSize === "lg"
-                  ? style.lg
-                  : inpSize === "xlg"
-                  ? style.xlg
-                  : style.md
-              } ${color && color !== "" ? style[color] : style.white} ${
-                border ? style[border] : ""
-              }${partialErrorObj && style.red}`}
+                color && color !== "" ? style[color] : style.white
+              } ${border ? style[border] : ""}${partialErrorObj && style.red}`}
               disabled={
                 color === "disabled" || item.disabled === true ? true : false
               }
