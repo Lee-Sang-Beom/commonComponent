@@ -1,13 +1,24 @@
+"use client";
 import Accordion from "@/components/Accordion/Accordion";
 import style from "./accordionPage.module.scss";
+import { useEffect, useState } from "react";
 
 export default function AccordionPage() {
+  const [check1, setCheck1] = useState<boolean>(false);
+
+  useEffect(() => {
+    console.log("체크 상태 : ", check1);
+  }, [check1]);
   return (
     <div className={style.wrap}>
       <Accordion
         title={"아코디언 제목1"}
         content={`<div>ㅎㅇㅎㅇ<br/>ㅇㅋㅇㅋ</div>`}
         isCheckbox
+        checkState={check1}
+        onCheckClick={(check) => {
+          setCheck1(check);
+        }}
       />
       <Accordion
         title={"아코디언 제목2"}
