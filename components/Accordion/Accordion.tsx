@@ -27,6 +27,7 @@ export default function Accordion({
       setIsChecked(checkState);
     }
   }, []);
+
   return (
     <dl className={style.dl}>
       <dt className={style.dt}>
