@@ -2,6 +2,7 @@
 
 import style from "./TopBtn.module.scss";
 import Button from "../Button/Button";
+import { useEffect, useState } from "react";
 
 interface TopBtnProps {
   position?: "topLeft" | "topRgiht" | "bottomLeft";
@@ -38,11 +39,34 @@ export default function TopBtn({
   children,
   position,
 }: TopBtnProps) {
+  const [opacity, setOpasity] = useState(0);
+
+  useEffect(() => {
+    let mounted = true;
+    window.addEventListener("scroll", () => {
+      if (mounted) {
+        if (window.scrollY > 30) {
+          setOpasity(1);
+        } else {
+          setOpasity(0);
+        }
+      }
+    });
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <div
       className={`${style.btn_top} ${
         position ? style[position] : style.bottomRight
       }`}
+      style={{
+        opacity: opacity,
+        transition: "all 0.3s",
+        zIndex: opacity === 0 ? "-1" : "999999",
+      }}
     >
       <Button
         id={"topBtn"}

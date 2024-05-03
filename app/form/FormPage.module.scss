@@ -1,0 +1,27 @@
+.box {
+  padding: 3rem;
+  margin-bottom: 5rem;
+  box-sizing: border-box;
+
+  h3 {
+    font-size: var(--fs-36);
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  .inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  // radio_box
+  &.radio_box {
+    .inner {
+      gap: 2rem;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}

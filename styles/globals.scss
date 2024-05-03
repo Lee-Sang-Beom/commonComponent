@@ -123,6 +123,9 @@ body {
   //   }
   // }
 }
+textarea {
+  font-family: var(--font-pretendard) !important;
+}
 a {
   display: block;
 }
@@ -231,12 +234,6 @@ img {
 @media only screen and (max-width: 640px) {
   .pp_top {
     display: none;
-  }
-  .pc {
-    display: none;
-  }
-  .mobile {
-    display: block;
   }
 }
 @media only screen and (max-width: 815px) {
@@ -416,6 +413,13 @@ img {
   // 서브 레이아웃 전체
   .sub_layout_container {
     padding: 6.5rem 0 0;
+  }
+
+  .pc {
+    display: none;
+  }
+  .mobile {
+    display: block;
   }
 
   // 에디터

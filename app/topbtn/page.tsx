@@ -1,6 +1,5 @@
 "use client";
 
-import Button from "@/components/Button/Button";
 import TopBtn from "@/components/TopBtn/TopBtn";
 
 export default function TopbtnPage() {
