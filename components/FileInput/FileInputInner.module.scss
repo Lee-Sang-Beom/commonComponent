@@ -127,9 +127,47 @@
 }
 @media only screen and (max-width: 768px) {
   .files_box {
-    & > span,
-    & > ul {
-      font-size: var(--fs-14);
+    // & > span,
+    // & > ul {
+    //   font-size: var(--fs-14);
+    // }
+
+    &.md {
+      // min-height: 2.4rem;
+      & > button {
+        width: 96px !important;
+      }
+      & > ul, & > span {
+        padding: 0.7rem 1.4rem;
+        max-height: 13.2rem;
+        font-size: var(--fs-16);
+        width: calc(100% - 106px);
+      }
+    }
+    &.lg {
+      // min-height: 3.2rem;
+      & > button {
+        width: 111px !important;
+      }
+      & > ul, & > span  {
+        padding: 1.1rem 1.8rem;
+        max-height: 17.4rem;
+        font-size: var(--fs-18);
+        width: calc(100% - 121px);
+      }
+    }
+    &.xlg {
+      // min-height: 4.4rem;
+      & > button {
+        width: 127px !important;
+      }
+      & > ul, & > span  {
+        max-height: 19.8rem;
+        font-size: var(--fs-18);
+        
+        padding: 0.9rem 2rem;
+        width: calc(100% - 137px);
+      }
     }
 
     /* border */
@@ -171,13 +209,13 @@
     display: inline-block;
     width: 100%;
   }
-  .files_box .lg {
-    font-size: var(--fs-14);
-    padding: 10px !important;
-  }
-  .files_box li {
-    font-size: var(--fs-14);
-  }
+  // .files_box .lg {
+  //   font-size: var(--fs-14);
+  //   padding: 10px !important;
+  // }
+  // .files_box li {
+  //   font-size: var(--fs-14);
+  // }
 
   // -----
   .files_box {
@@ -188,7 +226,7 @@
     & > span {
       width: 100%;
       border: 1px solid var(--gray-300);
-      padding: 1rem;
+      // padding: 1rem;
       box-sizing: border-box;
     }
     .btn_box {

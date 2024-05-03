@@ -27,7 +27,7 @@ export default function FileInputPage() {
     return (
         <>
             <div className={styles.box}>
-                <h3>FileInput - inner btn</h3>
+                <h3>FileInput - inner btn </h3>
                 <FileInputInner
                     multiple
                     ref={inner1Ref}
