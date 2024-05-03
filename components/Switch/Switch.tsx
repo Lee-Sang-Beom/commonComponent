@@ -6,7 +6,6 @@ import { FieldValues } from "react-hook-form";
 
 interface SwitchProps {
   txt?: { left: string; right: string };
-  inpSize?: "xsm" | "sm" | "lg" | "xlg";
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
   title: string;
@@ -38,7 +37,6 @@ interface SwitchProps {
 const Switch = (
   {
     txt,
-    inpSize,
     color,
     title,
     border,
@@ -60,17 +58,8 @@ const Switch = (
         type="checkbox"
         id={`${id}_${title}`}
         title={title}
-        className={`${style.switch} ${
-          inpSize === "xsm"
-            ? style.xsm
-            : inpSize === "sm"
-            ? style.sm
-            : inpSize === "lg"
-            ? style.lg
-            : inpSize === "xlg"
-            ? style.xlg
-            : style.md
-        } ${color && color !== "" ? style[color] : style.white} ${
+        className={`${style.switch} 
+        ${color && color !== "" ? style[color] : style.white} ${
           border ? style[border] : ""
         } ${partialErrorObj && style.red}`}
         disabled={color === "disabled" ? true : false}
