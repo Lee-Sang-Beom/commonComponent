@@ -15,6 +15,8 @@ interface ChipProps {
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
   title: string;
+  tooltipText?: string;
+  tooltipDirection?: "left" | "right" | "bottom" | "top";
 }
 
 /**
@@ -45,31 +47,53 @@ export default function Chip({
   color,
   title,
   border,
+  tooltipText,
+  tooltipDirection,
   ...props
 }: ChipProps & React.HTMLProps<HTMLSpanElement>) {
+  const [hover, setHover] = useState<boolean>(false);
   return (
-    <span
-      className={`${style.chip} ${
-        chipSize === "xsm"
-          ? style.xsm
-          : chipSize === "sm"
-          ? style.sm
-          : chipSize === "lg"
-          ? style.lg
-          : chipSize === "xlg"
-          ? style.xlg
-          : style.md
-      } ${color && color !== "" ? style[color] : style.white} ${
-        border ? style[border] : ""
-      }`}
-      onClick={() => {
-        if (chipClick) {
-          chipClick(chipData);
-        }
-      }}
-      {...props}
-    >
-      {chipData.name}
-    </span>
+    <>
+      <span
+        className={`${style.chip} ${
+          chipSize === "xsm"
+            ? style.xsm
+            : chipSize === "sm"
+            ? style.sm
+            : chipSize === "lg"
+            ? style.lg
+            : chipSize === "xlg"
+            ? style.xlg
+            : style.md
+        } ${color && color !== "" ? style[color] : style.white} ${
+          border ? style[border] : ""
+        }`}
+        onClick={() => {
+          if (chipClick) {
+            chipClick(chipData);
+          }
+        }}
+        onMouseEnter={() => {
+          setHover(true);
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+        }}
+        {...props}
+      >
+        {chipData.name}
+        {tooltipText ? (
+          <span
+            className={`${style.tooltip_box} ${
+              tooltipDirection ? style[tooltipDirection] : style.bottom
+            } ${hover ? style.block : style.none}`}
+          >
+            {tooltipText}
+          </span>
+        ) : (
+          <></>
+        )}
+      </span>
+    </>
   );
 }

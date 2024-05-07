@@ -60,6 +60,7 @@ export default function Selectbox({
   partialErrorObj,
   placeholder,
   onChange,
+  ...props
 }: SelectboxProps) {
   const id = useId();
 
@@ -124,6 +125,7 @@ export default function Selectbox({
           border ? border : "br_suqare"
         } ${partialErrorObj && "red"}`}
         IconComponent={CustomExpandMore}
+        {...props}
       >
         {items.map((item: SelectboxType) => {
           return (
@@ -133,6 +135,14 @@ export default function Selectbox({
           );
         })}
       </Select>
+      {partialErrorObj && (
+        <small
+          role="alert"
+          // className={style.txt_error}
+        >
+          {partialErrorObj.message}
+        </small>
+      )}
     </FormControl>
   );
 }

@@ -23,6 +23,8 @@ import { useEffect } from "react";
 import Input from "@/components/Input/Input";
 import moment from "moment";
 import SubmitForm from "@/components/SubmitForm/SubmitForm";
+import Selectbox from "@/components/Selectbox/Selectbox";
+import Checkbox from "@/components/Checkbox/Checkbox";
 
 interface IProps {
   data: {
@@ -38,6 +40,7 @@ interface IProps {
     createDtDetail: string | Date;
     createDtDetailString: string;
     cost: number | string;
+    memberType: string;
   };
 }
 
@@ -55,6 +58,7 @@ interface IForm {
   createDtDetail: string | Date;
   createDtDetailString: string;
   cost: number | string;
+  memberType: string;
 }
 export default function ReactFormClient({ data }: IProps) {
   const {
@@ -95,6 +99,7 @@ export default function ReactFormClient({ data }: IProps) {
       createDtDetail: data.createDtDetail,
       createDtDetailString: data.createDtDetailString,
       cost: Number(data.cost),
+      memberType: data.memberType,
     },
   });
 
@@ -124,6 +129,10 @@ export default function ReactFormClient({ data }: IProps) {
       shouldValidate: true,
     });
   }, [watch("pw")]);
+
+  useEffect(() => {
+    console.log("memberType : ", watch("memberType"));
+  }, [watch()]);
 
   return (
     <SubmitForm onSubmit={handleSubmit(onSubmit)}>
@@ -171,6 +180,38 @@ export default function ReactFormClient({ data }: IProps) {
           border="br_square_round_1"
           partialErrorObj={errors.name}
         />
+      </div>
+
+      {/* 회원유형 */}
+      <div className="input_box">
+        <p>회원유형</p>
+        <Selectbox
+          {...register("memberType", {
+            required: "회원유형 선택은 필수입니다.",
+          })}
+          items={[
+            { group: "", name: "선택안함", value: "" },
+            { group: "", name: "일반", value: "normal" },
+            { group: "", name: "기업", value: "enterprise" },
+          ]}
+          placeholder="회원유형을 선택 해주세요."
+          // 별도 컴포넌트 기능
+          title="회원유형"
+          color="white"
+          border="br_square_round_1"
+          size="lg"
+          value={watch("memberType")}
+          onChange={(e) => {
+            setValue("memberType", e.target.value);
+          }}
+          partialErrorObj={errors.memberType}
+        />
+      </div>
+
+      {/* 이름 */}
+      <div className="input_box">
+        <p>필수동의</p>
+        <Checkbox title={""} color={"mainColor"} border="br_round" />
       </div>
 
       {/* 휴대폰번호 */}

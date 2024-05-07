@@ -15,6 +15,7 @@ export default function Page() {
       createDtDetail: new Date(),
       createDtDetailString: "20240401123059",
       cost: 6500000,
+      memberType: "normal",
     },
   };
 
