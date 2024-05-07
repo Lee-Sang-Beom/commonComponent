@@ -38,6 +38,12 @@ interface ChipProps {
  *
  * @param title: title로, 한 페이지 내에서 겹치지 않는 스위치 대상명을 정확히 보내주어야 함
  * @returns string
+ *
+ * @param tooltipText: 툴팁 안의 내용 text, 이 값이 있어야 tooltip이 생깁니다.
+ * @returns string
+ *
+ * @param tooltipDirection: tooltip이 뜨는 방향으로, top, bottom, left, right 값을 넣을 수 있습니다.
+ * @returns "top", "bottom", "left", "right"
  */
 
 export default function Chip({
