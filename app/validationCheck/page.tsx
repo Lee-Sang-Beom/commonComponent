@@ -11,7 +11,7 @@ interface IProps {
     id: string;
     brno: string;
     createDt: string;
-    createDtDetail: string | Date;
+    createDtDetail: Date;
     createDtDetailString: string;
     cost: number | string;
     memberType: string | null;
