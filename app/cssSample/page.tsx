@@ -12,9 +12,6 @@ import Checkbox from "@/components/Checkbox/Checkbox";
 import Textarea from "@/components/Textarea/Textarea";
 import Selectbox from "@/components/Selectbox/Selectbox";
 import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
-import { duration } from "moment";
-import { Fade } from "@mui/material";
 
 export default function CssAnimation() {
   const outer1Ref = useRef(null);
@@ -231,7 +228,7 @@ export default function CssAnimation() {
                 <td>
                   <div className={style.switch_box}>
                     <span className={style.switch_txt}>비공개</span>
-                    <Switch title={""} inpSize={"xsm"} border={"br_round"} />
+                    <Switch title={""} border={"br_round"} />
                     <span className={style.switch_txt}>공개</span>
                   </div>
                 </td>
@@ -253,7 +250,6 @@ export default function CssAnimation() {
                   <div className={style.radio_box}>
                     <Radiobox
                       title={"마"}
-                      inpSize="xsm"
                       items={[
                         {
                           name: "사과",
@@ -276,19 +272,11 @@ export default function CssAnimation() {
                   <div className={style.check_box}>
                     <ul>
                       <li>
-                        <Checkbox
-                          title={""}
-                          inpSize="xsm"
-                          border="br_square_round_1"
-                        />{" "}
+                        <Checkbox title={""} border="br_square_round_1" />{" "}
                         <span className={style.chk_txt}>사과</span>
                       </li>
                       <li>
-                        <Checkbox
-                          title={""}
-                          inpSize="xsm"
-                          border="br_square_round_1"
-                        />{" "}
+                        <Checkbox title={""} border="br_square_round_1" />{" "}
                         <span className={style.chk_txt}>바나나</span>
                       </li>
                     </ul>

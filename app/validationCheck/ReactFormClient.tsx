@@ -359,7 +359,7 @@ export default function ReactFormClient({ data }: IProps) {
         <p>ID</p>
         <Input
           {...register("id", {
-            required: "아이디는 필수 입력입니다.",
+            // required: "아이디는 필수 입력입니다.",
 
             // 최소 길이 4글자 이상
             minLength: {
@@ -378,6 +378,14 @@ export default function ReactFormClient({ data }: IProps) {
           inpSize={"lg"}
           border="br_square_round_1"
           partialErrorObj={errors.id}
+          effectivenessMsg={
+            !errors.id && watch("id").length
+              ? {
+                  isSuccess: true,
+                  msg: "사용 가능한 아이디입니다.",
+                }
+              : undefined
+          }
         />
       </div>
 
@@ -419,6 +427,14 @@ export default function ReactFormClient({ data }: IProps) {
           inpSize={"lg"}
           border="br_square_round_1"
           partialErrorObj={errors.pwConfirm}
+          effectivenessMsg={
+            !errors.pwConfirm
+              ? {
+                  isSuccess: true,
+                  msg: "비밀번호가 일치합니다.",
+                }
+              : undefined
+          }
         />
       </div>
 

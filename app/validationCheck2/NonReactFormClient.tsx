@@ -18,6 +18,8 @@ interface IProps {
 }
 
 export default function NonReactFormClient({ data }: IProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   // 유효성 검사: ID
   const [idEffectiveness, setIdEffectiveness] = useState<InputErrorMsgType>(
     data.id
@@ -52,9 +54,30 @@ export default function NonReactFormClient({ data }: IProps) {
     });
 
   const onSubmit = async () => {
-    await new Promise((r) => setTimeout(r, 1000));
-    alert("유효성 테스트 검사 완료 (전달된 값은 콘솔확인)");
-    // POST API 추가
+    if (
+      idEffectiveness.isSuccess &&
+      pwEffectivenessMsg.isSuccess &&
+      pwConfirmEffectivenessMsg.isSuccess
+    ) {
+      setIsLoading(true);
+
+      await new Promise((r) => {
+        return setTimeout(r, 1000);
+      });
+      setIsLoading(false);
+
+      const postData = {
+        userId: userId,
+        pw: userPw,
+        pwConfirm: userPwConfirm,
+      };
+      alert("유효성 테스트 검사 완료 (전달된 값은 콘솔확인)");
+      console.log("postData : ", postData);
+
+      // POST API 추가
+    } else {
+      alert("유효성 검증 통과 실패");
+    }
   };
 
   const [userId, setUserId] = useState<string>("");
@@ -65,6 +88,7 @@ export default function NonReactFormClient({ data }: IProps) {
     setUserId(data.id);
     setUserPw(data.pw);
   }, [data]);
+
   return (
     <div style={{ padding: "30px" }}>
       {/* ID */}
@@ -148,9 +172,14 @@ export default function NonReactFormClient({ data }: IProps) {
 
       {/* 버튼 */}
       <button
+        style={{
+          border: "1px solid black",
+          padding: "10px",
+        }}
         onClick={() => {
           onSubmit();
         }}
+        disabled={isLoading}
       >
         로그인
       </button>
