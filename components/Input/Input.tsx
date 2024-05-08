@@ -15,6 +15,7 @@ interface InputProps {
 
   partialErrorObj?: FieldValues;
   effectivenessMsg?: InputErrorMsgType;
+  maxLength?: number;
 }
 
 /**
@@ -40,6 +41,8 @@ interface InputProps {
  * @param effectivenessMsg: 비제어형 컴포넌트의 유효성 검증에 사용 (react-hook-form)
  * @returns InputErrorMsgType
  *
+ * @param mexLength: 최대글자수, 이 값을 입력 시 우측에 현재글자수/최대글자수가 표시됩니다, value 값을 넘겨줘야 정상동작 합니다.
+ * @returns number
  */
 
 const Input = (
@@ -51,6 +54,7 @@ const Input = (
     value,
     partialErrorObj,
     effectivenessMsg,
+    maxLength,
     ...props
   }: InputProps & React.HTMLProps<HTMLInputElement>,
   ref: Ref<HTMLInputElement>
@@ -70,6 +74,7 @@ const Input = (
       inpSize !== "xlg",
     [style.red]:
       partialErrorObj || (effectivenessMsg && !effectivenessMsg.isSuccess),
+    [style.cnt]: maxLength,
   });
 
   return (
@@ -81,6 +86,7 @@ const Input = (
         type="text"
         id={`${id}_${title}`}
         title={title}
+        maxLength={maxLength}
         className={clsx(
           baseInputClassName,
           color && color !== "" ? style[color] : style.white,
@@ -114,6 +120,11 @@ const Input = (
             </>
           )}
         </>
+      )}
+      {maxLength && value !== undefined && (
+        <span className={style.count}>{`${
+          value?.toString().length
+        }/${maxLength}`}</span>
       )}
     </div>
   );

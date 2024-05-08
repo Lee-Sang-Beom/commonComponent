@@ -11,6 +11,7 @@ interface SwitchProps {
   title: string;
   value?: string | number;
   partialErrorObj?: FieldValues;
+  type?: "large";
 }
 
 /**
@@ -32,6 +33,9 @@ interface SwitchProps {
  *
  * @param title: input title로, 한 페이지 내에서 겹치지 않는 input 대상명을 정확히 보내주어야 함
  * @returns string
+ *
+ * @param type : 기본 타입 외에 배경이 작고, 스위치 버튼이 더 큰 형태 : large 타입
+ * @returns "large"
  */
 
 const Switch = (
@@ -42,6 +46,7 @@ const Switch = (
     border,
     value,
     partialErrorObj,
+    type,
     ...props
   }: SwitchProps & React.HTMLProps<HTMLInputElement>,
   ref: Ref<HTMLInputElement>
@@ -61,7 +66,9 @@ const Switch = (
         className={`${style.switch} 
         ${color && color !== "" ? style[color] : style.white} ${
           border ? style[border] : ""
-        } ${partialErrorObj && style.red}`}
+        } ${partialErrorObj && style.red} ${
+          type && type == "large" ? style.large : ""
+        }`}
         disabled={color === "disabled" ? true : false}
         value={value}
         ref={ref}

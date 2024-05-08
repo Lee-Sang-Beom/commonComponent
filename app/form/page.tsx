@@ -10,8 +10,10 @@ import Selectbox from "@/components/Selectbox/Selectbox";
 import Switch from "@/components/Switch/Switch";
 import Textarea from "@/components/Textarea/Textarea";
 import { SelectChangeEvent } from "@mui/material";
+import { useState } from "react";
 
 export default function FormPage() {
+  const [value, setValue] = useState<string>("");
   return (
     <>
       {/* 버튼 --------------------------- */}
@@ -88,6 +90,11 @@ export default function FormPage() {
             title={""}
             inpSize={"xlg"}
             border={"br_square_round_1"}
+            maxLength={50}
+            value={value}
+            onChange={(e) => {
+              setValue(e.currentTarget.value);
+            }}
           />
           <Input
             placeholder={"lg black br_square_round_2"}
@@ -413,6 +420,8 @@ export default function FormPage() {
           <Switch title={""} color={"mainColor"} border={"br_round"} />
           <Switch title={""} color="none" border={"br_square_round_2"} />
           <Switch title={""} color="disabled" border={"br_square_round_2"} />
+          <Switch title={""} type="large" />
+          <Switch title={""} border="br_round" type="large" />
         </div>
       </div>
 

@@ -10,6 +10,17 @@ input.switch {
   position: relative;
   transition: all 0.3s;
 
+  &.large {
+    height: 1.8rem;
+    overflow: unset;
+    aspect-ratio: 2.5 / 1;
+    &::after {
+      height: 24px;
+      border: 1px solid var(--gray-300);
+      box-sizing: border-box;
+    }
+  }
+
   // size
   // &.xsm {
   //   height: 2.8rem;
@@ -116,6 +127,11 @@ input.switch {
     border-radius: var(--br-50);
     &::after {
       border-radius: var(--br-50);
+    }
+    &.large {
+      &::before {
+        border-radius: var(--br-50);
+      }
     }
   }
 
