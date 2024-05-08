@@ -49,37 +49,46 @@ const Radiobox = (
   const id = useId();
 
   return (
-    <div className={style.radio_box}>
-      {items.map((item: Radioboxtype) => {
-        return (
-          <div key={`${id}_ ${item.value}`} className={style.radio_inner}>
-            <label htmlFor={`${id}_ ${title}`} className="screen_out">
-              {title}
-            </label>
+    <div className={style.radio_wrap}>
+      <div className={style.radio_box}>
+        {items.map((item: Radioboxtype) => {
+          return (
+            <div key={`${id}_ ${item.value}`} className={style.radio_inner}>
+              <label htmlFor={`${id}_ ${title}`} className="screen_out">
+                {title}
+              </label>
 
-            <input
-              type="radio"
-              name={title}
-              id={`${id}_${item.id}`}
-              title={title}
-              className={`${style.radio} ${
-                color && color !== "" ? style[color] : style.white
-              } ${border ? style[border] : ""}${partialErrorObj && style.red}`}
-              disabled={
-                color === "disabled" || item.disabled === true ? true : false
-              }
-              value={item.value}
-              ref={ref}
-              // checked={item.checked}
-              defaultChecked={item.checked ? item.checked : false}
-              {...props}
-            />
-            <span className={style.radio_txt} title={title}>
-              {item.name}
-            </span>
-          </div>
-        );
-      })}
+              <input
+                type="radio"
+                name={title}
+                id={`${id}_${item.id}`}
+                title={title}
+                className={`${style.radio} ${
+                  color && color !== "" ? style[color] : style.white
+                } ${border ? style[border] : ""}${
+                  partialErrorObj && style.red
+                }`}
+                disabled={
+                  color === "disabled" || item.disabled === true ? true : false
+                }
+                value={item.value}
+                ref={ref}
+                // checked={item.checked}
+                defaultChecked={item.checked ? item.checked : false}
+                {...props}
+              />
+              <span className={style.radio_txt} title={title}>
+                {item.name}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+      {partialErrorObj && (
+        <small role="alert" className={style.txt_error}>
+          {partialErrorObj.message}
+        </small>
+      )}
     </div>
   );
 };

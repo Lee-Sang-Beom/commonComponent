@@ -136,10 +136,7 @@ export default function Selectbox({
         })}
       </Select>
       {partialErrorObj && (
-        <small
-          role="alert"
-          // className={style.txt_error}
-        >
+        <small role="alert" className="txt_error">
           {partialErrorObj.message}
         </small>
       )}

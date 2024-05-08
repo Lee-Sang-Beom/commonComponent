@@ -90,7 +90,7 @@
       color: var(--mcolor);
     }
     &.red {
-      border: 1px solid var(--error03) !important;
+      border: 1px solid var(--error) !important;
     }
     // none
     .none {
@@ -137,7 +137,7 @@
   .txt_error {
     display: block;
     margin-top: 1rem;
-    color: var(--error03);
+    color: var(--error);
   }
 }
 

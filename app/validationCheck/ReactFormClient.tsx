@@ -19,31 +19,13 @@ import { useForm } from "react-hook-form";
 
 // 임시
 import "./input.scss";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Input from "@/components/Input/Input";
 import moment from "moment";
 import SubmitForm from "@/components/SubmitForm/SubmitForm";
 import Selectbox from "@/components/Selectbox/Selectbox";
 import Checkbox from "@/components/Checkbox/Checkbox";
 import Radiobox from "@/components/Radiobox/Radiobox";
-
-interface IProps {
-  data: {
-    email: string;
-    name: string;
-    phoneNumber: string;
-    regionNumber: string;
-    commonNumber: string;
-    pw: string;
-    id: string;
-    brno: string;
-    createDt: string;
-    createDtDetail: string | Date;
-    createDtDetailString: string;
-    cost: number | string;
-    memberType: string;
-  };
-}
 
 interface IForm {
   email: string;
@@ -60,9 +42,37 @@ interface IForm {
   createDtDetailString: string;
   cost: number | string;
   memberType: string;
-  validCheck: boolean;
-  radio: string;
+  radioSelectType: "ONE" | "TWO" | null;
+  smsYn: boolean;
 }
+
+interface IProps {
+  data: {
+    email: string;
+    name: string;
+    phoneNumber: string;
+    regionNumber: string;
+    commonNumber: string;
+    pw: string;
+    id: string;
+    brno: string;
+    createDt: string;
+    createDtDetail: string | Date;
+    createDtDetailString: string;
+    cost: number | string;
+    memberType: string | null;
+    radioSelectType: "ONE" | "TWO" | null;
+    smsYn: "Y" | "N" | null;
+  };
+}
+
+interface RadioType {
+  id: string;
+  name: string;
+  value: string | number;
+  checked: boolean;
+}
+
 export default function ReactFormClient({ data }: IProps) {
   const {
     register,
@@ -102,9 +112,9 @@ export default function ReactFormClient({ data }: IProps) {
       createDtDetail: data.createDtDetail,
       createDtDetailString: data.createDtDetailString,
       cost: Number(data.cost),
-      memberType: data.memberType,
-      validCheck: false,
-      radio: "",
+      memberType: data.memberType || "",
+      radioSelectType: data.radioSelectType || null,
+      smsYn: data.smsYn && data.smsYn === "Y" ? true : false,
     },
   });
 
@@ -120,6 +130,7 @@ export default function ReactFormClient({ data }: IProps) {
       brno: removeHyphenToString(data.brno),
       createDt: removeHyphenToString(data.createDt),
       cost: removeCommaToString(data.cost.toString()),
+      smsYn: data.smsYn ? "Y" : "N",
     };
 
     console.log("postData is ", postData);
@@ -135,10 +146,26 @@ export default function ReactFormClient({ data }: IProps) {
     });
   }, [watch("pw")]);
 
+  // 라디오 버튼 items 배열 재배치
+  const [baseArrayRadio, setBaseArrayRadio] = useState<RadioType[]>([
+    { id: "1", name: "항목 1", value: "ONE", checked: false },
+    { id: "2", name: "항목 2", value: "TWO", checked: false },
+  ]);
+
   useEffect(() => {
-    console.log("memberType : ", watch("memberType"));
-    console.log("check : ", watch("validCheck"));
-  }, [watch()]);
+    setBaseArrayRadio((prev: RadioType[]) => {
+      return prev.map((prevItem: RadioType, idx: number) => {
+        if (prevItem.value === watch("radioSelectType")) {
+          return {
+            ...prevItem,
+            checked: true,
+          };
+        } else {
+          return prevItem;
+        }
+      });
+    });
+  }, [data]);
 
   return (
     <SubmitForm onSubmit={handleSubmit(onSubmit)}>
@@ -214,37 +241,41 @@ export default function ReactFormClient({ data }: IProps) {
         />
       </div>
 
-      {/* 이름 */}
-      <div className="input_box">
-        <p>필수동의</p>
+      {/* 체크박스 테스트 */}
+      <div className="include_checkbox">
+        <p>{`필수동의(체크박스 테스트)`}</p>
         <Checkbox
-          {...register("validCheck", {
-            required: "필수 동의 항목입니다.",
+          {...register("smsYn", {
+            required:
+              "체크박스는 따로 오류출력 메시지를 외부에서 만들어주어야 한다. 선택항목을 골라주세요.",
           })}
-          title={""}
+          title={"필수동의(체크박스)"}
           color={"mainColor"}
           border="br_round"
-          checked={watch("validCheck")}
-          onChange={() => {
-            setValue("validCheck", !watch("validCheck"));
+          checked={watch("smsYn")}
+          onChange={(e) => {
+            setValue("smsYn", e.currentTarget.checked);
           }}
         />
+        <p style={{ color: "red" }}>{errors.smsYn && errors.smsYn.message}</p>
+      </div>
+
+      {/* 라디오 테스트 */}
+      <div className="input_box">
+        <p>{`필수동의(라디오버튼 테스트)`}</p>
         <Radiobox
-          {...register("radio", {
-            required: "필수 선택 항목입니다.",
+          {...register("radioSelectType", {
+            required: "항목을 필수적으로 선택해주세요.",
           })}
-          items={[
-            { id: "1", name: "1번", value: 1 },
-            { id: "2", name: "2번", value: 2 },
-          ]}
-          title={""}
+          items={baseArrayRadio}
+          title={"필수동의(라디오)"}
           color={"mainColor"}
           border="br_round"
           onClick={(e) => {
-            console.log("e : ", e.currentTarget.value);
-
-            setValue("radio", e.currentTarget.value);
+            const selectValue = e.currentTarget.value as "ONE" | "TWO";
+            setValue("radioSelectType", selectValue);
           }}
+          partialErrorObj={errors.radioSelectType}
         />
       </div>
 
@@ -259,14 +290,10 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.phoneNumber ? "true" : "false") : undefined
           }
           value={insertHyphenToString("TEL_NO", watch("phoneNumber") || "")}
-          onChange={(e) => {
-            setValue(
-              "phoneNumber",
-              removeHyphenToString(e.currentTarget.value),
-              {
-                shouldValidate: true,
-              }
-            );
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("phoneNumber", removeHyphenToString(e.target.value), {
+              shouldValidate: true,
+            });
           }}
           // 별도  컴포넌트 기능
           title="phoneNumber"
@@ -288,14 +315,10 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.regionNumber ? "true" : "false") : undefined
           }
           value={insertHyphenToString("TEL_NO", watch("regionNumber") || "")}
-          onChange={(e) => {
-            setValue(
-              "regionNumber",
-              removeHyphenToString(e.currentTarget.value),
-              {
-                shouldValidate: true,
-              }
-            );
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("regionNumber", removeHyphenToString(e.target.value), {
+              shouldValidate: true,
+            });
           }}
           // 별도 컴포넌트 기능
           title="regionNumber"
@@ -317,14 +340,10 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.commonNumber ? "true" : "false") : undefined
           }
           value={insertHyphenToString("TEL_NO", watch("commonNumber") || "")}
-          onChange={(e) => {
-            setValue(
-              "commonNumber",
-              removeHyphenToString(e.currentTarget.value),
-              {
-                shouldValidate: true,
-              }
-            );
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("commonNumber", removeHyphenToString(e.target.value), {
+              shouldValidate: true,
+            });
           }}
           // 별도 컴포넌트 기능
           title="commonNumber"
@@ -413,8 +432,8 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.brno ? "true" : "false") : undefined
           }
           value={insertHyphenToString("BRNO", watch("brno") || "")}
-          onChange={(e) => {
-            setValue("brno", removeHyphenToString(e.currentTarget.value), {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("brno", removeHyphenToString(e.target.value), {
               shouldValidate: true,
             });
           }}
@@ -436,8 +455,8 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.cost ? "true" : "false") : undefined
           }
           value={insertHyphenToString("GENERAL", watch("cost") || "")}
-          onChange={(e) => {
-            setValue("cost", removeCommaToString(e.currentTarget.value), {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("cost", removeCommaToString(e.target.value), {
               shouldValidate: true,
             });
           }}

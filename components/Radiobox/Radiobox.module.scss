@@ -156,6 +156,13 @@
     }
   }
 }
+
+.txt_error {
+  display: block;
+  margin-top: 1rem;
+  color: var(--error);
+}
+
 // 반응형
 // 모s바일
 @media screen and (max-width: 768px) {
