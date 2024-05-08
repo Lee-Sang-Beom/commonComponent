@@ -67,6 +67,7 @@ export default function Tab({
               } `}
             >
               <Button
+                title="버튼"
                 id={`${tit}_${index}`}
                 size={size ? size : undefined}
                 color={color ? color : undefined}
