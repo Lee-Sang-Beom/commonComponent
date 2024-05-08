@@ -38,9 +38,10 @@ export default function SliderPage() {
             <br />
             <div className={style.banner_wrap}>
                 <div className={style.banner_top}>
+                    
                     <p className={style.banner_title}>배너</p>
                     <div className={style.btn_group}>
-                        <button type="button" title="이전으로" className="swiper-prev">
+                        <button type="button" title="이전으로" className="swiper-prev2">
                             <HiOutlineChevronLeft size={24} />
                         </button>
                         {isPlay === true ? (
@@ -80,7 +81,7 @@ export default function SliderPage() {
                         )}
 
                         <button type="button" title="다음으로">
-                            <HiOutlineChevronRight className="swiper-next" size={24} />
+                            <HiOutlineChevronRight className="swiper-next2" size={24} />
                         </button>
                     </div>
                 </div>
@@ -98,8 +99,8 @@ export default function SliderPage() {
                         pauseOnMouseEnter: true,
                     }}
                     navigation={{
-                        prevEl: ".swiper-prev",
-                        nextEl: ".swiper-next",
+                        prevEl: ".swiper-prev2",
+                        nextEl: ".swiper-next2",
                     }}
                 >
                     {bannerData && bannerData.length ? (

@@ -499,6 +499,7 @@ export default function FormPage() {
             color={"none"}
             title={""}
           />
+
           <Chip
             chipData={{
               name: "disabled",
@@ -507,6 +508,17 @@ export default function FormPage() {
             }}
             color={"disabled"}
             title={""}
+          />
+          <Chip
+            chipData={{
+              name: "tooltip",
+              value: "tooltip",
+              group: "",
+            }}
+            color={"red"}
+            title={""}
+            tooltipText="툴팁 테스트"
+            tooltipDirection="bottom"
           />
         </div>
       </div>

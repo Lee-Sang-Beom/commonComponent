@@ -164,24 +164,19 @@
     }
 }
 @media only screen and (max-width: 768px) {
-    .files_box {
-        & > span,
-        & > ul {
-            font-size: var(--fs-14);
-        }
-    }
+    
     .files_box .sm,
     .files_box button {
         display: inline-block;
         width: 100%;
     }
-    .files_box .lg {
-        font-size: var(--fs-14);
-        padding: 10px !important;
-    }
-    .files_box li {
-        font-size: var(--fs-14);
-    }
+    // .files_box .lg {
+    //     font-size: var(--fs-14);
+    //     padding: 10px !important;
+    // }
+    // .files_box li {
+    //     font-size: var(--fs-14);
+    // }
 
     // -----
     .files_box {
@@ -193,11 +188,11 @@
             width: 100%;
             // border: 1px solid var(--gray-300);
             // padding: 1rem;
-            font-size: var(--fs-14) !important;
-            padding: 1rem !important;
+            // font-size: var(--fs-14) !important;
+            // padding: 1rem !important;
             box-sizing: border-box;
-            min-height: 2.5rem !important;
-            max-height: 7.5rem !important;
+            // min-height: 2.5rem !important;
+            // max-height: 7.5rem !important;
         }
         .btn_box {
             width: 100%;

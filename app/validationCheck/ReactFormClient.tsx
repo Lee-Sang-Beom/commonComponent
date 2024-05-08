@@ -23,6 +23,9 @@ import { useEffect } from "react";
 import Input from "@/components/Input/Input";
 import moment from "moment";
 import SubmitForm from "@/components/SubmitForm/SubmitForm";
+import Selectbox from "@/components/Selectbox/Selectbox";
+import Checkbox from "@/components/Checkbox/Checkbox";
+import Radiobox from "@/components/Radiobox/Radiobox";
 
 interface IProps {
   data: {
@@ -38,6 +41,7 @@ interface IProps {
     createDtDetail: string | Date;
     createDtDetailString: string;
     cost: number | string;
+    memberType: string;
   };
 }
 
@@ -55,6 +59,9 @@ interface IForm {
   createDtDetail: string | Date;
   createDtDetailString: string;
   cost: number | string;
+  memberType: string;
+  validCheck: boolean;
+  radio: string;
 }
 export default function ReactFormClient({ data }: IProps) {
   const {
@@ -95,6 +102,9 @@ export default function ReactFormClient({ data }: IProps) {
       createDtDetail: data.createDtDetail,
       createDtDetailString: data.createDtDetailString,
       cost: Number(data.cost),
+      memberType: data.memberType,
+      validCheck: false,
+      radio: "",
     },
   });
 
@@ -124,6 +134,11 @@ export default function ReactFormClient({ data }: IProps) {
       shouldValidate: true,
     });
   }, [watch("pw")]);
+
+  useEffect(() => {
+    console.log("memberType : ", watch("memberType"));
+    console.log("check : ", watch("validCheck"));
+  }, [watch()]);
 
   return (
     <SubmitForm onSubmit={handleSubmit(onSubmit)}>
@@ -170,6 +185,66 @@ export default function ReactFormClient({ data }: IProps) {
           inpSize={"lg"}
           border="br_square_round_1"
           partialErrorObj={errors.name}
+        />
+      </div>
+
+      {/* 회원유형 */}
+      <div className="input_box">
+        <p>회원유형</p>
+        <Selectbox
+          {...register("memberType", {
+            required: "회원유형 선택은 필수입니다.",
+          })}
+          items={[
+            { group: "", name: "선택안함", value: "" },
+            { group: "", name: "일반", value: "normal" },
+            { group: "", name: "기업", value: "enterprise" },
+          ]}
+          placeholder="회원유형을 선택 해주세요."
+          // 별도 컴포넌트 기능
+          title="회원유형"
+          color="white"
+          border="br_square_round_1"
+          size="lg"
+          value={watch("memberType")}
+          onChange={(e) => {
+            setValue("memberType", e.target.value);
+          }}
+          partialErrorObj={errors.memberType}
+        />
+      </div>
+
+      {/* 이름 */}
+      <div className="input_box">
+        <p>필수동의</p>
+        <Checkbox
+          {...register("validCheck", {
+            required: "필수 동의 항목입니다.",
+          })}
+          title={""}
+          color={"mainColor"}
+          border="br_round"
+          checked={watch("validCheck")}
+          onChange={() => {
+            setValue("validCheck", !watch("validCheck"));
+          }}
+        />
+        <Radiobox
+          {...register("radio", {
+            required: "필수 선택 항목입니다.",
+          })}
+          items={[
+            { id: "1", name: "1번", value: 1 },
+            { id: "2", name: "2번", value: 2 },
+          ]}
+          title={""}
+          color={"mainColor"}
+          border="br_round"
+          onClick={(e) => {
+            console.log("e : ", e.currentTarget.value);
+
+            setValue("radio", e.currentTarget.value);
+          }}
         />
       </div>
 
@@ -351,7 +426,6 @@ export default function ReactFormClient({ data }: IProps) {
           partialErrorObj={errors.brno}
         />
       </div>
-
       {/* 사업자 등록번호 */}
       <div className="input_box">
         <p>COST</p>
@@ -363,13 +437,9 @@ export default function ReactFormClient({ data }: IProps) {
           }
           value={insertHyphenToString("GENERAL", watch("cost") || "")}
           onChange={(e) => {
-            setValue(
-              "cost",
-              removeCommaToString(e.currentTarget.value.toString()),
-              {
-                shouldValidate: true,
-              }
-            );
+            setValue("cost", removeCommaToString(e.currentTarget.value), {
+              shouldValidate: true,
+            });
           }}
           // 별도 컴포넌트 기능
           title="cost"
@@ -379,7 +449,6 @@ export default function ReactFormClient({ data }: IProps) {
           partialErrorObj={errors.cost}
         />
       </div>
-
       {/* 날짜 */}
       <div className="input_box">
         <p>날짜</p>
