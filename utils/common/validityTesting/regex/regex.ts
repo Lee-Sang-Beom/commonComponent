@@ -9,11 +9,13 @@ export const regionNumberRegex =
 export const phoneAndRegionCommonNumberRegex = /^[0-9]{2,3}[0-9]{3,4}[0-9]{4}$/;
 
 /**
+ * @idRegex : 아이디 유효성체크를 위한 정규식 (4~12글자로 default 지정)
  * @emailRegex : 이메일 유효성체크를 위한 정규식
  * @passwordRegex : 패스워드 유효성 체크를 위한 정규식 (영문, 숫자, 특수문자 혼용 9~20자리)
 
  * @generalNumRegex : 숫자로만 이루어진 값인지에 대한 체크를 위한 정규식
  */
+export const idRegex = /^[a-zA-Z0-9]{4,12}$/;
 export const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 export const passwordRegex =
   /^(?=.*[0-9])(?=.*[a-z])(?=.*[`~!@@#$%^&*|₩₩₩'₩";:₩/?])[a-zA-Z0-9`~!@@#$%^&*|₩₩₩'₩";:₩/?]{9,20}$/;

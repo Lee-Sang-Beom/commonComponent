@@ -290,14 +290,10 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.phoneNumber ? "true" : "false") : undefined
           }
           value={insertHyphenToString("TEL_NO", watch("phoneNumber") || "")}
-          onChange={(e) => {
-            setValue(
-              "phoneNumber",
-              removeHyphenToString(e.currentTarget.value),
-              {
-                shouldValidate: true,
-              }
-            );
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("phoneNumber", removeHyphenToString(e.target.value), {
+              shouldValidate: true,
+            });
           }}
           // 별도  컴포넌트 기능
           title="phoneNumber"
@@ -319,14 +315,10 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.regionNumber ? "true" : "false") : undefined
           }
           value={insertHyphenToString("TEL_NO", watch("regionNumber") || "")}
-          onChange={(e) => {
-            setValue(
-              "regionNumber",
-              removeHyphenToString(e.currentTarget.value),
-              {
-                shouldValidate: true,
-              }
-            );
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("regionNumber", removeHyphenToString(e.target.value), {
+              shouldValidate: true,
+            });
           }}
           // 별도 컴포넌트 기능
           title="regionNumber"
@@ -348,14 +340,10 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.commonNumber ? "true" : "false") : undefined
           }
           value={insertHyphenToString("TEL_NO", watch("commonNumber") || "")}
-          onChange={(e) => {
-            setValue(
-              "commonNumber",
-              removeHyphenToString(e.currentTarget.value),
-              {
-                shouldValidate: true,
-              }
-            );
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("commonNumber", removeHyphenToString(e.target.value), {
+              shouldValidate: true,
+            });
           }}
           // 별도 컴포넌트 기능
           title="commonNumber"
@@ -444,8 +432,8 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.brno ? "true" : "false") : undefined
           }
           value={insertHyphenToString("BRNO", watch("brno") || "")}
-          onChange={(e) => {
-            setValue("brno", removeHyphenToString(e.currentTarget.value), {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("brno", removeHyphenToString(e.target.value), {
               shouldValidate: true,
             });
           }}
@@ -467,8 +455,8 @@ export default function ReactFormClient({ data }: IProps) {
             isSubmitted ? (errors.cost ? "true" : "false") : undefined
           }
           value={insertHyphenToString("GENERAL", watch("cost") || "")}
-          onChange={(e) => {
-            setValue("cost", removeCommaToString(e.currentTarget.value), {
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setValue("cost", removeCommaToString(e.target.value), {
               shouldValidate: true,
             });
           }}
