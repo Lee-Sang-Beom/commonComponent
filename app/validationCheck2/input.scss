@@ -1,0 +1,14 @@
+.input_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 20px 15px;
+  border-bottom: 1px solid #434343;
+
+  input {
+    width: 300px;
+  }
+
+  margin-bottom: 30px;
+}
