@@ -419,6 +419,14 @@ export default function ReactFormClient({ data }: IProps) {
           inpSize={"lg"}
           border="br_square_round_1"
           partialErrorObj={errors.pwConfirm}
+          effectivenessMsg={
+            !errors.pwConfirm
+              ? {
+                  isSuccess: true,
+                  msg: "비밀번호가 일치합니다.",
+                }
+              : undefined
+          }
         />
       </div>
 
