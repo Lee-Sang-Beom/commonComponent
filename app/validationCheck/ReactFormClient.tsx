@@ -25,6 +25,7 @@ import moment from "moment";
 import SubmitForm from "@/components/SubmitForm/SubmitForm";
 import Selectbox from "@/components/Selectbox/Selectbox";
 import Checkbox from "@/components/Checkbox/Checkbox";
+import Radiobox from "@/components/Radiobox/Radiobox";
 
 interface IProps {
   data: {
@@ -59,6 +60,8 @@ interface IForm {
   createDtDetailString: string;
   cost: number | string;
   memberType: string;
+  validCheck: boolean;
+  radio: string;
 }
 export default function ReactFormClient({ data }: IProps) {
   const {
@@ -100,6 +103,8 @@ export default function ReactFormClient({ data }: IProps) {
       createDtDetailString: data.createDtDetailString,
       cost: Number(data.cost),
       memberType: data.memberType,
+      validCheck: false,
+      radio: "",
     },
   });
 
@@ -132,6 +137,7 @@ export default function ReactFormClient({ data }: IProps) {
 
   useEffect(() => {
     console.log("memberType : ", watch("memberType"));
+    console.log("check : ", watch("validCheck"));
   }, [watch()]);
 
   return (
@@ -211,7 +217,35 @@ export default function ReactFormClient({ data }: IProps) {
       {/* 이름 */}
       <div className="input_box">
         <p>필수동의</p>
-        <Checkbox title={""} color={"mainColor"} border="br_round" />
+        <Checkbox
+          {...register("validCheck", {
+            required: "필수 동의 항목입니다.",
+          })}
+          title={""}
+          color={"mainColor"}
+          border="br_round"
+          checked={watch("validCheck")}
+          onChange={() => {
+            setValue("validCheck", !watch("validCheck"));
+          }}
+        />
+        <Radiobox
+          {...register("radio", {
+            required: "필수 선택 항목입니다.",
+          })}
+          items={[
+            { id: "1", name: "1번", value: 1 },
+            { id: "2", name: "2번", value: 2 },
+          ]}
+          title={""}
+          color={"mainColor"}
+          border="br_round"
+          onClick={(e) => {
+            console.log("e : ", e.currentTarget.value);
+
+            setValue("radio", e.currentTarget.value);
+          }}
+        />
       </div>
 
       {/* 휴대폰번호 */}
