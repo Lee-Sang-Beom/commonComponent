@@ -116,6 +116,10 @@ export default function ReactFormClient({ data }: IProps) {
       radioSelectType: data.radioSelectType || null,
       smsYn: data.smsYn && data.smsYn === "Y" ? true : false,
     },
+    // resetOptions: {
+    //   keepDirtyValues: true, // 사용자 상호작용으로 입력된 값이 유지됩니다.
+    //   keepErrors: true, // 값 업데이트 시 입력 오류가 유지됩니다.
+    // },
   });
 
   const onSubmit = async (data: IForm) => {
