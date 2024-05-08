@@ -10,8 +10,10 @@ import Selectbox from "@/components/Selectbox/Selectbox";
 import Switch from "@/components/Switch/Switch";
 import Textarea from "@/components/Textarea/Textarea";
 import { SelectChangeEvent } from "@mui/material";
+import { useState } from "react";
 
 export default function FormPage() {
+  const [value, setValue] = useState<string>("");
   return (
     <>
       {/* 버튼 --------------------------- */}
@@ -88,6 +90,11 @@ export default function FormPage() {
             title={""}
             inpSize={"xlg"}
             border={"br_square_round_1"}
+            maxLength={50}
+            value={value}
+            onChange={(e) => {
+              setValue(e.currentTarget.value);
+            }}
           />
           <Input
             placeholder={"lg black br_square_round_2"}
@@ -212,26 +219,11 @@ export default function FormPage() {
       <div className={style.box}>
         <h3>CHECKBOX</h3>
         <div className={style.inner}>
-          <Checkbox title={""} inpSize="xlg" border="br_square_round_1" />
-          <Checkbox
-            title={""}
-            inpSize="lg"
-            color={"black"}
-            border="br_square_round_2"
-          />
+          <Checkbox title={""} border="br_square_round_1" />
+          <Checkbox title={""} color={"black"} border="br_square_round_2" />
           <Checkbox title={""} />
-          <Checkbox
-            title={""}
-            inpSize="sm"
-            color={"mainColor"}
-            border="br_square_round_2"
-          />
-          <Checkbox
-            title={""}
-            inpSize="xsm"
-            color={"mainColor"}
-            border="br_round"
-          />
+          <Checkbox title={""} color={"mainColor"} border="br_square_round_2" />
+          <Checkbox title={""} color={"mainColor"} border="br_round" />
           <Checkbox title={""} color={"none"} />
           <Checkbox title={""} color={"disabled"} checked={true} />
         </div>
@@ -243,7 +235,6 @@ export default function FormPage() {
         <div className={style.inner}>
           <Radiobox
             title={"가"}
-            inpSize="xlg"
             items={[
               {
                 name: "사과",
@@ -260,7 +251,6 @@ export default function FormPage() {
 
           <Radiobox
             title={"나"}
-            inpSize="lg"
             color={"black"}
             items={[
               {
@@ -294,7 +284,6 @@ export default function FormPage() {
 
           <Radiobox
             title={"라"}
-            inpSize="sm"
             color={"mainColor"}
             items={[
               {
@@ -312,7 +301,6 @@ export default function FormPage() {
 
           <Radiobox
             title={"마"}
-            inpSize="xsm"
             color={"mainColor"}
             items={[
               {
@@ -432,6 +420,8 @@ export default function FormPage() {
           <Switch title={""} color={"mainColor"} border={"br_round"} />
           <Switch title={""} color="none" border={"br_square_round_2"} />
           <Switch title={""} color="disabled" border={"br_square_round_2"} />
+          <Switch title={""} type="large" />
+          <Switch title={""} border="br_round" type="large" />
         </div>
       </div>
 
