@@ -20,9 +20,27 @@ form {
     gap: 5px;
     padding: 20px 15px;
     border-bottom: 1px solid #434343;
+
     input {
       width: 300px;
     }
+    .etc_txt {
+      display: inline-block;
+      border: 1px solid #8d8d8d;
+      width: 300px;
+      padding: 10px;
+    }
+  }
+
+  .include_checkbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    padding: 20px 15px;
+    border-bottom: 1px solid #434343;
+
     .etc_txt {
       display: inline-block;
       border: 1px solid #8d8d8d;

@@ -1,7 +1,31 @@
 import ReactFormClient from "./ReactFormClient";
 
+interface IProps {
+  data: {
+    email: string;
+    name: string;
+    phoneNumber: string;
+    regionNumber: string;
+    commonNumber: string;
+    pw: string;
+    id: string;
+    brno: string;
+    createDt: string;
+    createDtDetail: string | Date;
+    createDtDetailString: string;
+    cost: number | string;
+    memberType: string | null;
+
+    // Default 세팅이 null일 수 있음
+    radioSelectType: "ONE" | "TWO" | null;
+
+    // Y, N 말고 서버에서는 NULL로 줄 수도 있음
+    smsYn: "Y" | "N" | null;
+  };
+}
+
 export default function Page() {
-  const persistDummyData = {
+  const persistDummyData: IProps = {
     data: {
       email: "user01@naver.com",
       name: "테스트유저01",
@@ -16,6 +40,8 @@ export default function Page() {
       createDtDetailString: "20240401123059",
       cost: 6500000,
       memberType: "normal",
+      radioSelectType: "TWO",
+      smsYn: "Y",
     },
   };
 

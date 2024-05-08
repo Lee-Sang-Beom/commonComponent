@@ -32,7 +32,7 @@ const itemVariants = {
 export default function ScrollAnimation() {
   const [isOpen, setIsOpen] = useState(false);
   const scrollRef = useRef(null);
-  const emojiVariants = {
+  const emojiVariants: Variants = {
     hidden: { opacity: 0, y: 100, rotateY: 300 },
     visible: {
       opacity: 1,
