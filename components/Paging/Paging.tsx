@@ -26,9 +26,9 @@ interface PagingProps {
 
 /**
  * 페이징 컴포넌트
- *
  * @param onClickEvent 화살표 또는 숫자 버튼을 클릭했을 때의 동작 (페이지 이동 동작함수)
- * @param onMoClickEvent 모바일 화살표 또는 숫자 버튼을 클릭했을 때의 동작 (페이지 이동 동작함수)
+ * @param onMoClickEvent 모바일 화살표 또는 숫자 버튼을 클릭했을 때의 동작 (페이지 이동 동작함수), router.push 괄호 안에 scroll 옵션 false로 줘야 모바일 클릭 시 스크롤이 이동되지 않습니다.
+ * ex) router.push(`주소`, {scroll : false})
  * @param defaultSize 모바일 기본 사이즈 (기본 사이즈가 10이 아니면!)
  * @param pagingData :  페이징 데이터, DTO는 공통 pagingType
  * @param otherType : 없거나 false일 경우 기본 (현재 페이지가 가운데 고정되는 타입), true이면 현재 페이지가 가운데에 고정되지 않는 타입
@@ -204,8 +204,8 @@ export default function PagingComponent({
             pagingData.totalPages === 0 || pagingData.totalPages === null
               ? styles.noData
               : pagingData.first === true
-                ? styles.noMorePage
-                : ""
+              ? styles.noMorePage
+              : ""
           }`}
           onClick={() => {
             goFirst();
@@ -220,8 +220,8 @@ export default function PagingComponent({
             pagingData.totalPages === 0 || pagingData.totalPages === null
               ? styles.noData
               : pagingData.first === true
-                ? styles.noMorePage
-                : ""
+              ? styles.noMorePage
+              : ""
           }`}
           onClick={() => {
             goPrev();
@@ -237,8 +237,8 @@ export default function PagingComponent({
             pagingData.totalPages === 0 || pagingData.totalPages === null
               ? styles.noData
               : pagingData.last === true
-                ? styles.noMorePage
-                : ""
+              ? styles.noMorePage
+              : ""
           }`}
           onClick={() => {
             goNext();
@@ -253,8 +253,8 @@ export default function PagingComponent({
             pagingData.totalPages === 0 || pagingData.totalPages === null
               ? styles.noData
               : pagingData.last === true
-                ? styles.noMorePage
-                : ""
+              ? styles.noMorePage
+              : ""
           }`}
           onClick={() => {
             goEnd();

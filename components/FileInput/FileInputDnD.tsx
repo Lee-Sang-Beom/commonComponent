@@ -143,8 +143,6 @@ const FileInputDnD = React.forwardRef(
 
       const fileList = e.target.files;
 
-      console.log("file List : ", fileList);
-
       if (fileList) {
         for (let i = 0; i < fileList.length; i++) {
           const file = fileList[i];
@@ -228,8 +226,6 @@ const FileInputDnD = React.forwardRef(
 
       const fileList = filesProps;
 
-      console.log("file List : ", fileList);
-
       if (fileList) {
         for (let i = 0; i < fileList.length; i++) {
           const file = fileList[i];
@@ -255,7 +251,6 @@ const FileInputDnD = React.forwardRef(
               // @ts-ignore
               ref.current.value = "";
             }
-            console.log("여기서 걸림2");
             return alert("중복되는 파일명이 있습니다.");
           }
 
@@ -267,7 +262,6 @@ const FileInputDnD = React.forwardRef(
                   // @ts-ignore
                   ref.current.value = "";
                 }
-                console.log("여기서 걸림3");
 
                 return alert("중복되는 파일명이 있습니다.");
               }
@@ -425,7 +419,6 @@ const FileInputDnD = React.forwardRef(
               e.preventDefault();
               handleDrop(e.dataTransfer.files);
               setOnOver(false);
-              console.log("asdf : ", e.dataTransfer.files);
             }}
             onDragOver={(e) => {
               e.preventDefault();
@@ -455,7 +448,6 @@ const FileInputDnD = React.forwardRef(
               e.preventDefault();
               handleDrop(e.dataTransfer.files);
               setOnOver(false);
-              console.log("asdf : ", e.dataTransfer.files);
             }}
             onDragOver={(e) => {
               e.preventDefault();
