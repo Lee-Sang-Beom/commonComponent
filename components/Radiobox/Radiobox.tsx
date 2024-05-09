@@ -3,6 +3,7 @@
 import React, { Ref, forwardRef, useEffect, useId, useState } from "react";
 import style from "./Radiobox.module.scss";
 import { FieldValues } from "react-hook-form";
+import { InputErrorMsgType } from "@/types/common/commonType";
 
 export interface Radioboxtype {
   name: string;
@@ -17,6 +18,7 @@ interface RadioboxProps {
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
   title: string;
+  effectivenessMsg?: InputErrorMsgType;
   partialErrorObj?: FieldValues;
 }
 
@@ -33,6 +35,12 @@ interface RadioboxProps {
  *
  * @param title: input title로, 한 페이지 내에서 겹치지 않는 input 대상명을 정확히 보내주어야 함
  * @returns string
+ *
+ * @param partialErrorObj: 제어형 컴포넌트의 유효성 검증에 사용 -> (state and setState / none use react-hook-form)
+ * @returns FieldValues
+ *
+ * @param effectivenessMsg: 비제어형 컴포넌트의 유효성 검증에 사용 (react-hook-form)
+ * @returns InputErrorMsgType
  */
 
 const Radiobox = (
@@ -41,6 +49,7 @@ const Radiobox = (
     color,
     title,
     border,
+    effectivenessMsg,
     partialErrorObj,
     ...props
   }: RadioboxProps & React.HTMLProps<HTMLInputElement>,
@@ -84,10 +93,31 @@ const Radiobox = (
           );
         })}
       </div>
+      {/* react-hook-form error 객체 (비제어형 컴포넌트)*/}
       {partialErrorObj && (
         <small role="alert" className={style.txt_error}>
           {partialErrorObj.message}
         </small>
+      )}
+      {/* 제어형 컴포넌트*/}
+      {effectivenessMsg && (
+        <>
+          {!effectivenessMsg.isSuccess &&
+          effectivenessMsg.msg &&
+          effectivenessMsg.msg.length ? (
+            <p className={"txt_error"}>{effectivenessMsg.msg}</p>
+          ) : (
+            <>
+              {effectivenessMsg.isSuccess &&
+              effectivenessMsg.msg &&
+              effectivenessMsg.msg.length ? (
+                <p className={"txt_success"}>{effectivenessMsg.msg}</p>
+              ) : (
+                <></>
+              )}
+            </>
+          )}
+        </>
       )}
     </div>
   );

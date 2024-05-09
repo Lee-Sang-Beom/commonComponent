@@ -235,9 +235,19 @@ export default function ReactFormClient({ data }: IProps) {
           size="lg"
           value={watch("memberType")}
           onChange={(e) => {
-            setValue("memberType", e.target.value);
+            setValue("memberType", e.target.value, {
+              shouldValidate: true,
+            });
           }}
           partialErrorObj={errors.memberType}
+          effectivenessMsg={
+            !errors.memberType
+              ? {
+                  isSuccess: true,
+                  msg: "선택 가능한 유형입니다.",
+                }
+              : undefined
+          }
         />
       </div>
 
@@ -254,7 +264,9 @@ export default function ReactFormClient({ data }: IProps) {
           border="br_round"
           checked={watch("smsYn")}
           onChange={(e) => {
-            setValue("smsYn", e.currentTarget.checked);
+            setValue("smsYn", e.currentTarget.checked, {
+              shouldValidate: true,
+            });
           }}
         />
         <p style={{ color: "red" }}>{errors.smsYn && errors.smsYn.message}</p>

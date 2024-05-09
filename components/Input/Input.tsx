@@ -97,11 +97,13 @@ const Input = (
         ref={ref}
         {...props}
       />
+      {/* react-hook-form (비제어형 컴포넌트) */}
       {partialErrorObj && (
         <small role="alert" className={style.txt_error}>
           {partialErrorObj.message}
         </small>
       )}
+      {/*제어형 컴포넌트 */}
       {effectivenessMsg && (
         <>
           {!effectivenessMsg.isSuccess &&

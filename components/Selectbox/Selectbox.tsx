@@ -10,6 +10,7 @@ import { FieldValues } from "react-hook-form";
 import clsx from "clsx";
 import { withStyles } from "@mui/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { InputErrorMsgType } from "@/types/common/commonType";
 export interface SelectboxType {
   name: string;
   value: string | number;
@@ -23,6 +24,7 @@ interface SelectboxProps {
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
   title: string;
   value?: string;
+  effectivenessMsg?: InputErrorMsgType;
   partialErrorObj?: FieldValues;
   onChange: (event: SelectChangeEvent) => void;
   placeholder?: string;
@@ -48,6 +50,12 @@ interface SelectboxProps {
  * @param onChange
  *
  * @param placeholder? placeholder가 있고 value 값이 ""인 데이터가 있으면 value 값이 ""인 데이터가 우선 적용
+ *
+ * @param partialErrorObj: 제어형 컴포넌트의 유효성 검증에 사용 -> (state and setState / none use react-hook-form)
+ * @returns FieldValues
+ *
+ * @param effectivenessMsg: 비제어형 컴포넌트의 유효성 검증에 사용 (react-hook-form)
+ * @returns InputErrorMsgType
  */
 
 export default function Selectbox({
@@ -57,6 +65,7 @@ export default function Selectbox({
   title,
   border,
   value,
+  effectivenessMsg,
   partialErrorObj,
   placeholder,
   onChange,
@@ -135,10 +144,31 @@ export default function Selectbox({
           );
         })}
       </Select>
+      {/* react-hook-form error 객체 */}
       {partialErrorObj && (
         <small role="alert" className="txt_error">
           {partialErrorObj.message}
         </small>
+      )}
+      {/* 제어형 컴포넌트*/}
+      {effectivenessMsg && (
+        <>
+          {!effectivenessMsg.isSuccess &&
+          effectivenessMsg.msg &&
+          effectivenessMsg.msg.length ? (
+            <p className={"txt_error"}>{effectivenessMsg.msg}</p>
+          ) : (
+            <>
+              {effectivenessMsg.isSuccess &&
+              effectivenessMsg.msg &&
+              effectivenessMsg.msg.length ? (
+                <p className={"txt_success"}>{effectivenessMsg.msg}</p>
+              ) : (
+                <></>
+              )}
+            </>
+          )}
+        </>
       )}
     </FormControl>
   );
