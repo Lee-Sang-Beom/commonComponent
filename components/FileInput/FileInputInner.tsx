@@ -6,6 +6,7 @@ import { FiXCircle, FiXSquare } from "react-icons/fi";
 import Button from "@/components/Button/Button";
 import style from "./FileInputInner.module.scss";
 
+// test
 interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
   /**
    * @id : 웹 접근성. Element를 구별하기위한 유일 식별자

@@ -359,7 +359,7 @@ export default function ReactFormClient({ data }: IProps) {
         <p>ID</p>
         <Input
           {...register("id", {
-            // required: "아이디는 필수 입력입니다.",
+            required: "아이디는 필수 입력입니다.",
 
             // 최소 길이 4글자 이상
             minLength: {
