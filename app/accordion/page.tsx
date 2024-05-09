@@ -6,9 +6,6 @@ import { useEffect, useState } from "react";
 export default function AccordionPage() {
   const [check1, setCheck1] = useState<boolean>(false);
 
-  useEffect(() => {
-    console.log("체크 상태 : ", check1);
-  }, [check1]);
   return (
     <div className={style.wrap}>
       <Accordion
