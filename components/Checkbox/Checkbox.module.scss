@@ -134,6 +134,22 @@ input.checkbox {
   }
   &.br_round {
     border-radius: var(--br-50);
+    position: relative;
+
+    border-color: var(--gray-300);
+
+    &::after {
+      content: "";
+      width: 30%;
+      height: 50%;
+      position: absolute;
+      left: 50%;
+      top: 10%;
+      transform: translate(-50%, 0) rotate(45deg);
+      z-index: 3;
+      border-right: 2px solid var(--gray-300);
+      border-bottom: 2px solid var(--gray-300);
+    }
   }
 
   // disabled

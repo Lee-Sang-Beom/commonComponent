@@ -224,6 +224,7 @@ export default function FormPage() {
           <Checkbox title={""} />
           <Checkbox title={""} color={"mainColor"} border="br_square_round_2" />
           <Checkbox title={""} color={"mainColor"} border="br_round" />
+          <Checkbox title={""} color={"black"} border="br_round" />
           <Checkbox title={""} color={"none"} />
           <Checkbox title={""} color={"disabled"} checked={true} />
         </div>
