@@ -103,7 +103,7 @@ const Input = (
           {partialErrorObj.message}
         </small>
       )}
-      {/* 제어형 컴포넌트*/}
+      {/* 제어형 컴포넌트 */}
       {effectivenessMsg && (
         <>
           {!effectivenessMsg.isSuccess &&
