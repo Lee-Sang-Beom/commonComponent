@@ -38,7 +38,7 @@ interface IForm {
   id: string;
   brno: string;
   createDt: string;
-  createDtDetail: string | Date;
+  createDtDetail: string;
   createDtDetailString: string;
   cost: number | string;
   memberType: string;
@@ -57,7 +57,7 @@ interface IProps {
     id: string;
     brno: string;
     createDt: string;
-    createDtDetail: string | Date;
+    createDtDetail: Date;
     createDtDetailString: string;
     cost: number | string;
     memberType: string | null;
@@ -109,7 +109,7 @@ export default function ReactFormClient({ data }: IProps) {
         "YYYYMMDD",
         "YYYY-MM-DD"
       ),
-      createDtDetail: data.createDtDetail,
+      createDtDetail: moment(data.createDtDetail).format("YYYYMMDDHHmmss"),
       createDtDetailString: data.createDtDetailString,
       cost: Number(data.cost),
       memberType: data.memberType || "",
@@ -235,9 +235,19 @@ export default function ReactFormClient({ data }: IProps) {
           size="lg"
           value={watch("memberType")}
           onChange={(e) => {
-            setValue("memberType", e.target.value);
+            setValue("memberType", e.target.value, {
+              shouldValidate: true,
+            });
           }}
           partialErrorObj={errors.memberType}
+          effectivenessMsg={
+            !errors.memberType
+              ? {
+                  isSuccess: true,
+                  msg: "선택 가능한 유형입니다.",
+                }
+              : undefined
+          }
         />
       </div>
 
@@ -254,7 +264,9 @@ export default function ReactFormClient({ data }: IProps) {
           border="br_round"
           checked={watch("smsYn")}
           onChange={(e) => {
-            setValue("smsYn", e.currentTarget.checked);
+            setValue("smsYn", e.currentTarget.checked, {
+              shouldValidate: true,
+            });
           }}
         />
         <p style={{ color: "red" }}>{errors.smsYn && errors.smsYn.message}</p>
@@ -378,6 +390,14 @@ export default function ReactFormClient({ data }: IProps) {
           inpSize={"lg"}
           border="br_square_round_1"
           partialErrorObj={errors.id}
+          effectivenessMsg={
+            !errors.id && watch("id").length
+              ? {
+                  isSuccess: true,
+                  msg: "사용 가능한 아이디입니다.",
+                }
+              : undefined
+          }
         />
       </div>
 
@@ -419,6 +439,14 @@ export default function ReactFormClient({ data }: IProps) {
           inpSize={"lg"}
           border="br_square_round_1"
           partialErrorObj={errors.pwConfirm}
+          effectivenessMsg={
+            !errors.pwConfirm
+              ? {
+                  isSuccess: true,
+                  msg: "비밀번호가 일치합니다.",
+                }
+              : undefined
+          }
         />
       </div>
 
@@ -491,15 +519,13 @@ export default function ReactFormClient({ data }: IProps) {
         <p>
           {`디테일 날짜 출력 예시 1 (Date 객체를 커스텀 포맷팅된 날짜 형태로 출력하기)`}
         </p>
-        <p className="etc_txt">{moment(watch("createDtDetail")).format("")}</p>
+        <p className="etc_txt">{watch("createDtDetail").toString()}</p>
 
         <p className="etc_txt">
           {insertHyphenToString(
             "DATE",
             watch("createDtDetail"),
-
-            // incomingMomentDateType undefined 전달 시, baseString를 default 날짜 객체로 읽어들임
-            undefined,
+            "YYYYMMDDHHmmss", // incomingMomentDateType를 명시하여 형식 지정
             "YYYY-MM-DD HH:mm:ss"
           )}
         </p>

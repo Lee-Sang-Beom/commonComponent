@@ -244,10 +244,11 @@ export default function DialogPage() {
               setOpen3(true);
             }}
           >
-            열어
+            열어 closeBtnHover 없음
           </Button>
 
           <DialogComp
+            closeBtnHover={false}
             width="xl"
             open={open3}
             setOpen={setOpen3}

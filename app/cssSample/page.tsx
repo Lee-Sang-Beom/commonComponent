@@ -12,9 +12,6 @@ import Checkbox from "@/components/Checkbox/Checkbox";
 import Textarea from "@/components/Textarea/Textarea";
 import Selectbox from "@/components/Selectbox/Selectbox";
 import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
-import { duration } from "moment";
-import { Fade } from "@mui/material";
 
 export default function CssAnimation() {
   const outer1Ref = useRef(null);

@@ -1,6 +1,14 @@
 .inp_box {
   width: 100%;
   height: 100%;
+  position: relative;
+  .count {
+    position: absolute;
+    top: 50%;
+    left: unset;
+    right: 15px;
+    transform: translateY(-50%);
+  }
 
   input.inp {
     width: 100%;
@@ -37,6 +45,9 @@
       padding: 0 2.4rem;
     }
 
+    &.cnt {
+      padding-right: 100px;
+    }
     /* color */
     // 기본 컬러
     &.white {

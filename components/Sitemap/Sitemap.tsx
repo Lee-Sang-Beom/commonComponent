@@ -24,7 +24,7 @@ interface SitemapProps {
   menuData: any[];
   btnDirection?: "center" | "left" | "right";
   sitemapDirection?: "left" | "right" | "bottom";
-  session: any;
+  session: any | null;
 }
 
 /**

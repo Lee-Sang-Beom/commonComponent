@@ -50,8 +50,11 @@ export default function RootLayout({
       <body className={`${pretendard.variable}`}>
         <RecoilRootProvider>
           <div className={style.menu}>
-            <a href="/validationCheck" title="table">
+            <a href="/validationCheck" title="react hook form">
               React-Hook-Form
+            </a>
+            <a href="/validationCheck2" title="non use react hook form">
+              Non React-Hook-Form
             </a>
             <a href="/form" title="form요소">
               form요소
