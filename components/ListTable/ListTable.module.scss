@@ -1,0 +1,238 @@
+// 캡션
+.tb_st1 caption,
+.tb_st2 caption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 0 0, 0 0);
+}
+
+.ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  // 카드형
+  &.card {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+
+    & > li {
+      width: calc((100% - 40px) / 3);
+      border: 1px solid var(--gray-500);
+      box-sizing: border-box;
+
+      & > .picture {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        height: 40rem;
+        img {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          transition: all 0.2s linear;
+        }
+        img:hover {
+          scale: 1.1;
+          transform: translate(-45%, -45%);
+          transition: all 0.2s linear;
+        }
+      }
+
+      .li_wrap {
+        padding: 3rem 2rem;
+        box-sizing: border-box;
+        margin: 0;
+      }
+    }
+
+    & > li::after {
+      content: "";
+      display: flex;
+      width: 100%;
+      height: 0px;
+      background-color: var(--gray-500);
+    }
+  }
+  & > li {
+    width: 100%;
+  }
+
+  & > li::after {
+    content: "";
+    display: flex;
+    width: 100%;
+    height: 1px;
+    background-color: var(--gray-500);
+  }
+
+  .li_wrap {
+    display: flex;
+    margin: 2rem 0;
+    gap: 2rem;
+    padding: 2rem 0;
+    box-sizing: border-box;
+
+    .left {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: var(--fs-20);
+      padding: 0 1.2rem;
+    }
+
+    .right {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+
+      .chip_box {
+        display: flex;
+        gap: 5px;
+        width: fit-content;
+      }
+
+      .title_content_wrap {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        font-weight: bold;
+        font-size: var(--fs-20);
+        .content {
+          color: var(--gray-800);
+          font-weight: normal;
+          font-size: var(--fs-16);
+          line-height: 1.5;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          word-break: break-word;
+          overflow: hidden;
+          height: 4.8rem;
+        }
+      }
+
+      .bottom_box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        li {
+          padding-right: 2rem;
+          margin-right: 1.4rem;
+          border-right: 1px solid #333;
+
+          &:last-of-type {
+            border-right: 0;
+          }
+
+          span {
+            &:first-of-type {
+              font-weight: bold;
+              margin-right: 1rem;
+            }
+            &:last-of-type {
+              color: var(--gray-800);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .ul {
+    // 카드형
+    &.card {
+      gap: 2rem;
+
+      & > li {
+        width: calc((100% - 20px) / 2);
+
+        .li_wrap {
+          .right {
+            gap: 4rem;
+          }
+        }
+      }
+    }
+    .li_wrap {
+      .right {
+        gap: 3rem;
+
+        .bottom_box {
+          li {
+            &:last-of-type {
+              border-right: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 640px) {
+  .ul {
+    &.card {
+      & > li {
+        width: 100%;
+
+        .li_wrap {
+          padding: 2rem 1rem;
+          .right {
+            gap: 2rem;
+          }
+        }
+      }
+    }
+    .li_wrap {
+      margin: 1rem 0;
+
+      .left {
+        display: none;
+      }
+
+      .right {
+        flex-direction: column;
+        gap: 1.5rem;
+
+        .title_content_wrap {
+          gap: 1rem;
+          font-size: var(--fs-18);
+          .content {
+            font-size: var(--fs-14);
+            line-height: 1.4;
+            height: unset;
+          }
+        }
+
+        .bottom_box {
+          display: flex;
+          flex-direction: column;
+          gap: 0.4rem;
+          font-size: var(--fs-14);
+          li {
+            padding-right: 0;
+            border-right: 0;
+
+            &:last-of-type {
+              border-right: 0;
+            }
+
+            span {
+              &:first-of-type {
+                font-weight: bold;
+                margin-right: 1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
