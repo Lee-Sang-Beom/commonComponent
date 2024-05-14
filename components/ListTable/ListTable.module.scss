@@ -36,6 +36,9 @@
           top: 50%;
           transform: translate(-50%, -50%);
           transition: all 0.2s linear;
+          aspect-ratio: 1.2 / 1;
+          height: 100%;
+          object-fit: cover;
         }
         img:hover {
           scale: 1.1;
