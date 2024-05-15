@@ -147,7 +147,7 @@ export default function ReactFormClient({ data }: IProps) {
   }, [watch("pw")]);
 
   useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
+    watch((value, { name, type }) => {
       console.log("watch value: ", value);
       console.log("watch name: ", name);
       console.log("watch type: ", type);
