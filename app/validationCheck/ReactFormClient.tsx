@@ -150,6 +150,14 @@ export default function ReactFormClient({ data }: IProps) {
     });
   }, [watch("pw")]);
 
+  useEffect(() => {
+    watch((value, { name, type }) => {
+      console.log("watch value: ", value);
+      console.log("watch name: ", name);
+      console.log("watch type: ", type);
+    });
+  }, [watch]);
+
   // 라디오 버튼 items 배열 재배치
   const [baseArrayRadio, setBaseArrayRadio] = useState<RadioType[]>([
     { id: "1", name: "항목 1", value: "ONE", checked: false },
@@ -375,7 +383,7 @@ export default function ReactFormClient({ data }: IProps) {
         <p>ID</p>
         <Input
           {...register("id", {
-            required: "아이디는 필수 입력입니다.",
+            // required: "아이디는 필수 입력입니다.",
 
             // 최소 길이 4글자 이상
             minLength: {

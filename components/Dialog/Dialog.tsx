@@ -18,6 +18,7 @@ interface DialogCompProps {
   children: React.ReactNode | React.ReactNode[];
   botton?: React.ReactNode | React.ReactNode[];
   closeFocusRef?: HTMLButtonElement;
+  closeBtnHover?: boolean;
 }
 
 /**
@@ -30,6 +31,8 @@ interface DialogCompProps {
  *
  * @param botton?:팝업 하단 버튼  (자동 고정됨)
  * @returns
+ *
+ * @param closeBtnHover?: 다이얼로그 닫기 버튼 호버 여부
  */
 
 export default function DialogComp({
@@ -41,6 +44,7 @@ export default function DialogComp({
   children,
   botton,
   closeFocusRef,
+  closeBtnHover,
 }: DialogCompProps) {
   const descriptionElementRef = React.useRef<HTMLElement>(null);
   React.useEffect(() => {
@@ -67,7 +71,7 @@ export default function DialogComp({
     >
       <DialogTitle id={`scroll-dialog-${title}`}>
         <p>{title}</p>
-        <div className="btn_close">
+        <div className={`btn_close ${closeBtnHover === false ? "" : "hover"}`}>
           <Button
             title={"다이얼로그 닫기"}
             id={"dialogClose"}

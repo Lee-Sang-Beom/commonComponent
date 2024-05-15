@@ -108,6 +108,9 @@ export default function RootLayout({
             <a href="/accordion" title="accrodion">
               Accordion
             </a>
+            <a href="/listTable" title="listTable">
+              List Table
+            </a>
           </div>
           {children}
           <AutoAlert />

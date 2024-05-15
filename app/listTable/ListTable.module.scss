@@ -1,0 +1,12 @@
+.box {
+  width: 100%;
+  padding: 3rem;
+  box-sizing: border-box;
+  h3 {
+    font-weight: 700;
+    font-size: 30px;
+    margin-top: 3rem;
+    border-top: 5px dashed var(--gray-1000);
+    padding-top: 3rem;
+  }
+}

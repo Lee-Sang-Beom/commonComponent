@@ -136,6 +136,7 @@ const FileInputInner = React.forwardRef(
       }
 
       const fileList = e.target.files;
+      console.log("fileList is ", fileList);
 
       if (fileList) {
         for (let i = 0; i < fileList.length; i++) {
