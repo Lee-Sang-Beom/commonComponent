@@ -1,4 +1,4 @@
-import { removeCommaToString } from "../../common";
+import { removeFormatToString } from "../../common";
 import {
   emailRegex,
   generalNumRegex,
@@ -304,7 +304,7 @@ export function onlyNumberReactHookFormOption(
         if (!required && v.length <= 0) return true;
 
         let result = false;
-        if (generalNumRegex.test(removeCommaToString(v))) {
+        if (generalNumRegex.test(removeFormatToString("NUMBER", v))) {
           result = true;
         }
         return (
