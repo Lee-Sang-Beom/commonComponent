@@ -1,9 +1,8 @@
 "use client";
 
 import {
-  insertHyphenToString,
-  removeCommaToString,
-  removeHyphenToString,
+  insertFormatToString,
+  removeFormatToString,
 } from "@/utils/common/common";
 import {
   brnoReactHookFormOption,
@@ -96,14 +95,14 @@ export default function ReactFormClient({ data }: IProps) {
     defaultValues: {
       email: data.email,
       name: data.name,
-      phoneNumber: insertHyphenToString("TEL_NO", data.phoneNumber),
-      regionNumber: insertHyphenToString("TEL_NO", data.regionNumber),
-      commonNumber: insertHyphenToString("TEL_NO", data.commonNumber),
-      brno: insertHyphenToString("BRNO", data.brno),
+      phoneNumber: insertFormatToString("TEL_NO", data.phoneNumber),
+      regionNumber: insertFormatToString("TEL_NO", data.regionNumber),
+      commonNumber: insertFormatToString("TEL_NO", data.commonNumber),
+      brno: insertFormatToString("BRNO", data.brno),
       pw: data.pw,
       pwConfirm: "",
       id: data.id,
-      createDt: insertHyphenToString(
+      createDt: insertFormatToString(
         "DATE",
         data.createDt,
         "YYYYMMDD",
@@ -111,25 +110,29 @@ export default function ReactFormClient({ data }: IProps) {
       ),
       createDtDetail: moment(data.createDtDetail).format("YYYYMMDDHHmmss"),
       createDtDetailString: data.createDtDetailString,
-      cost: Number(data.cost),
+      cost: insertFormatToString("NUMBER", Number(data.cost)),
       memberType: data.memberType || "",
       radioSelectType: data.radioSelectType || null,
       smsYn: data.smsYn && data.smsYn === "Y" ? true : false,
     },
+    // resetOptions: {
+    //   keepDirtyValues: true, // 사용자 상호작용으로 입력된 값이 유지됩니다.
+    //   keepErrors: true, // 값 업데이트 시 입력 오류가 유지됩니다.
+    // },
   });
 
   const onSubmit = async (data: IForm) => {
     await new Promise((r) => setTimeout(r, 1000));
 
-    // removeHyphenToString 메소드는 빈 값이나 존재하지 않는 값을 보내면 무조건 빈 string을 반환함
+    // removeFormatToString 메소드는 빈 값이나 존재하지 않는 값을 보내면 무조건 빈 string을 반환함
     const postData = {
       ...data,
-      phoneNumber: removeHyphenToString(data.phoneNumber),
-      regionNumber: removeHyphenToString(data.regionNumber),
-      commonNumber: removeHyphenToString(data.commonNumber),
-      brno: removeHyphenToString(data.brno),
-      createDt: removeHyphenToString(data.createDt),
-      cost: removeCommaToString(data.cost.toString()),
+      phoneNumber: removeFormatToString("TEL_NO", data.phoneNumber),
+      regionNumber: removeFormatToString("TEL_NO", data.regionNumber),
+      commonNumber: removeFormatToString("TEL_NO", data.commonNumber),
+      brno: removeFormatToString("BRNO", data.brno),
+      createDt: removeFormatToString("DATE", data.createDt),
+      cost: removeFormatToString("NUMBER", data.cost.toString()),
       smsYn: data.smsYn ? "Y" : "N",
     };
 
@@ -309,9 +312,27 @@ export default function ReactFormClient({ data }: IProps) {
           aria-invalid={
             isSubmitted ? (errors.phoneNumber ? "true" : "false") : undefined
           }
-          value={insertHyphenToString("TEL_NO", watch("phoneNumber") || "")}
+          value={watch("phoneNumber")}
+          onFocus={(e) => {
+            setValue(
+              "phoneNumber",
+              removeFormatToString("TEL_NO", watch("phoneNumber")),
+              {
+                shouldValidate: true,
+              }
+            );
+          }}
+          onBlur={(e) => {
+            setValue(
+              "phoneNumber",
+              insertFormatToString("TEL_NO", watch("phoneNumber")),
+              {
+                shouldValidate: true,
+              }
+            );
+          }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setValue("phoneNumber", removeHyphenToString(e.target.value), {
+            setValue("phoneNumber", e.target.value, {
               shouldValidate: true,
             });
           }}
@@ -334,9 +355,27 @@ export default function ReactFormClient({ data }: IProps) {
           aria-invalid={
             isSubmitted ? (errors.regionNumber ? "true" : "false") : undefined
           }
-          value={insertHyphenToString("TEL_NO", watch("regionNumber") || "")}
+          value={watch("regionNumber")}
+          onFocus={(e) => {
+            setValue(
+              "regionNumber",
+              removeFormatToString("TEL_NO", "regionNumber"),
+              {
+                shouldValidate: true,
+              }
+            );
+          }}
+          onBlur={(e) => {
+            setValue(
+              "regionNumber",
+              insertFormatToString("TEL_NO", watch("regionNumber")),
+              {
+                shouldValidate: true,
+              }
+            );
+          }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setValue("regionNumber", removeHyphenToString(e.target.value), {
+            setValue("regionNumber", e.target.value, {
               shouldValidate: true,
             });
           }}
@@ -359,9 +398,27 @@ export default function ReactFormClient({ data }: IProps) {
           aria-invalid={
             isSubmitted ? (errors.commonNumber ? "true" : "false") : undefined
           }
-          value={insertHyphenToString("TEL_NO", watch("commonNumber") || "")}
+          value={watch("commonNumber")}
+          onFocus={(e) => {
+            setValue(
+              "commonNumber",
+              removeFormatToString("TEL_NO", watch("commonNumber")),
+              {
+                shouldValidate: true,
+              }
+            );
+          }}
+          onBlur={(e) => {
+            setValue(
+              "commonNumber",
+              insertFormatToString("TEL_NO", watch("commonNumber")),
+              {
+                shouldValidate: true,
+              }
+            );
+          }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setValue("commonNumber", removeHyphenToString(e.target.value), {
+            setValue("commonNumber", e.target.value, {
               shouldValidate: true,
             });
           }}
@@ -467,9 +524,19 @@ export default function ReactFormClient({ data }: IProps) {
           aria-invalid={
             isSubmitted ? (errors.brno ? "true" : "false") : undefined
           }
-          value={insertHyphenToString("BRNO", watch("brno") || "")}
+          value={watch("brno")}
+          onFocus={(e) => {
+            setValue("brno", removeFormatToString("BRNO", watch("brno")), {
+              shouldValidate: true,
+            });
+          }}
+          onBlur={(e) => {
+            setValue("brno", insertFormatToString("BRNO", watch("brno")), {
+              shouldValidate: true,
+            });
+          }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setValue("brno", removeHyphenToString(e.target.value), {
+            setValue("brno", e.target.value, {
               shouldValidate: true,
             });
           }}
@@ -490,9 +557,19 @@ export default function ReactFormClient({ data }: IProps) {
           aria-invalid={
             isSubmitted ? (errors.cost ? "true" : "false") : undefined
           }
-          value={insertHyphenToString("GENERAL", watch("cost") || "")}
+          value={watch("cost")}
+          onFocus={(e) => {
+            setValue("cost", removeFormatToString("BRNO", watch("cost")), {
+              shouldValidate: true,
+            });
+          }}
+          onBlur={(e) => {
+            setValue("cost", insertFormatToString("NUMBER", watch("cost")), {
+              shouldValidate: true,
+            });
+          }}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setValue("cost", removeCommaToString(e.target.value), {
+            setValue("cost", e.target.value, {
               shouldValidate: true,
             });
           }}
@@ -530,7 +607,7 @@ export default function ReactFormClient({ data }: IProps) {
         <p className="etc_txt">{watch("createDtDetail").toString()}</p>
 
         <p className="etc_txt">
-          {insertHyphenToString(
+          {insertFormatToString(
             "DATE",
             watch("createDtDetail"),
             "YYYYMMDDHHmmss", // incomingMomentDateType를 명시하여 형식 지정
@@ -547,7 +624,7 @@ export default function ReactFormClient({ data }: IProps) {
         <p className="etc_txt">{watch("createDtDetailString")}</p>
 
         <p className="etc_txt">
-          {insertHyphenToString(
+          {insertFormatToString(
             "DATE",
             watch("createDtDetailString"),
             "YYYYMMDDHHmmss",
