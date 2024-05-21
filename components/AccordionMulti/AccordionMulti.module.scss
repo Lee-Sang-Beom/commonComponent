@@ -16,7 +16,7 @@
   transition: all 0.3s;
   min-height: 4.4rem;
 
-  &:first-of-type {
+  &.first {
     border-top: 1px solid var(--gray-600);
   }
 
