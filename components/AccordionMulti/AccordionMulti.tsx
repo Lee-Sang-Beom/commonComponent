@@ -26,7 +26,9 @@ export default function AccordionMulti({ data }: AccordionMultiProps) {
             <>
               <dt className={style.dt} key={item.seq + index}>
                 <button
-                  className={style.title_btn}
+                  className={`${style.title_btn} ${
+                    index == 0 ? style.first : ""
+                  }`}
                   onClick={() => {
                     if (openSeq == item.seq) {
                       setOpenSeq("");
