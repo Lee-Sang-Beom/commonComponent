@@ -118,7 +118,7 @@ export default function ListTablePage() {
     {
       value: "title",
       accessFn: (row: dataType) => {
-        return <p>{row.title} </p>;
+        return <a href={`/table/${row.rowId}`}>{row.title} </a>;
       },
     },
     {
@@ -126,10 +126,10 @@ export default function ListTablePage() {
       type: "bottom",
       accessFn: (row: dataType) => {
         return [
-          { key: "공과대학", value: row.stateEnu.name },
-          { key: "과제책임자", value: row.entType.name },
-          { key: "연도", value: row.year },
-          { key: "조회수", value: row.count },
+          { name: "공과대학", value: row.stateEnu.name },
+          { name: "과제책임자", value: row.entType.name },
+          { name: "연도", value: row.year },
+          { name: "조회수", value: row.count },
         ];
       },
     },
@@ -151,7 +151,7 @@ export default function ListTablePage() {
             title="새 창으로 열림"
           >
             {" "}
-            <img src={`${row.imgUrl}`} />
+            <img src={`${row.imgUrl}`} alt={`${row.title} 페이지로 이동`} />
           </a>
         );
       },
@@ -208,14 +208,14 @@ export default function ListTablePage() {
       },
     },
     {
-      value: "content",
+      value: "category",
       type: "bottom",
       accessFn: (row: dataType) => {
         return [
-          { key: "공과대학", value: row.stateEnu.name },
-          { key: "과제책임자", value: row.entType.name },
-          { key: "연도", value: row.year },
-          { key: "조회수", value: row.count },
+          { name: "공과대학", value: row.stateEnu.name },
+          { name: "과제책임자", value: row.entType.name },
+          { name: "연도", value: row.year },
+          { name: "조회수", value: row.count },
         ];
       },
     },
@@ -224,26 +224,12 @@ export default function ListTablePage() {
     <>
       <div className={style.box}>
         <h3>list type</h3>
-        <ListTable
-          data={data}
-          headers={header}
-          tableType={"list"}
-          tableCaption={""}
-          itemTitle={""}
-          ref={null}
-        />
+        <ListTable data={data} headers={header} tableType={"list"} ref={null} />
         <br />
         <br />
         <h3>card type</h3>
         <br />
-        <ListTable
-          data={data}
-          headers={header}
-          tableType={"card"}
-          tableCaption={""}
-          itemTitle={""}
-          ref={null}
-        />
+        <ListTable data={data} headers={header} tableType={"card"} ref={null} />
         <br />
         <br />
         <h3>gallery type</h3>
@@ -252,8 +238,6 @@ export default function ListTablePage() {
           data={data}
           headers={header2}
           tableType={"card"}
-          tableCaption={""}
-          itemTitle={""}
           ref={null}
         />
       </div>
