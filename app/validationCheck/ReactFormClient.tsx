@@ -552,7 +552,7 @@ export default function ReactFormClient({ data }: IProps) {
       <div className="input_box">
         <p>COST</p>
         <Input
-          {...register("cost", onlyNumberReactHookFormOption(false, "비용"))}
+          {...register("cost", onlyNumberReactHookFormOption(true, "비용"))}
           type="text"
           aria-invalid={
             isSubmitted ? (errors.cost ? "true" : "false") : undefined
