@@ -5,6 +5,7 @@ import style from "./page.module.scss";
 import localFont from "next/font/local";
 import RecoilRootProvider from "@/provider/RecoilProvider";
 import AutoAlert from "@/components/AutoAlert/AutoAlert";
+import QuickMenu from "@/components/QuickMenu/QuickMenu";
 
 const pretendard = localFont({
   src: [
@@ -114,6 +115,7 @@ export default function RootLayout({
           </div>
           {children}
           <AutoAlert />
+          <QuickMenu />
         </RecoilRootProvider>
       </body>
     </html>
