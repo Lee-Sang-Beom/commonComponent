@@ -116,6 +116,9 @@ export default function RootLayout({
             <a href="/quickMenu" title="quickMenu">
               QuickMenu
             </a>
+            <a href="/gimhaeMap" title="listTable">
+              김해 지도
+            </a>
           </div>
           {children}
           <AutoAlert />
