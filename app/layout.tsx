@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import RecoilRootProvider from "@/provider/RecoilProvider";
 import AutoAlert from "@/components/AutoAlert/AutoAlert";
 import QuickMenu from "@/components/QuickMenu/QuickMenu";
+import ProgressQuickMenu from "@/components/ProgressQuickMenu/ProgressQuickMenu";
 
 const pretendard = localFont({
   src: [
@@ -112,10 +113,14 @@ export default function RootLayout({
             <a href="/listTable" title="listTable">
               List Table
             </a>
+            <a href="/quickMenu" title="quickMenu">
+              QuickMenu
+            </a>
           </div>
           {children}
           <AutoAlert />
-          <QuickMenu />
+          {/* <QuickMenu /> */}
+          <ProgressQuickMenu />
         </RecoilRootProvider>
       </body>
     </html>
