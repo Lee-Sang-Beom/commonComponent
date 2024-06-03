@@ -1,7 +1,7 @@
 "use client";
 
 import { MouseEvent, Ref, forwardRef, useEffect, useState } from "react";
-import styles from "./ProgressQuickMenu.module.scss";
+import styles from "./IncludeScrollQuickMenu2.module.scss";
 import {
   Box,
   CircularProgress,
@@ -11,7 +11,7 @@ import {
 import { HiArrowNarrowUp } from "react-icons/hi";
 interface ProgressQuickMenu {}
 
-const ProgressQuickMenu = (
+const IncludeScrollQuickMenu2 = (
   {}: ProgressQuickMenu,
   ref: Ref<HTMLButtonElement>
 ) => {
@@ -46,7 +46,12 @@ const ProgressQuickMenu = (
       window.addEventListener("scroll", function () {
         // 현재 수직 스크롤 위치 가져오기
         const scrollTop = window.scrollY;
-        const scrollPercent = (scrollTop / (pageHeight - windowHeight)) * 100;
+        const scrollPercent =
+          (scrollTop / (pageHeight - windowHeight)) * 100 < 0
+            ? 0
+            : (scrollTop / (pageHeight - windowHeight)) * 100 > 100
+            ? 100
+            : (scrollTop / (pageHeight - windowHeight)) * 100;
 
         setCurScrollPercent(scrollPercent);
       });
@@ -123,4 +128,4 @@ const ProgressQuickMenu = (
   );
 };
 
-export default forwardRef(ProgressQuickMenu);
+export default forwardRef(IncludeScrollQuickMenu2);

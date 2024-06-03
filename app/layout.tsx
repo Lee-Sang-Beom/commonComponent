@@ -5,8 +5,8 @@ import style from "./page.module.scss";
 import localFont from "next/font/local";
 import RecoilRootProvider from "@/provider/RecoilProvider";
 import AutoAlert from "@/components/AutoAlert/AutoAlert";
-import QuickMenu from "@/components/QuickMenu/QuickMenu";
-import ProgressQuickMenu from "@/components/ProgressQuickMenu/ProgressQuickMenu";
+import IncludeScrollQuickMenu1 from "@/components/IncludeScrollQuickMenu1/IncludeScrollQuickMenu1";
+import IncludeScrollQuickMenu2 from "@/components/IncludeScrollQuickMenu2/IncludeScrollQuickMenu2";
 
 const pretendard = localFont({
   src: [
@@ -119,8 +119,8 @@ export default function RootLayout({
           </div>
           {children}
           <AutoAlert />
-          {/* <QuickMenu /> */}
-          <ProgressQuickMenu />
+          <IncludeScrollQuickMenu1 />
+          <IncludeScrollQuickMenu2 />
         </RecoilRootProvider>
       </body>
     </html>

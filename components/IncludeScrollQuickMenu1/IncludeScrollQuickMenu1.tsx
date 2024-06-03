@@ -1,11 +1,14 @@
 "use client";
 
 import { MouseEvent, Ref, forwardRef, useEffect, useState } from "react";
-import styles from "./QuickMenu.module.scss";
+import styles from "./IncludeScrollQuickMenu1.module.scss";
 
 interface QuickMenuProps {}
 
-const QuickMenu = ({}: QuickMenuProps, ref: Ref<HTMLButtonElement>) => {
+const IncludeScrollQuickMenu1 = (
+  {}: QuickMenuProps,
+  ref: Ref<HTMLButtonElement>
+) => {
   // hover
   const [isHover, setIsHover] = useState<boolean>(false);
   const [isMount, setIsMount] = useState<boolean>(false);
@@ -47,4 +50,4 @@ const QuickMenu = ({}: QuickMenuProps, ref: Ref<HTMLButtonElement>) => {
   );
 };
 
-export default forwardRef(QuickMenu);
+export default forwardRef(IncludeScrollQuickMenu1);
