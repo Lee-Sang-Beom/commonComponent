@@ -1,0 +1,87 @@
+$sm-width: 520px;
+$md-width: 768px;
+$lg-width: 1024px;
+$xl-width: 1500px;
+
+$width-small: "screen and (max-width: #{$sm-width})";
+$width-medium: "screen and (max-width: #{$md-width})";
+$width-large: "screen and (max-width: #{$lg-width})";
+$width-xlarge: "screen and (max-width: #{$xl-width})";
+
+// content size
+@mixin setBoxSize($h, $w) {
+  width: $w;
+  height: $h;
+}
+
+// section 영역의 box shadow
+@mixin section-box-shadow($color-1, $color-2, $color-3) {
+  box-shadow: 0 0 5px 0 white, inset -10px 0px 30px 0 $color-2,
+    inset 10px 0px 30px 0 $color-2, inset -20px -20px 50px 0 $color-3,
+    inset 20px 20px 50px 0 $color-3, inset -21px -21px 60px 0 white,
+    inset 21px 21px 60px 0 white;
+}
+
+// main page의 img shadow
+@mixin ball($shadow-color) {
+  box-shadow: 0 0 20px 0 white, 10px 10px 20px 10px $shadow-color,
+    -10px -10px 20px 0 rgb(0, 0, 0), inset 0 0 14px 0 white,
+    inset -40px -30px 60px 0 $shadow-color, inset -40px -30px 70px 0 blue,
+    inset -40px -30px 100px 0 white,
+    inset -40px -30px 140px 0 rgb(110, 229, 245);
+
+  animation: glow 0.8s linear infinite alternate;
+
+  @keyframes glow {
+    from {
+      /*애니메이션이 시작될 때 요소에게 지정할 스타일*/
+      box-shadow: 0 0 20px 0 white, 10px 10px 20px 10px $shadow-color,
+        -10px -10px 20px 0 rgb(0, 0, 0), inset 0 0 14px 0 white,
+        inset -40px -30px 60px 0 $shadow-color, inset -40px -30px 70px 0 blue,
+        inset -40px -30px 100px 0 white,
+        inset -40px -30px 140px 0 rgb(110, 229, 245);
+    }
+
+    to {
+      /*애니메이션이 종료될 때 요소에게 지정할 스타일*/
+      box-shadow: 0 0 20px 0 white, 10px 10px 20px 10px rgb(0, 0, 0),
+        -10px -10px 20px 0 $shadow-color, inset 0 0 14px 0 white,
+        inset -40px -30px 60px 0 rgb(0, 0, 0), inset -40px -30px 70px 0 blue,
+        inset -40px -30px 100px 0 $shadow-color,
+        inset -40px -30px 140px 0 rgb(110, 229, 245);
+    }
+  }
+}
+
+@mixin section_img($name, $w: 100%, $h: 100vh) {
+  width: $w;
+  height: $h;
+  background: url(../../public/img/#{$name}) no-repeat center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+@mixin logo-img {
+  position: absolute;
+  border-radius: 50%;
+  padding: 1.5rem;
+  z-index: 2;
+
+  // 70px: header
+  top: calc(50% + 70px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @media screen and (max-height: 560px) {
+    display: none;
+  }
+
+  img {
+    width: 100%;
+    transition: all 1s ease;
+
+    &:hover {
+      transform: scale(0);
+    }
+  }
+}
