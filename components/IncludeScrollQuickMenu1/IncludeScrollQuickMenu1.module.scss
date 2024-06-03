@@ -11,7 +11,10 @@
   border-radius: 100%;
   position: fixed;
   bottom: calc(max(1rem, 0.8334vw) * (24 / 16));
-  right: calc(max(1rem, 0.8334vw) * (24 / 16));
+  right: 80px;
+
+  // 이거써야함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  // right: calc(max(1rem, 0.8334vw) * (24 / 16));
 
   // ------------- TOP -------------
 
