@@ -112,6 +112,9 @@ export default function RootLayout({
             <a href="/listTable" title="listTable">
               List Table
             </a>
+            <a href="/gimhaeMap" title="listTable">
+              김해 지도
+            </a>
           </div>
           {children}
           <AutoAlert />
