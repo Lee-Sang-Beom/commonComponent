@@ -17,11 +17,8 @@
     "@mui/material": "^5.15.15",
     "@react-pdf/renderer": "^3.4.4",
     "@tanstack/react-query": "^5.35.1",
-<<<<<<< HEAD
     "apexcharts": "^3.49.1",
-=======
     "@tomickigrzegorz/react-circular-progress-bar": "^1.1.2",
->>>>>>> d2979daccf68b8a45cfd6e79a83fb8bb138b84cf
     "axios": "^1.6.8",
     "ckeditor5-custom-build": "file:ckeditor5",
     "clsx": "^2.1.1",
