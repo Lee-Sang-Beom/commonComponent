@@ -119,6 +119,9 @@ export default function RootLayout({
             <a href="/gimhaeMap" title="listTable">
               김해 지도
             </a>
+            <a href="/scrollSection" title="listTable">
+              스크롤 애니메이션 2 - framer.motion
+            </a>
           </div>
           {children}
           <AutoAlert />
