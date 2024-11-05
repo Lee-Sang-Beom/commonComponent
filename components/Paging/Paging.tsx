@@ -5,8 +5,8 @@ import { FiPlus } from "react-icons/fi";
 import {
   BiChevronLeft,
   BiChevronRight,
-  BiFirstPage,
-  BiLastPage,
+  BiChevronsLeft,
+  BiChevronsRight,
 } from "react-icons/bi";
 
 interface PagingProps {
@@ -21,7 +21,7 @@ interface PagingProps {
     totalElements: number;
     number: number;
   };
-  ohterType?: boolean;
+  nonCenterTracking?: boolean;
 }
 
 /**
@@ -31,14 +31,14 @@ interface PagingProps {
  * ex) router.push(`주소`, {scroll : false})
  * @param defaultSize 모바일 기본 사이즈 (기본 사이즈가 10이 아니면!)
  * @param pagingData :  페이징 데이터, DTO는 공통 pagingType
- * @param otherType : 없거나 false일 경우 기본 (현재 페이지가 가운데 고정되는 타입), true이면 현재 페이지가 가운데에 고정되지 않는 타입
+ * @param nonCenterTracking : 없거나 false일 경우 기본 (현재 페이지가 가운데 고정되는 타입), true이면 현재 페이지가 가운데에 고정되지 않는 타입
  */
 export default function PagingComponent({
   onClickEvent,
   onMoClickEvent,
   defaultSize,
   pagingData,
-  ohterType,
+  nonCenterTracking,
 }: PagingProps) {
   const [curNum, setCurNum] = useState(1);
 
@@ -77,50 +77,30 @@ export default function PagingComponent({
     }
   };
 
-  const renderNumber = () => {
-    let renderButtons = [];
+  const centerTrackingRenderingTablePaginationCurNumComponent = () => {
+    let renderButtons = []; // 페이지 번호 버튼을 저장할 배열
 
     if (pagingData) {
-      // 처음 현재 페이지 -1  - ((현재 페이지 -1) % (페이지하단 = 10)) + 1
-      // 마지막 = 현재 페이지 -1  - ((현재 페이지 -1) % (페이지하단 = 10)) + 10
+      let pageFirst: number; // 첫 번째 페이지 번호
+      let pageLast: number; // 마지막 페이지 번호
 
-      let pageFirst;
-      let pageLast;
-      if (curNum === 1 || curNum === 2) {
-        pageFirst = curNum - 1 - ((curNum - 1) % 5) + 1;
-        pageLast = curNum - 1 - ((curNum - 1) % 5) + 5;
-      } else if (
-        curNum === pagingData.totalPages ||
-        curNum === pagingData.totalPages - 1
-      ) {
-        if (pagingData.totalPages < 5) {
-          pageFirst = curNum - 1 - ((curNum - 1) % 5) + 1;
-          pageLast = curNum - 1 - ((curNum - 1) % 5) + 5;
-        } else {
-          if (curNum === pagingData.totalPages) {
-            pageFirst = curNum - 4;
-            pageLast = curNum;
-          } else {
-            pageFirst = curNum - 3;
-            pageLast = curNum + 1;
-          }
-        }
+      if (curNum <= 5) {
+        pageFirst = 1; // 첫 번째 페이지 번호를 1로 설정
+        pageLast = Math.min(9, pagingData.totalPages); // 마지막 페이지 번호를 9 또는 총 페이지 수로 설정
+      } else if (curNum >= pagingData.totalPages - 4) {
+        pageFirst = Math.max(pagingData.totalPages - 8, 1); // 첫 번째 페이지 번호를 총 페이지 수 - 8 또는 1로 설정
+        pageLast = pagingData.totalPages; // 마지막 페이지 번호를 총 페이지 수로 설정
       } else {
-        pageFirst = curNum - 2;
-        pageLast = curNum + 2;
-      }
-      if (pagingData && pageLast > pagingData.totalPages)
-        pageLast = pagingData.totalPages;
-      if (typeof curNum != "number") setCurNum(1);
-      if (pagingData && typeof pagingData.totalPages != "number") {
-        pagingData.totalPages = 1;
+        pageFirst = Math.max(curNum - 4, 1); // 첫 번째 페이지 번호를 현재 페이지 번호 - 4 또는 1로 설정
+        pageLast = Math.min(curNum + 4, pagingData.totalPages); // 마지막 페이지 번호를 현재 페이지 번호 + 4 또는 총 페이지 수로 설정
       }
 
       if (isNaN(pageFirst) || isNaN(pageLast)) {
-        pageFirst = 1;
-        pageLast = 1;
-        setCurNum(1);
+        pageFirst = 1; // 페이지 번호가 NaN인 경우 1로 설정
+        pageLast = 1; // 페이지 번호가 NaN인 경우 1로 설정
+        setCurNum(1); // 현재 페이지 번호를 1로 설정
       }
+
       for (let i = pageFirst; i <= pageLast; i++) {
         const curNumber = i;
         renderButtons.push(
@@ -145,34 +125,27 @@ export default function PagingComponent({
       return renderButtons;
     }
   };
-  const renderNumber2 = () => {
+
+  const nonCenterTrackingRenderingTablePaginationCurNumComponent = () => {
+    const pagingWrapSize = 10;
     let renderButtons = [];
 
-    // 처음 현재 페이지 -1  - ((현재 페이지 -1) % (페이지하단 = 10)) + 1
-    // 마지막 = 현재 페이지 -1  - ((현재 페이지 -1) % (페이지하단 = 10)) + 10
+    let pageFirst = Math.max(
+      curNum - 1 - ((curNum - 1) % pagingWrapSize) + 1,
+      1
+    ); // 첫 번째 페이지 번호
+    let pageLast = Math.min(
+      curNum - 1 - ((curNum - 1) % pagingWrapSize) + pagingWrapSize,
+      pagingData.totalPages
+    ); // 마지막 페이지 번호
 
-    let pageFrist = curNum - 1 - ((curNum - 1) % 5) + 1;
-    let pageLast = curNum - 1 - ((curNum - 1) % 5) + 5;
-
-    //if (pageLast > data.totalPages) pageLast = data.totalPages;
-    if (pagingData && pageLast > pagingData.totalPages)
-      pageLast = pagingData.totalPages;
-
-    if (typeof curNum != "number") setCurNum(1);
-    if (pagingData && typeof pagingData.totalPages != "number") {
-      pagingData.totalPages = 1;
+    if (isNaN(pageFirst) || isNaN(pageLast)) {
+      pageFirst = 1; // 페이지 번호가 NaN인 경우 1로 설정
+      pageLast = 1; // 페이지 번호가 NaN인 경우 1로 설정
+      setCurNum(1); // 현재 페이지 번호를 1로 설정
     }
 
-    // if(data.size==5) {
-    //   setCurNum(1);
-    // }
-
-    if (isNaN(pageFrist) || isNaN(pageLast)) {
-      pageFrist = 1;
-      pageLast = 1;
-      setCurNum(1);
-    }
-    for (let i = pageFrist; i <= pageLast; i++) {
+    for (let i = pageFirst; i <= pageLast; i++) {
       const curNumber = i;
       renderButtons.push(
         <button
@@ -195,6 +168,7 @@ export default function PagingComponent({
 
     return renderButtons;
   };
+
   return (
     <>
       <div className={styles.pg}>
@@ -205,14 +179,19 @@ export default function PagingComponent({
               ? styles.noData
               : pagingData.first === true
               ? styles.noMorePage
-              : ""
+              : styles.general_button
           }`}
+          disabled={
+            pagingData.totalPages === 0 ||
+            pagingData.totalPages === null ||
+            pagingData.first === true
+          }
           onClick={() => {
             goFirst();
           }}
           title="처음 페이지로 이동"
         >
-          <BiFirstPage role="img" aria-label="처음 페이지로 이동 아이콘" />
+          <BiChevronsLeft role="img" aria-label="처음 페이지로 이동 아이콘" />
         </button>
         <button
           type="button"
@@ -221,8 +200,13 @@ export default function PagingComponent({
               ? styles.noData
               : pagingData.first === true
               ? styles.noMorePage
-              : ""
+              : styles.general_button
           }`}
+          disabled={
+            pagingData.totalPages === 0 ||
+            pagingData.totalPages === null ||
+            pagingData.first === true
+          }
           onClick={() => {
             goPrev();
           }}
@@ -230,7 +214,9 @@ export default function PagingComponent({
         >
           <BiChevronLeft role="img" aria-label="이전 페이지로 이동 아이콘" />
         </button>
-        {ohterType ? renderNumber2() : renderNumber()}
+        {nonCenterTracking
+          ? nonCenterTrackingRenderingTablePaginationCurNumComponent()
+          : centerTrackingRenderingTablePaginationCurNumComponent()}
         <button
           type="button"
           className={`${styles.arrow_button} ${
@@ -238,11 +224,16 @@ export default function PagingComponent({
               ? styles.noData
               : pagingData.last === true
               ? styles.noMorePage
-              : ""
+              : styles.general_button
           }`}
           onClick={() => {
             goNext();
           }}
+          disabled={
+            pagingData.totalPages === 0 ||
+            pagingData.totalPages === null ||
+            pagingData.last === true
+          }
           title="다음 페이지로 이동"
         >
           <BiChevronRight role="img" aria-label="다음 페이지로 이동 아이콘" />
@@ -254,14 +245,22 @@ export default function PagingComponent({
               ? styles.noData
               : pagingData.last === true
               ? styles.noMorePage
-              : ""
+              : styles.general_button
           }`}
+          disabled={
+            pagingData.totalPages === 0 ||
+            pagingData.totalPages === null ||
+            pagingData.last === true
+          }
           onClick={() => {
             goEnd();
           }}
           title="마지막 페이지로 이동"
         >
-          <BiLastPage role="img" aria-label="마지막 페이지로 이동 아이콘" />
+          <BiChevronsRight
+            role="img"
+            aria-label="마지막 페이지로 이동 아이콘"
+          />
         </button>
       </div>
       <div className={styles.m_pg}>
