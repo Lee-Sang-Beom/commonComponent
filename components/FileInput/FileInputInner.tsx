@@ -3,8 +3,9 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { FileDto } from "@/types/common/commonType";
 import { FiXCircle, FiXSquare } from "react-icons/fi";
-import Button from "@/components/Button/Button";
 import style from "./FileInputInner.module.scss";
+import Button from "../Button/Button";
+import { RiAttachment2 } from "react-icons/ri";
 
 // test
 interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
@@ -106,7 +107,7 @@ const FileInputInner = React.forwardRef(
       border,
       ...props
     }: FileInputProps,
-    ref: React.Ref<HTMLInputElement>
+    ref: React.Ref<HTMLInputElement>,
   ) => {
     const [files, setFiles] = useState<FileList>();
     const [existFiles, setExistFiles] = useState<FileDto[] | undefined>([]);
@@ -214,19 +215,31 @@ const FileInputInner = React.forwardRef(
     };
 
     const deleteFile = (index: number) => {
-      setFiles((files) => {
-        const dt = new DataTransfer();
-        if (files !== undefined) {
-          for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            if (index !== i) {
-              dt.items.add(file);
+      if (multiple) {
+        if (!files) return;
+        const updatedFiles = Array.from(files).filter((_, i) => i !== index);
+        // @ts-ignore
+        setFiles(new FileListItems(updatedFiles));
+      } else {
+        // @ts-ignore
+        if (ref && ref.current) {
+          // @ts-ignore
+          ref.current.value = "";
+        }
+        setFiles((files) => {
+          const dt = new DataTransfer();
+          if (files !== undefined) {
+            for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+              if (index !== i) {
+                dt.items.add(file);
+              }
             }
           }
-        }
 
-        return dt.files;
-      });
+          return dt.files;
+        });
+      }
     };
 
     const deleteSeqFile = (fileMainSeq: number) => {
@@ -296,7 +309,7 @@ const FileInputInner = React.forwardRef(
           {(files === undefined || files.length === 0) &&
           (existFiles === undefined || existFiles.length === 0) ? (
             // 서버에 있는 파일 + 로컬에 있는 파일 둘 다 아무것도 없으면?
-            <span>등록된 파일이 없습니다.</span>
+            <span>파일 선택</span>
           ) : (
             <ul>
               {/* 1. 서버에서 관리되는 파일이 아닌, 로컬에서 관리되는 파일 출력 */}
@@ -382,7 +395,7 @@ const FileInputInner = React.forwardRef(
                           file.svrFileNm,
                         {
                           method: "GET",
-                        }
+                        },
                       )
                         .then((res) => {
                           return res.blob();
@@ -415,18 +428,26 @@ const FileInputInner = React.forwardRef(
                 onClickEvent={handleButtonClick}
                 title="파일찾기: 새 창으로 열림"
                 id="file_btn"
-                color="mainColor"
+                color="blue"
                 size={size == "lg" ? "sm" : size == "xlg" ? undefined : "xsm"}
                 border={border}
               >
-                파일찾기
+                <RiAttachment2 size={16} />
+                <span>파일첨부</span>
               </Button>
             )}
           </div>
         </div>
       </>
     );
-  }
+  },
 );
 FileInputInner.displayName = "FileInputInner";
 export default FileInputInner;
+
+// Helper function to create a FileList from an array of File objects
+function FileListItems(files: File[]): FileList {
+  const dataTransfer = new DataTransfer();
+  files.forEach((file) => dataTransfer.items.add(file));
+  return dataTransfer.files;
+}

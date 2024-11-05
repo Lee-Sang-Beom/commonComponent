@@ -3,8 +3,8 @@
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { FileDto } from "@/types/common/commonType";
 import { FiXCircle, FiXSquare } from "react-icons/fi";
-import Button from "@/components/Button/Button";
 import style from "./FileInputTitle.module.scss";
+import Button from "../Button/Button";
 
 interface FileInputProps extends React.HTMLAttributes<HTMLInputElement> {
   /**
@@ -213,19 +213,31 @@ const FileInputTitle = React.forwardRef(
     };
 
     const deleteFile = (index: number) => {
-      setFiles((files) => {
-        const dt = new DataTransfer();
-        if (files !== undefined) {
-          for (let i = 0; i < files.length; i++) {
-            const file = files[i];
-            if (index !== i) {
-              dt.items.add(file);
+      if (multiple) {
+        if (!files) return;
+        const updatedFiles = Array.from(files).filter((_, i) => i !== index);
+        // @ts-ignore
+        setFiles(new FileListItems(updatedFiles));
+      } else {
+        // @ts-ignore
+        if (ref && ref.current) {
+          // @ts-ignore
+          ref.current.value = "";
+        }
+        setFiles((files) => {
+          const dt = new DataTransfer();
+          if (files !== undefined) {
+            for (let i = 0; i < files.length; i++) {
+              const file = files[i];
+              if (index !== i) {
+                dt.items.add(file);
+              }
             }
           }
-        }
 
-        return dt.files;
-      });
+          return dt.files;
+        });
+      }
     };
 
     const deleteSeqFile = (fileMainSeq: number) => {
@@ -445,3 +457,10 @@ const FileInputTitle = React.forwardRef(
 );
 FileInputTitle.displayName = "FileInputTitle";
 export default FileInputTitle;
+
+// Helper function to create a FileList from an array of File objects
+function FileListItems(files: File[]): FileList {
+  const dataTransfer = new DataTransfer();
+  files.forEach((file) => dataTransfer.items.add(file));
+  return dataTransfer.files;
+}

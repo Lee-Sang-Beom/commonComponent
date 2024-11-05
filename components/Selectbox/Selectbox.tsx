@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useId } from "react";
+import React, { useEffect, useId, useState } from "react";
 import "./Selectbox.scss";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
@@ -19,7 +19,7 @@ export interface SelectboxType {
 
 interface SelectboxProps {
   items: SelectboxType[];
-  size?: "xsm" | "sm" | "lg" | "xlg";
+  size?: "xsm" | "sm" | "md" | "lg" | "xlg";
   color?: string;
   border?: "br_square_round_1" | "br_square_round_2" | "br_round";
   title: string;
@@ -71,7 +71,20 @@ export default function Selectbox({
   onChange,
   ...props
 }: SelectboxProps) {
+  /**
+   * @isMount : Selectbox 컴포넌트는 서버에서 SSR방식으로 미리 렌더링하는 도중 className이 불일치하는 현상이 발생함
+   *  - 따라서 해석과정에서, 완전한 tsx파일을 module reference type을 바로 적용할 수 없도록 빈 컴포넌트로 해석하게 한 다음 클라이언트에서 window객체를 찾은 다음 순차적으로 그리도록 함
+   *  - 이 오류는, `document.querySelector`과 관련이 있음
+   */
+  const [isMount, setIsMount] = useState<boolean>(false);
+  useEffect(() => {
+    setIsMount(true);
+  }, []);
+
   const id = useId();
+  const labelId = `${id}_${title}_label`;
+  const [open, setOpen] = useState<boolean>(false); // 드롭다운 열림 상태 관리
+  const [isMouseFocus, setIsMouseFocus] = useState<boolean>(false);
 
   // 커스텀 셀렉트 아이콘
   const iconStyles = {
@@ -91,86 +104,129 @@ export default function Selectbox({
     }
   );
 
+  const baseSelectClassName = clsx({
+    ["select"]: true,
+    ["xsm"]: size === "xsm",
+    ["sm"]: size === "sm",
+    ["md"]:
+      !size ||
+      size === "md" ||
+      (size !== "xsm" && size !== "sm" && size !== "lg" && size !== "xlg"),
+    ["lg"]: size === "lg",
+    ["xlg"]: size === "xlg",
+    ["red"]:
+      partialErrorObj || (effectivenessMsg && !effectivenessMsg.isSuccess),
+    ["focus"]: isMouseFocus,
+  });
   return (
-    <FormControl className={`select_box`}>
-      <label htmlFor={`${id}_ ${title}_label`} className={`screen_out`}>
-        {title}
-      </label>
+    <>
+      {isMount ? (
+        <FormControl
+          className={`select_box`}
+          onClick={() => setOpen((prev) => !prev)} // 클릭 시 드롭다운 여닫음
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setOpen((prev) => !prev); // 엔터 시 드롭다운 여닫음
+            }
 
-      <Select
-        displayEmpty
-        inputProps={{ "aria-label": "Without label" }}
-        id={`${id}_${title}`}
-        labelId={`${id}_${title}_label`}
-        title={title}
-        defaultValue={""}
-        onChange={onChange}
-        onMouseUp={() => {
-          const addSizeClass = document.querySelector(
-            ".MuiList-root.MuiMenu-list"
-          );
+            if (
+              (e.key === "ArrowUp" && !open) ||
+              (e.key === "ArrowDown" && !open)
+            ) {
+              setOpen(true);
+            }
+          }}
+          onFocus={() => {
+            setIsMouseFocus(true);
+          }}
+          onBlur={() => {
+            setIsMouseFocus(false);
+          }}
+        >
+          <InputLabel htmlFor={labelId} className={`screen_out`}>
+            {title}
+          </InputLabel>
+          <Select
+            open={open} // open 상태 관리
+            // id={selectId}
+            // labelId={labelId}
+            displayEmpty
+            inputProps={{
+              "aria-label": title,
+              id: labelId,
+              title: title,
+            }}
+            defaultValue={""}
+            onChange={(event) => {
+              onChange(event);
+              setTimeout(() => {
+                setOpen(false); // 선택 후 드롭다운 닫기
+              }, 0);
+            }}
+            className={clsx(
+              baseSelectClassName,
+              color && color !== "" ? color : "white",
+              border ? border : "br_square"
+            )}
+            onMouseUp={() => {
+              const addSizeClass = document.querySelector(
+                ".MuiList-root.MuiMenu-list"
+              );
+              addSizeClass?.classList.add(size ? size : "md");
+            }}
+            renderValue={(selected) => {
+              if (selected.length === 0) {
+                return placeholder;
+              }
 
-          addSizeClass?.classList.add(size ? size : "md");
-        }}
-        renderValue={(selected) => {
-          if (selected.length === 0) {
-            return placeholder;
-          }
-
-          return items.find((item) => item.value === selected)?.name;
-        }}
-        value={value}
-        disabled={color === "disabled" ? true : false}
-        className={`select ${
-          size === "xsm"
-            ? "xsm"
-            : size === "sm"
-            ? "sm"
-            : size === "lg"
-            ? "lg"
-            : size === "xlg"
-            ? "xlg"
-            : "md"
-        } ${color && color !== "" ? color : "white"} ${
-          border ? border : "br_suqare"
-        } ${partialErrorObj && "red"}`}
-        // IconComponent={CustomExpandMore}
-        {...props}
-      >
-        {items.map((item: SelectboxType) => {
-          return (
-            <MenuItem key={`${id}_${item.value}`} value={item.value}>
-              {item.name}
-            </MenuItem>
-          );
-        })}
-      </Select>
-      {/* react-hook-form error 객체 */}
-      {partialErrorObj && (
-        <small role="alert" className="txt_error">
-          {partialErrorObj.message}
-        </small>
-      )}
-      {/* 제어형 컴포넌트*/}
-      {effectivenessMsg && (
-        <>
-          {!effectivenessMsg.isSuccess &&
-          effectivenessMsg.msg &&
-          effectivenessMsg.msg.length ? (
-            <p className={"txt_error"}>{effectivenessMsg.msg}</p>
-          ) : (
+              return items.find((item) => item.value === selected)?.name;
+            }}
+            value={value}
+            disabled={color === "disabled" ? true : false}
+            IconComponent={CustomExpandMore}
+            MenuProps={{
+              disableScrollLock: true, // 내부 스크롤 영역으로 인한 페이지 좌우 들썩거림 문제 해결을 위해 사용
+            }}
+            {...props}
+          >
+            {items.map((item: SelectboxType) => {
+              return (
+                <MenuItem key={`${id}_${item.value}`} value={item.value}>
+                  {item.name}
+                </MenuItem>
+              );
+            })}
+          </Select>
+          {/* react-hook-form error 객체: 실패일 때 에러메시지를 던져줌 */}
+          {partialErrorObj && (
+            <small role="alert" className="txt_error">
+              {partialErrorObj.message}
+            </small>
+          )}
+          {/* 제어형 컴포넌트*/}
+          {effectivenessMsg && (
             <>
-              {effectivenessMsg.isSuccess &&
+              {!effectivenessMsg.isSuccess &&
               effectivenessMsg.msg &&
               effectivenessMsg.msg.length ? (
-                <p className={"txt_success"}>{effectivenessMsg.msg}</p>
+                <p className={"txt_error"}>{effectivenessMsg.msg}</p>
               ) : (
-                <></>
+                <>
+                  {effectivenessMsg.isSuccess &&
+                  effectivenessMsg.msg &&
+                  effectivenessMsg.msg.length ? (
+                    <p className={"txt_success"}>{effectivenessMsg.msg}</p>
+                  ) : (
+                    <></>
+                  )}
+                </>
               )}
             </>
           )}
-        </>
+        </FormControl>
+      ) : (
+        <></>
       )}
-    </FormControl>
+    </>
   );
 }

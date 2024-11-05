@@ -92,6 +92,9 @@
     &.red {
       border: 1px solid var(--error) !important;
     }
+    &.focus {
+      outline: 1px solid black;
+    }
     // none
     .none {
       border: none;
