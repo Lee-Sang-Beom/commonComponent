@@ -19,6 +19,7 @@ interface TextareaProps {
   fixSize?: boolean;
   onChange?: (e: any) => void;
   resize?: boolean;
+  defaultMultiLine?: boolean;
 }
 
 /**
@@ -37,9 +38,11 @@ interface TextareaProps {
  *
  * @param title: input title로, 한 페이지 내에서 겹치지 않는 input 대상명을 정확히 보내주어야 함
  * @returns string
-
-* @param resize?: textarea 사이즈 조절 (기본 false)
+ *
+ * @param resize?: textarea 사이즈 조절 (기본 false)
  * @returns boolean
+ *
+ * @param defaultMultiLine?: 기본이 한줄이 아닌 여러줄인지 여부 (기본 false)
  */
 
 export default function Textarea({
@@ -51,10 +54,12 @@ export default function Textarea({
   fixSize,
   onChange,
   resize,
+  defaultMultiLine,
   ...props
 }: TextareaProps & React.HTMLProps<HTMLTextAreaElement>) {
   const id = useId();
   const textArea = useRef<HTMLTextAreaElement>(null);
+
   //
   const resizeHeight = () => {
     if (textArea.current !== null) {
@@ -68,12 +73,19 @@ export default function Textarea({
           : taSize === "xlg"
           ? "6.4rem"
           : "4.4rem";
+      if (defaultMultiLine) {
+        textArea.current.style.height = "10.1rem";
+      }
       textArea.current.style.height =
-        textArea.current.scrollHeight <= 100
+        textArea.current.scrollHeight <= 300
           ? textArea.current.scrollHeight + "px"
-          : "100px";
+          : "300px";
     }
   };
+
+  useEffect(() => {
+    resizeHeight();
+  }, []);
 
   return (
     <>
