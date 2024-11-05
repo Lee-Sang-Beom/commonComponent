@@ -27,10 +27,10 @@ interface IProps {
 export default function Page() {
   const persistDummyData: IProps = {
     data: {
-      email: "user01@naver.com",
+      email: "",
       name: "테스트유저01",
       phoneNumber: "01012345678",
-      regionNumber: "0544221123",
+      regionNumber: "0F544221123",
       commonNumber: "01098765432",
       pw: "asdf1234!",
       id: "user01",

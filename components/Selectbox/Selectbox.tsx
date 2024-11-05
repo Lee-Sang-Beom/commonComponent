@@ -79,6 +79,7 @@ export default function Selectbox({
       color: "var(--gray-1000)",
     },
   };
+
   const CustomExpandMore = withStyles(iconStyles)(
     ({ className, classes, ...rest }: any) => {
       return (
@@ -133,7 +134,7 @@ export default function Selectbox({
         } ${color && color !== "" ? color : "white"} ${
           border ? border : "br_suqare"
         } ${partialErrorObj && "red"}`}
-        IconComponent={CustomExpandMore}
+        // IconComponent={CustomExpandMore}
         {...props}
       >
         {items.map((item: SelectboxType) => {
