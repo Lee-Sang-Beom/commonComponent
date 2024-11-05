@@ -10,8 +10,8 @@ export default function BlurBtn() {
         <BlurButton
           title={"blurBtn"}
           id={"blurBtn"}
-          onClickEvent={function (): void {
-            // throw new Error("Function not implemented.");
+          onClickEvent={() => {
+            console.log("click");
           }}
           leftIcon={<></>}
           rightIcon={<></>}
