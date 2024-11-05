@@ -61,6 +61,10 @@ interface TableProps<T> {
    */
   tableType: "vertical" | "horizontal";
   /**
+   * 테이블 요소 높이
+   */
+  tableEleHeight?: "small" | "normal";
+  /**
    * 데이터 로딩 중일 때 tbody에 데이터 불러오는 중입니다 메세지 제공
    */
   isLoading?: boolean;
@@ -88,11 +92,16 @@ interface TableProps<T> {
    */
   checkYn?: "Y" | "N";
   setCheckYn?: Function;
+  /**
+   * horizontal 타입일 때 모바일 반응형 적용 안되게 하기
+   */
+  noHorizontalResponsive?: boolean;
 }
 /**
  * @param data (필수) 데이데
  * @param headers (필수) 테이블 헤더
  * @param tableTupe (필수) 테이블 가로 세로 방향
+ * @param tableEleHeight : 테이블 각 요소의 높이를 일반 페이징 테이블보다 낮게 하고 싶으면 "smail" 전달 (default "normal")
  * @param trHover tr hover 여부
  * @param isLoading 데이터 로딩 중일 때 tbody에 데이터 불러오는 중입니다. 표시(react query 사용시 사용하면 좋음)
  * @param tableCaption 웹접근성을 위한 테이블의 caption
@@ -108,6 +117,7 @@ const Table = forwardRef(
       data,
       headers,
       tableType,
+      tableEleHeight,
       isLoading,
       trHover,
       tableCaption,
@@ -115,6 +125,7 @@ const Table = forwardRef(
       checkList,
       checkYn,
       setCheckYn,
+      noHorizontalResponsive,
     }: TableProps<T>,
     ref: Ref<any>
   ) => {
@@ -129,6 +140,13 @@ const Table = forwardRef(
     ] = useState<boolean[]>(
       data === null || !data.length ? [false] : data.map((item) => false)
     );
+
+    // 데이터가 바뀌면 모든 체크리스트 초기화
+    useEffect(() => {
+      if (data && data.length) {
+        setCheckArray([]);
+      }
+    }, [data]);
 
     useEffect(() => {
       if (checkList !== undefined) {
@@ -159,7 +177,12 @@ const Table = forwardRef(
     // const allCheck;
 
     return tableType === "vertical" ? (
-      <table className={style.tb_st1} ref={ref}>
+      <table
+        className={`${noHorizontalResponsive ? style.tb_st3 : style.tb_st1} ${
+          tableEleHeight && tableEleHeight === "small" ? style.small : ""
+        }`}
+        ref={ref}
+      >
         <colgroup>
           {headers.map((width: TableHeader, index: number) => {
             return (
@@ -269,8 +292,6 @@ const Table = forwardRef(
                             }
                             // @ts-ignore
                             onChange={({ target: { checked } }) => {
-                              console.log("checked : ", checked);
-
                               if (checked === true) {
                                 if (setCheckYn) {
                                   setCheckYn("Y");
@@ -412,7 +433,12 @@ const Table = forwardRef(
         </tbody>
       </table>
     ) : (
-      <table className={style.tb_st2} ref={ref}>
+      <table
+        className={`${style.tb_st2} ${
+          tableEleHeight && tableEleHeight === "small" ? style.small : ""
+        }`}
+        ref={ref}
+      >
         <colgroup>
           <col
             width={
