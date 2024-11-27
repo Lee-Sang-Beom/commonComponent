@@ -556,14 +556,14 @@ export default function ReactFormClient({ data }: IProps) {
       <div className="input_box">
         <p>COST</p>
         <Input
-          {...register("cost", onlyNumberReactHookFormOption(true, "비용"))}
+          {...register("cost", onlyNumberReactHookFormOption(true))}
           type="text"
           aria-invalid={
             isSubmitted ? (errors.cost ? "true" : "false") : undefined
           }
           value={watch("cost")}
           onFocus={(e) => {
-            setValue("cost", removeFormatToString("BRNO", watch("cost")), {
+            setValue("cost", removeFormatToString("NUMBER", watch("cost")), {
               shouldValidate: true,
             });
           }}
