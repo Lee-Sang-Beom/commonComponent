@@ -16,7 +16,7 @@ export const phoneAndRegionCommonNumberRegex = /^[0-9]{2,3}[0-9]{3,4}[0-9]{4}$/;
 export const idRegex = /^[a-zA-Z0-9]{4,12}$/;
 export const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
 export const passwordRegex =
-  /^(?=.*[0-9])(?=.*[a-z])(?=.*[`~!@@#$%^&*|₩₩₩'₩";:₩/?])[a-zA-Z0-9`~!@@#$%^&*|₩₩₩'₩";:₩/?]{8,20}$/;
+  /^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[`~!@@#$%^&*|₩₩₩'₩";:₩/?])[a-zA-Z0-9`~!@@#$%^&*|₩₩₩'₩";:₩/?]{8,20}$/;
 
 /**
  * @addCommaRegex : 입력된 string에 대해 Number에 대한 toLocaleString()과 같은 효과를 내도록 하는 정규식
