@@ -1,36 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### 개인 공통 컴포넌트
 
-## Getting Started
+- 이 프로젝트는 Material-UI를 기반으로 한 공통 컴포넌트를 프로젝트 기여자가 각자 구현해보고, 사용 예시를 통해 컴포넌트의 활용법을 공유하는 것이 목표입니다.
+- 개인적인 프로젝트이지만, 지인들과 아이디어를 나누고 그 아이디어를 반영하여 서로 확인할 수 있도록 하기 위해 만들어졌습니다.
 
-First, run the development server:
+### 주요 특징 ✨
+
+- Material-UI 기반: Material-UI의 스타일링 및 컴포넌트 시스템을 활용하여 중구난방하게 사용되던 컴포넌트 별 보일러 플레이트 설계
+
+- 프로젝트 전반에서 기능 자체로 반복적으로 사용 가능한 컴포넌트를 구현하되 스타일은 프로젝트마다 다르게 적용될 수 있도록 구성해야 합니다.
+
+### 설치 및 실행 방법 🚀
+
+1. 클론 및 설치
+
+```bash
+git clone [URL]
+npm install
+```
+
+2. 개발 서버 실행
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. 페이지 확인
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- 개발 서버가 실행되면 브라우저에서 http://localhost:3000에 접속하여 사용 예시를 확인할 수 있습니다.
+- 혹은 https://common-component-91a5.vercel.app/ 를 방문할 수 있습니다.
