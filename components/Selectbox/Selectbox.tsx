@@ -1,19 +1,27 @@
 "use client";
 
-import React, { useEffect, useId, useState } from "react";
+import React, {
+  forwardRef,
+  useEffect,
+  useId,
+  useState,
+  Ref,
+  useRef,
+} from "react";
 import "./Selectbox.scss";
 import FormControl from "@mui/material/FormControl";
 import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { FieldValues } from "react-hook-form";
 import clsx from "clsx";
 import { withStyles } from "@mui/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { InputErrorMsgType } from "@/types/common/commonType";
+import { InputLabel } from "@mui/material";
+import { RiCheckboxCircleFill, RiErrorWarningFill } from "react-icons/ri";
 export interface SelectboxType {
   name: string;
-  value: string | number;
+  value: any;
   group: string;
 }
 
@@ -33,10 +41,10 @@ interface SelectboxProps {
 /**
  *
  * @param size?: 크기  (기본 md)
- * @return "xsm" | "sm" | "lg" | "xlg";
+ * @return "xsm" | "sm" | "md" | "lg" | "xlg";
  *
  * @param color?: 색상 (기본 white)
- * @returns string (black, mainColor, disabled, none)
+ * @returns "white" | "gray" | "darkgray" | "disabled"
  *
  * @param border?: 보더 사이즈 (기본 0)
  * @return "br_square_round_1" | "br_square_round_2" | "br_round";
@@ -58,32 +66,23 @@ interface SelectboxProps {
  * @returns InputErrorMsgType
  */
 
-export default function Selectbox({
-  items,
-  size,
-  color,
-  title,
-  border,
-  value,
-  effectivenessMsg,
-  partialErrorObj,
-  placeholder,
-  onChange,
-  ...props
-}: SelectboxProps) {
-  /**
-   * @isMount : Selectbox 컴포넌트는 서버에서 SSR방식으로 미리 렌더링하는 도중 className이 불일치하는 현상이 발생함
-   *  - 따라서 해석과정에서, 완전한 tsx파일을 module reference type을 바로 적용할 수 없도록 빈 컴포넌트로 해석하게 한 다음 클라이언트에서 window객체를 찾은 다음 순차적으로 그리도록 함
-   *  - 이 오류는, `document.querySelector`과 관련이 있음
-   */
-  const [isMount, setIsMount] = useState<boolean>(false);
-  useEffect(() => {
-    setIsMount(true);
-  }, []);
-
+const Selectbox = (
+  {
+    items,
+    size,
+    color,
+    title,
+    border,
+    value,
+    effectivenessMsg,
+    partialErrorObj,
+    placeholder,
+    onChange,
+    ...props
+  }: SelectboxProps,
+  ref: Ref<any>
+) => {
   const id = useId();
-  const labelId = `${id}_${title}_label`;
-  const [open, setOpen] = useState<boolean>(false); // 드롭다운 열림 상태 관리
   const [isMouseFocus, setIsMouseFocus] = useState<boolean>(false);
 
   // 커스텀 셀렉트 아이콘
@@ -92,7 +91,6 @@ export default function Selectbox({
       color: "var(--gray-1000)",
     },
   };
-
   const CustomExpandMore = withStyles(iconStyles)(
     ({ className, classes, ...rest }: any) => {
       return (
@@ -118,24 +116,23 @@ export default function Selectbox({
       partialErrorObj || (effectivenessMsg && !effectivenessMsg.isSuccess),
     ["focus"]: isMouseFocus,
   });
+
+  /**
+   * @isMount : Selectbox 컴포넌트는 서버에서 SSR방식으로 미리 렌더링하는 도중 className이 불일치하는 현상이 발생함
+   *  - 따라서 해석과정에서, 완전한 tsx파일을 module reference type을 바로 적용할 수 없도록 빈 컴포넌트로 해석하게 한 다음 클라이언트에서 window객체를 찾은 다음 순차적으로 그리도록 함
+   *  - 이 오류는, `document.querySelector`과 관련이 있음
+   */
+  const [isMount, setIsMount] = useState<boolean>(false);
+  const labelId = `${id}_${title}_label`;
+  useEffect(() => {
+    setIsMount(true);
+  }, []);
+
   return (
     <>
       {isMount ? (
         <FormControl
           className={`select_box`}
-          onClick={() => setOpen((prev) => !prev)} // 클릭 시 드롭다운 여닫음
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              setOpen((prev) => !prev); // 엔터 시 드롭다운 여닫음
-            }
-
-            if (
-              (e.key === "ArrowUp" && !open) ||
-              (e.key === "ArrowDown" && !open)
-            ) {
-              setOpen(true);
-            }
-          }}
           onFocus={() => {
             setIsMouseFocus(true);
           }}
@@ -147,9 +144,6 @@ export default function Selectbox({
             {title}
           </InputLabel>
           <Select
-            open={open} // open 상태 관리
-            // id={selectId}
-            // labelId={labelId}
             displayEmpty
             inputProps={{
               "aria-label": title,
@@ -159,9 +153,6 @@ export default function Selectbox({
             defaultValue={""}
             onChange={(event) => {
               onChange(event);
-              setTimeout(() => {
-                setOpen(false); // 선택 후 드롭다운 닫기
-              }, 0);
             }}
             className={clsx(
               baseSelectClassName,
@@ -175,7 +166,12 @@ export default function Selectbox({
               addSizeClass?.classList.add(size ? size : "md");
             }}
             renderValue={(selected) => {
-              if (selected.length === 0) {
+              if (
+                !selected ||
+                selected.toString() == "null" ||
+                selected.toString() == "undefined" ||
+                selected.length === 0
+              ) {
                 return placeholder;
               }
 
@@ -185,7 +181,7 @@ export default function Selectbox({
             disabled={color === "disabled" ? true : false}
             IconComponent={CustomExpandMore}
             MenuProps={{
-              disableScrollLock: true, // 내부 스크롤 영역으로 인한 페이지 좌우 들썩거림 문제 해결을 위해 사용
+              disableScrollLock: true,
             }}
             {...props}
           >
@@ -200,6 +196,12 @@ export default function Selectbox({
           {/* react-hook-form error 객체: 실패일 때 에러메시지를 던져줌 */}
           {partialErrorObj && (
             <small role="alert" className="txt_error">
+              <RiErrorWarningFill
+                size={20}
+                color="#D50136"
+                role="img"
+                aria-label="입력값 체크 아이콘(실패 - 느낌표)"
+              />
               {partialErrorObj.message}
             </small>
           )}
@@ -209,13 +211,29 @@ export default function Selectbox({
               {!effectivenessMsg.isSuccess &&
               effectivenessMsg.msg &&
               effectivenessMsg.msg.length ? (
-                <p className={"txt_error"}>{effectivenessMsg.msg}</p>
+                <p className={"txt_error"}>
+                  <RiErrorWarningFill
+                    size={20}
+                    color="#D50136"
+                    role="img"
+                    aria-label="입력값 체크 아이콘(실패 - 느낌표)"
+                  />
+                  {effectivenessMsg.msg}
+                </p>
               ) : (
                 <>
                   {effectivenessMsg.isSuccess &&
                   effectivenessMsg.msg &&
                   effectivenessMsg.msg.length ? (
-                    <p className={"txt_success"}>{effectivenessMsg.msg}</p>
+                    <p className={"txt_success"}>
+                      <RiCheckboxCircleFill
+                        size={20}
+                        role="img"
+                        color="#006E18"
+                        aria-label="입력값 체크 아이콘(성공)"
+                      />
+                      {effectivenessMsg.msg}
+                    </p>
                   ) : (
                     <></>
                   )}
@@ -229,4 +247,5 @@ export default function Selectbox({
       )}
     </>
   );
-}
+};
+export default forwardRef(Selectbox);
